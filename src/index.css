@@ -1,0 +1,892 @@
+@import "tailwindcss";
+
+/* DaisyUI v5+ plugin for Tailwind v4+ */
+@plugin "daisyui" {
+  themes: cupcake, night;
+}
+
+:root {
+  --p: 240, 100%, 70%; /* Example: blue */
+  --s: 330, 100%, 70%; /* Example: pink */
+}
+
+/* Global Styles */
+@layer base {
+  body {
+    @apply font-sans bg-base-100 text-base-content;
+  }
+
+  ::selection {
+    @apply bg-primary/30 text-primary-content;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* Gradient background mesh */
+  body::after {
+    content: '';
+    @apply fixed top-[-50%] left-[-50%] w-[200%] h-[200%] pointer-events-none -z-10;
+    background: radial-gradient(circle at 20% 50%, hsl(var(--p)/0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, hsl(var(--s)/0.08) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, hsl(var(--a)/0.05) 0%, transparent 50%);
+    animation: gradientShift 20s ease infinite;
+  }
+
+  /* Background grain texture */
+  body::before {
+    content: '';
+    @apply fixed inset-0 w-full h-full pointer-events-none z-[1];
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-base-300;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full;
+    background: linear-gradient(180deg, hsl(var(--p)), hsl(var(--s)));
+  }
+
+  /* Helper class for gradient text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary via-secondary to-accent text-transparent bg-clip-text;
+  }
+}
+
+
+/* Add this new class */
+.animated-bg-grid {
+  background-color: hsl(var(--b1)); /* This uses your DaisyUI base-100 color */
+  background-image: linear-gradient(to right, rgba(128, 128, 128, 0.07) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(128, 128, 128, 0.07) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+@keyframes pulseBorder {
+  0%, 100% {
+    border-color: hsla(var(--p)/0.25);
+    box-shadow: 0 0 15px hsla(var(--p)/0.3);
+  }
+  50% {
+    border-color: hsla(var(--s)/0.4);
+    box-shadow: 0 0 25px hsla(var(--s)/0.4);
+  }
+}
+
+
+/* === Animated Gradient Text === */
+.gradient-text-animated {
+  background-image: linear-gradient(
+    90deg,
+    hsl(var(--p)),
+    hsl(var(--s)),
+    hsl(var(--a)),
+    hsl(var(--p))
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% auto;
+  animation: gradient-flow 8s linear infinite;
+}
+
+@keyframes gradient-flow {
+  to {
+    background-position: 200% center;
+  }
+}
+
+/* === Floating Animation for Visuals === */
+.floating-container {
+  animation: float-effect 6s ease-in-out infinite;
+}
+
+@keyframes float-effect {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
+}
+
+
+/* === Re-usable Aurora Glow Effect (if not already present) === */
+.aurora-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.aurora-card::before {
+  content: "";
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  transform: translate(-50%, -50%);
+  width: 250px;
+  height: 250px;
+  background-image: radial-gradient(
+    circle closest-side,
+    hsla(var(--p) / 0.15),
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.aurora-card:hover::before {
+  opacity: 1;
+}
+
+
+/* === Image Zoom on Card Hover === */
+.card-image-container {
+  overflow: hidden; /* This is crucial for the zoom effect */
+}
+
+.zoom-image {
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.group:hover .zoom-image {
+  transform: scale(1.1);
+}
+
+/* === Re-usable Button Glow (if not already present) === */
+.btn-primary-glow {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary-glow::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150%;
+  padding-bottom: 150%;
+  border-radius: 50%;
+  background: radial-gradient(circle, hsla(var(--p)/0.5) 0%, transparent 70%);
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  transition: transform 0.8s ease, opacity 0.8s ease;
+  z-index: 0;
+}
+.btn-primary-glow:hover::after {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
+
+.btn-primary-glow > * {
+  position: relative;
+  z-index: 1;
+}
+
+.progress-bar-fill {
+  transform-origin: left;
+}
+
+.gradient-text-animated {
+  background: linear-gradient(to right, #d63384, #6f42c1); /* dark pink to violet */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes pulse-slower {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.08);
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 10s ease-in-out infinite;
+}
+
+.animate-pulse-slower {
+  animation: pulse-slower 15s ease-in-out infinite;
+}
+
+/* Background floating gradient */
+.testimonials-bg {
+  background: radial-gradient(
+    circle at 20% 30%,
+    rgba(80, 120, 255, 0.1),
+    transparent 60%
+  ),
+  radial-gradient(circle at 80% 70%, rgba(255, 200, 150, 0.1), transparent 60%);
+  position: relative;
+}
+
+/* Floating animation for subtle motion */
+.floating-card {
+  animation: floatCard 6s ease-in-out infinite;
+}
+@keyframes floatCard {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+/* Floating glowing title */
+.floating-title {
+  animation: floatTitle 5s ease-in-out infinite;
+}
+@keyframes floatTitle {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-4px); }
+}
+
+/* Shimmering star animation */
+@keyframes shimmer {
+  0% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.1); }
+  100% { opacity: 0.7; transform: scale(1); }
+}
+.animate-star {
+  animation: shimmer 2.2s ease-in-out infinite;
+}
+
+/* Soft glowing card hover */
+.glowing-card:hover {
+  box-shadow: 0 0 25px rgba(99, 102, 241, 0.3);
+  transform: translateY(-6px) scale(1.02);
+}
+
+/* Pulsing glowing button */
+.glowing-btn {
+  transition: all 0.3s ease;
+}
+.glowing-btn:hover {
+  box-shadow: 0 0 15px rgba(99, 102, 241, 0.5);
+}
+
+/* Floating quote icon */
+.animate-quote {
+  animation: spinQuote 8s linear infinite;
+}
+@keyframes spinQuote {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(6deg); }
+}
+
+.aboutus-section {
+  background: radial-gradient(
+    circle at 20% 30%,
+    rgba(80, 120, 255, 0.1),
+    transparent 60%
+  ),
+  radial-gradient(circle at 80% 70%, rgba(255, 180, 200, 0.08), transparent 60%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Floating image animation */
+.floating-image {
+  animation: floatY 6s ease-in-out infinite;
+}
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Subtle glowing hover for button */
+.glowing-btn {
+  position: relative;
+  overflow: hidden;
+}
+.glowing-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.2), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+.glowing-btn:hover::after {
+  transform: translateX(100%);
+}
+
+/* Card tilt soft shadow */
+.card-tilt {
+  transition: box-shadow 0.4s ease, transform 0.4s ease;
+}
+.card-tilt:hover {
+  box-shadow: 0 0 30px rgba(99, 102, 241, 0.3);
+}
+
+/* Floating gradient blobs already handled by motion.divs */
+/* Section background styling */
+.cta-section {
+  position: relative;
+  background: radial-gradient(
+      circle at 20% 30%,
+      rgba(99, 102, 241, 0.08),
+      transparent 60%
+    ),
+    radial-gradient(circle at 80% 70%, rgba(244, 114, 182, 0.08), transparent 60%);
+}
+
+/* Glassy frosted panel */
+.glassy-panel {
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(20px);
+  border-radius: 2rem;
+}
+
+/* Gradient animated text */
+.gradient-text {
+  background: linear-gradient(90deg, hsl(var(--p)), hsl(var(--s)));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: hueRotate 6s linear infinite;
+}
+
+@keyframes hueRotate {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
+/* Magnetic hover button effect */
+.magnetic-btn {
+  position: relative;
+  transition: all 0.3s ease;
+}
+.magnetic-btn:hover {
+  box-shadow: 0 0 25px rgba(99, 102, 241, 0.4);
+}
+
+/* Glowing divider line */
+.animate-glow-line {
+  animation: glowPulse 3s ease-in-out infinite;
+}
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.5; transform: scaleX(1); }
+  50% { opacity: 1; transform: scaleX(1.1); }
+}
+
+/* Stat card hover */
+.stat-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.stat-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.2);
+}
+
+
+/* --- Global Styles & Enhancements --- */
+.gradient-text {
+  background: linear-gradient(90deg, hsl(var(--p)), hsl(var(--s)) 120%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+/* --- Hero Section Animated Grid Background --- */
+.animated-grid-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+  background-color: hsl(var(--b1));
+  --grid-color: hsl(var(--p) / 0.08);
+  --grid-size: 50px;
+  background-image:
+    linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+  background-size: var(--grid-size) var(--grid-size);
+  animation: moveGrid 30s linear infinite;
+}
+
+@keyframes moveGrid {
+  from { background-position: 0 0; }
+  to { background-position: var(--grid-size) var(--grid-size); }
+}
+
+/* --- NEW: Feature Card Styling --- */
+.feature-card {
+  background-color: hsl(var(--b2) / 0.3);
+  border: 1px solid hsl(var(--b3));
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 30px -10px hsl(var(--bc) / 0.1);
+  border-color: hsl(var(--p) / 0.5);
+}
+
+.feature-card .icon-wrapper {
+  padding: 1rem;
+  border-radius: 0.75rem;
+  display: inline-flex;
+  margin-bottom: 1.5rem;
+  transition: transform 0.3s ease;
+}
+.feature-card:hover .icon-wrapper {
+  transform: scale(1.1);
+}
+
+/* Special highlighted card from your screenshot */
+.feature-card-highlight {
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+}
+.feature-card-highlight::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+  background: radial-gradient(circle at 100% 0, hsl(var(--s)), hsl(var(--p)), transparent 60%);
+  opacity: 0.3;
+  transition: opacity 0.4s ease;
+}
+.feature-card-highlight:hover::before {
+  opacity: 0.5;
+}
+.feature-card-highlight .card-body {
+  z-index: 1; /* Ensure content is on top of the gradient */
+}
+
+/* --- REDESIGNED: Feature Item Styling (to match image) --- */
+.feature-item {
+  position: relative;
+  padding: 1.5rem;
+  border-radius: 1.5rem; /* 24px */
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.feature-item:hover {
+  transform: translateY(-8px);
+  background-color: hsl(var(--b2) / 0.4);
+}
+
+.feature-item .icon-chip {
+  padding: 1rem 1.5rem; /* More rectangular */
+  border-radius: 1rem; /* 16px */
+  display: inline-flex;
+  margin-bottom: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.feature-item:hover .icon-chip {
+  transform: scale(1.05);
+}
+
+/* Special highlighted item from your screenshot */
+.feature-item-highlight {
+  background: linear-gradient(120deg, hsl(var(--s)/.15), hsl(var(--p)/.15));
+  border: 1px solid hsl(var(--p)/.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.feature-item-highlight:hover {
+  transform: translateY(-8px);
+  border-color: hsl(var(--p)/.5);
+  box-shadow: 0 10px 25px -5px hsl(var(--bc)/.1);
+  background: linear-gradient(120deg, hsl(var(--s)/.2), hsl(var(--p)/.2));
+}
+
+/* --- FIXED: Development Process Timeline --- */
+.process-grid {
+  position: relative;
+  /* Add connector line for desktop */
+}
+@media (min-width: 1024px) {
+  .process-grid::before {
+    content: '';
+    position: absolute;
+    top: 2.5rem; /* Vertically align with the center of the icon */
+    left: calc(12.5% + 1rem);
+    right: calc(12.5% + 1rem);
+    height: 2px;
+    background-image: linear-gradient(to right, hsl(var(--p)/0.5) 50%, transparent 50%);
+    background-size: 20px 2px;
+    z-index: 0;
+  }
+}
+
+.process-card {
+  text-align: center;
+  z-index: 1;
+}
+
+@media (min-width: 640px) {
+  .process-card {
+    text-align: left;
+  }
+}
+
+.process-card .step-number {
+  position: absolute;
+  top: 0rem;
+  right: 1rem;
+  font-size: 5rem;
+  font-weight: 800;
+  line-height: 1;
+  opacity: 0.07;
+  z-index: 0;
+  user-select: none;
+}
+
+.process-card .timeline-marker {
+  width: 50px;
+  height: 50px;
+  border-radius: 9999px;
+  border: 2px solid hsl(var(--p) / 0.3);
+  background-color: hsl(var(--b1));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem; /* Center on mobile */
+  transition: all 0.3s ease;
+}
+
+.process-card:hover .timeline-marker {
+  border-color: hsl(var(--s));
+  transform: scale(1.1);
+  box-shadow: 0 0 20px hsl(var(--s) / 0.3);
+}
+
+@media (min-width: 640px) {
+  .process-card .timeline-marker {
+    margin: 0 0 1rem 0; /* Align left on desktop */
+  }
+}
+
+/* Animated Gradient for Text */
+.animated-gradient-text {
+  background: linear-gradient(to right, #ff6a00, #ee0979);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes gradient-animation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Subtle Pulsating Glow for Cards */
+.card-pulse-glow {
+  position: relative;
+  overflow: hidden; /* Important for containing the glow */
+}
+
+.card-pulse-glow::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150%;
+  height: 150%;
+  background: radial-gradient(circle, hsla(var(--p)/0.1) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  animation: pulse-glow 8s ease-in-out infinite;
+  z-index: 0;
+  pointer-events: none;
+}
+
+@keyframes pulse-glow {
+  0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.7; }
+  50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.7; }
+}
+
+
+/* --- Component Specific Enhancements --- */
+
+/* Hero Badge Pulsing Border */
+.hero-badge {
+  animation: pulse-border 3s ease-in-out infinite;
+}
+
+@keyframes pulse-border {
+  0% { box-shadow: 0 0 0 0 hsla(var(--p) / 0.4); }
+  70% { box-shadow: 0 0 0 10px hsla(var(--p) / 0); }
+  100% { box-shadow: 0 0 0 0 hsla(var(--p) / 0); }
+}
+
+
+/* Solution Card Image Shine Effect on Hover */
+.solution-image-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem; /* Match the image's border-radius */
+  transform: translateZ(0); /* Promotes to a new layer for better performance */
+}
+
+.solution-image-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 75%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.15) 50%,
+    transparent 100%
+  );
+  transform: skewX(-25deg);
+  transition: left 0.75s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.solution-card-wrapper:hover .solution-image-container::after {
+  left: 125%;
+}
+
+
+/* Benefits Section Item Hover Effect */
+.benefit-item {
+  transition: all 0.3s ease;
+}
+
+.benefit-item:hover {
+  transform: translateY(-5px);
+  background-color: hsl(var(--p) / 0.1);
+  border-color: hsl(var(--p) / 0.3);
+  box-shadow: 0 8px 25px -5px hsl(var(--p) / 0.15);
+}
+
+
+/* --- Core Values Card Glow Effect on Hover --- */
+.value-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.value-card::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 250px;
+  height: 250px;
+  background-color: hsla(var(--p) / 0.15);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  opacity: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.value-card:hover::before {
+  transform: translate(-50%, -50%) scale(2);
+  opacity: 1;
+}
+
+/* Ensure card content stays above the glow */
+.value-card .card-body {
+  position: relative;
+  z-index: 1;
+}
+
+/* --- Benefit Pills Hover Effect --- */
+.benefit-pill {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.benefit-pill:hover {
+  transform: translateY(-4px) scale(1.03);
+  background-color: hsl(var(--p) / 0.15);
+  border-color: hsl(var(--p) / 0.4);
+  box-shadow: 0 10px 20px -5px hsl(var(--p) / 0.2);
+}
+
+/* --- CTA Button Shine Effect --- */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  transform: translateX(-100%) skewX(-25deg);
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transition: transform 0.6s cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+.btn-shine:hover::after {
+  transform: translateX(250%) skewX(-25deg);
+}
+
+/* Pulsing outer ring for the timeline nodes */
+.timeline-node-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid;
+  opacity: 0;
+  animation: pulse-ring 2.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: translate(-50%, -50%) scale(0.33);
+    opacity: 0.8;
+  }
+  80%, 100% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 0;
+  }
+}
+
+/* Base style for the connector lines */
+.timeline-connector {
+  position: absolute;
+  top: 48px; /* This value should be tuned to align with the node */
+  height: 2px;
+  width: 100%;
+}
+
+@keyframes aurora-animation {
+  0% { transform: translate(20vw, -20vh) rotate(0deg); }
+  25% { transform: translate(-20vw, 20vh) rotate(90deg); }
+  50% { transform: translate(0vw, 30vh) rotate(180deg); }
+  75% { transform: translate(30vw, -10vh) rotate(270deg); }
+  100% { transform: translate(20vw, -20vh) rotate(360deg); }
+}
+
+.aurora-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.aurora-shape {
+  position: absolute;
+  filter: blur(100px);
+  opacity: 0.25;
+  will-change: transform;
+}
+
+.aurora-shape-1 {
+  width: 50vw;
+  height: 50vh;
+  top: 10%;
+  left: 10%;
+  background: radial-gradient(circle, hsl(var(--in)) 0%, transparent 70%);
+  animation: aurora-animation 30s linear infinite alternate;
+}
+
+.aurora-shape-2 {
+  width: 40vw;
+  height: 60vh;
+  top: 30%;
+  left: 60%;
+  background: radial-gradient(circle, hsl(var(--s)) 0%, transparent 70%);
+  animation: aurora-animation 25s linear infinite;
+}
+
+.aurora-shape-3 {
+  width: 60vw;
+  height: 40vh;
+  top: 60%;
+  left: 20%;
+  background: radial-gradient(circle, hsl(var(--p)) 0%, transparent 70%);
+  animation: aurora-animation 35s linear infinite reverse;
+}
+
+
+/* --- Bento Grid Card Styles --- */
+.bento-card {
+  position: relative;
+  background-color: hsla(var(--b3)/0.3);
+  border: 1px solid hsla(var(--b1)/0.2);
+  border-radius: 1.5rem; /* 24px */
+  padding: 1.5rem; /* 24px */
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  overflow: hidden; /* Important for inner glow effects */
+  background-image: radial-gradient(hsla(0,0%,100%,0.03) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+.bento-card:hover {
+  background-color: hsla(var(--b3)/0.5);
+  border-color: hsla(var(--p)/0.3);
+}
+
+/* --- Spotlight Card Effect --- */
+.spotlight-card {
+  position: relative;
+  overflow: hidden;
+  background-color: hsla(var(--b2)/0.5);
+  border: 1px solid hsla(var(--b1)/0.3);
+}
+
+.spotlight-card::before {
+  content: '';
+  position: absolute;
+  top: var(--mouse-y);
+  left: var(--mouse-x);
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, hsla(var(--p)/0.2) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none; /* Make sure it doesn't block interactions */
+}
+
+.spotlight-card:hover::before {
+  opacity: 1;
+}
+
+.spotlight-card > * {
+  position: relative;
+  z-index: 1; /* Keep content above the spotlight */
+}
