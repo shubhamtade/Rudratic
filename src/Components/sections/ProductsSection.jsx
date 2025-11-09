@@ -13,7 +13,11 @@ import {
   LayoutGrid,
   Calendar,
 } from "lucide-react";
-import { fadeInLeft, fadeInRight, staggerContainer } from "../../utils/animations";
+import {
+  fadeInLeft,
+  fadeInRight,
+  staggerContainer,
+} from "../../utils/animations";
 import { Link } from "react-router-dom";
 import productsData from "../../features/products/data/products";
 
