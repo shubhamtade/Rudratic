@@ -1,16 +1,16 @@
 import React from "react";
 import { motion } from "framer-motion";
-import HeroSection from "../components/sections/HeroSection";
-import ProductsSection from "../components/sections/ProductsSection";
-import ServicesSection from "../components/sections/ServicesSection";
-import TestimonialsSection from "../components/sections/TestimonialsSection";
-import AboutUsSection from "../components/sections/AboutUsSection";
-import CTASection from "../components/sections/CTASection";
-import HowItWorksSection from "../components/sections/HowItWorksSection";
-import WhatWeDoSection from "../components/sections/WhatWeDoSection";
-import IntegratedApproach from "../components/sections/IntegratedApproach";
-import Footer from "../layouts/Footer";
-import TechPartners from "../components/sections/TechPartners";
+import HeroSection from "../components/sections/HeroSection.jsx";
+import ProductsSection from "../components/sections/ProductsSection.jsx";
+import ServicesSection from "../components/sections/ServicesSection.jsx";
+import TestimonialsSection from "../components/sections/TestimonialsSection.jsx";
+import AboutUsSection from "../components/sections/AboutUsSection.jsx";
+import CTASection from "../components/sections/CTASection.jsx";
+import HowItWorksSection from "../components/sections/HowItWorksSection.jsx";
+import WhatWeDoSection from "../components/sections/WhatWeDoSection.jsx";
+import IntegratedApproach from "../components/sections/IntegratedApproach.jsx";
+import Footer from "../layouts/Footer.jsx";
+import TechPartners from "../components/sections/TechPartners.jsx";
 
 const HomePage = () => {
   // Animation for scroll reveal
