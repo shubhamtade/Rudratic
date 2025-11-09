@@ -1,8 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Calendar, PlayCircle } from "lucide-react";
-import { fadeInUp, staggerContainer } from "../utils/animations";
-import ParticleBackground from "./ParticleBackground";
+import { fadeInUp, staggerContainer } from "../../utils/animations";
+import ParticleBackground from "../ui/ParticleBackground";
 
 const CTASection = () => {
   return (

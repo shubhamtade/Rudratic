@@ -13,7 +13,7 @@ import AboutUsPage from "./Pages/AboutUsPage.jsx";
 import WhyRudraticPage from "./Pages/WhyRudraticpage.jsx";
 import SolutionsPage from "./Pages/SolutionsPage.jsx";
 import ClientSuccessPage from "./Pages/ClientSuccessPage.jsx";
-import ClientLoginModal from "./Components/ClientLoginModal";
+import ClientLoginModal from "./Components/modals/ClientLoginModal";
 import PAMPage from "./Pages/PAMPage.jsx";
 import SWOTDAMPage from "./Pages/SWOTDAMPage.jsx";
 import SWOTCloudPAMPage from "./Pages/SWOTCloudPAMPage.jsx";
@@ -25,7 +25,7 @@ import SAPconsultpage from "./Pages/Services/SAPconsultpage.jsx";
 import IBMservicespage from "./Pages/Services/IBMservicespage.jsx";
 import ITinfrastructurepage from "./Pages/Services/ITinfrastructurepage.jsx";
 import VMwarepage from "./Pages/Services/VMwarepage.jsx";
-import RequestDemoModal from "./Components/RequestDemoModal.jsx";
+import RequestDemoModal from "./Components/modals/RequestDemoModal";
 import { useTheme } from "./hooks/useTheme.js";
 
 // ✅ ADD IMPORTS FOR NEW PAGES

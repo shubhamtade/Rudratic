@@ -2,7 +2,7 @@ import React from 'react';
 import { motion, useInView, useAnimation, animate  } from 'framer-motion';
 import { Layers, Users2, Target, Sparkles, CheckCircle2, Search, Puzzle, Code, Rocket, Star, Quote } from 'lucide-react';
 import { useEffect, useRef, useState  } from 'react';
-import Footer from '../Components/Footer';
+import Footer from '../layouts/Footer';
 
 // Animation Variants for reusability
 const fadeInUp = {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Star, Quote } from "lucide-react";
-import { fadeInUp, staggerContainer } from "../utils/animations";
+import { fadeInUp, staggerContainer } from "../../utils/animations";
 
 const TestimonialsSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);

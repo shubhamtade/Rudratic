@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { motion, useInView, animate } from "framer-motion";
 import { Users, Target, TrendingUp, Shield } from "lucide-react";
-import Footer from "../Components/Footer";
+import Footer from "../layouts/Footer";
 
 // A reusable component for the animated number counter
 function Counter({ to }) {
@@ -26,7 +26,6 @@ function Counter({ to }) {
   return <span ref={nodeRef} />;
 }
 
-
 const AboutUsPage = () => {
   const stats = [
     { number: 500, label: "Happy Clients" },
@@ -39,25 +38,29 @@ const AboutUsPage = () => {
     {
       icon: Shield,
       title: "Integrity",
-      description: "We operate with transparency, honesty, and ethical practices in everything we do.",
+      description:
+        "We operate with transparency, honesty, and ethical practices in everything we do.",
       color: "text-indigo-400",
     },
     {
       icon: Users,
       title: "Collaboration",
-      description: "We believe in working together with our clients as partners to achieve shared success.",
+      description:
+        "We believe in working together with our clients as partners to achieve shared success.",
       color: "text-purple-400",
     },
     {
       icon: Target,
       title: "Excellence",
-      description: "We are committed to delivering the highest quality solutions and services.",
+      description:
+        "We are committed to delivering the highest quality solutions and services.",
       color: "text-pink-400",
     },
     {
       icon: TrendingUp,
       title: "Innovation",
-      description: "We continuously evolve and adopt cutting-edge technologies to stay ahead.",
+      description:
+        "We continuously evolve and adopt cutting-edge technologies to stay ahead.",
       color: "text-sky-400",
     },
   ];
@@ -72,7 +75,11 @@ const AboutUsPage = () => {
 
   const heroTitleLine = {
     hidden: { opacity: 0, y: 30 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+    },
   };
 
   return (
@@ -92,7 +99,11 @@ const AboutUsPage = () => {
 
       <div className="relative z-10">
         <div className="container mx-auto px-4 pt-36 pb-16 md:pb-20 text-center">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          >
             <div className="badge badge-lg badge-outline border-primary/50 bg-primary/10 text-primary p-4 mb-6 font-semibold">
               About Rudratic
             </div>
@@ -102,8 +113,12 @@ const AboutUsPage = () => {
               animate="show"
               className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight leading-tight animated-gradient-text"
             >
-              <motion.span className="block" variants={heroTitleLine}>Empowering Businesses Through</motion.span>
-              <motion.span className="block" variants={heroTitleLine}>Integrated IT Excellence</motion.span>
+              <motion.span className="block" variants={heroTitleLine}>
+                Empowering Businesses Through
+              </motion.span>
+              <motion.span className="block" variants={heroTitleLine}>
+                Integrated IT Excellence
+              </motion.span>
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -111,7 +126,8 @@ const AboutUsPage = () => {
               transition={{ delay: 0.8, duration: 0.8 }}
               className="max-w-3xl mx-auto text-lg text-base-content/70 leading-relaxed"
             >
-              We combine strategy, technology, and support to help businesses operate smarter and achieve more.
+              We combine strategy, technology, and support to help businesses
+              operate smarter and achieve more.
             </motion.p>
           </motion.div>
         </div>
@@ -134,23 +150,53 @@ const AboutUsPage = () => {
               }}
               className="relative overflow-hidden aspect-video rounded-3xl border border-primary/20 bg-base-200/30 backdrop-blur-md shadow-2xl p-2"
             >
-              <video src="/Swot Explainer Video V6.mp4" autoPlay loop muted playsInline className="w-full h-full object-cover rounded-2xl" />
+              <video
+                src="/Swot Explainer Video V6.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover rounded-2xl"
+              />
             </motion.div>
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.5 }} transition={{ duration: 0.8, delay: 0.2 }}>
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
             <h2 className="text-3xl md:text-4xl font-bold mb-6 leading-tight animated-gradient-text">
               Our Story
             </h2>
             <div className="space-y-5 text-base-content/80 leading-relaxed">
               <p>
-                <span className="text-primary font-semibold">Rudratic</span> is a leading provider of enterprise IT solutions, specializing in <span className="text-secondary font-medium">Privileged Access Management</span>, <span className="text-secondary font-medium">IT Monitoring</span>, and <span className="text-secondary font-medium">Automation</span>.
+                <span className="text-primary font-semibold">Rudratic</span> is
+                a leading provider of enterprise IT solutions, specializing in{" "}
+                <span className="text-secondary font-medium">
+                  Privileged Access Management
+                </span>
+                ,{" "}
+                <span className="text-secondary font-medium">
+                  IT Monitoring
+                </span>
+                , and{" "}
+                <span className="text-secondary font-medium">Automation</span>.
               </p>
               <p>
-                With over <strong>15 years of experience</strong>, we serve <strong>500+ global enterprises</strong> across <strong>150+ countries</strong>, delivering innovative solutions that secure, optimize, and transform IT operations.
+                With over <strong>15 years of experience</strong>, we serve{" "}
+                <strong>500+ global enterprises</strong> across{" "}
+                <strong>150+ countries</strong>, delivering innovative solutions
+                that secure, optimize, and transform IT operations.
               </p>
               <p>
-                Our certified experts provide comprehensive training, consulting, and implementation for <span className="text-accent font-medium">Oracle</span>, <span className="text-accent font-medium">IBM</span>, <span className="text-accent font-medium">SAP</span>, and custom application development.
+                Our certified experts provide comprehensive training,
+                consulting, and implementation for{" "}
+                <span className="text-accent font-medium">Oracle</span>,{" "}
+                <span className="text-accent font-medium">IBM</span>,{" "}
+                <span className="text-accent font-medium">SAP</span>, and custom
+                application development.
               </p>
             </div>
           </motion.div>
@@ -165,14 +211,21 @@ const AboutUsPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, duration: 0.6 }}
-                whileHover={{ scale: 1.05, y: -5, boxShadow: '0 10px 30px -10px hsla(var(--p)/0.3)' }}
+                whileHover={{
+                  scale: 1.05,
+                  y: -5,
+                  boxShadow: "0 10px 30px -10px hsla(var(--p)/0.3)",
+                }}
                 className="card text-center bg-base-200/30 backdrop-blur-md border border-primary/20 shadow-lg"
               >
                 <div className="card-body items-center p-8">
                   <div className="text-5xl font-bold mb-2 animated-gradient-text">
-                    <Counter to={stat.number} />{stat.suffix || '+'}
+                    <Counter to={stat.number} />
+                    {stat.suffix || "+"}
                   </div>
-                  <div className="text-base font-medium text-base-content/70">{stat.label}</div>
+                  <div className="text-base font-medium text-base-content/70">
+                    {stat.label}
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -208,7 +261,9 @@ const AboutUsPage = () => {
                     >
                       <Icon size={32} className="text-primary" />
                     </motion.div>
-                    <h3 className={`card-title text-2xl font-bold mb-3 ${value.color}`}>
+                    <h3
+                      className={`card-title text-2xl font-bold mb-3 ${value.color}`}
+                    >
                       {value.title}
                     </h3>
                     <p className="text-base text-base-content/70 leading-relaxed">

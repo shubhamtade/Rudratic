@@ -11,8 +11,8 @@ import {
   Code,
   Users,
 } from "lucide-react";
-import { fadeInUp, staggerContainer } from "../utils/animations";
-import ParticleBackground from "./ParticleBackground";
+import { fadeInUp, staggerContainer } from "../../utils/animations";
+import ParticleBackground from "../ui/ParticleBackground";
 
 const ServicesSection = () => {
   const [showAll, setShowAll] = useState(false);

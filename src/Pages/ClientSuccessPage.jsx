@@ -9,7 +9,7 @@ import {
   Award,
   Globe,
 } from "lucide-react";
-import Footer from "../Components/Footer";
+import Footer from "../layouts/Footer";
 
 const ClientSuccessPage = () => {
   const [activeTestimonial, setActiveTestimonial] = useState(0);

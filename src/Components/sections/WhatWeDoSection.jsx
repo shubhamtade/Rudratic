@@ -1,8 +1,8 @@
 import React, { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Shield, Activity, Settings, ArrowRight } from "lucide-react";
-import { fadeInUp, staggerContainer } from "../utils/animations";
-import ParticleBackground from "./ParticleBackground";
+import { fadeInUp, staggerContainer } from "../../utils/animations";
+import ParticleBackground from "../ui/ParticleBackground";
 
 const AuroraCard = ({ children, color, className }) => {
   const ref = useRef(null);
@@ -79,9 +79,6 @@ const WhatWeDoSection = () => {
       {/* Smooth transition from hero background */}
       <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-transparent via-base-100/70 to-base-100 pointer-events-none" />
 
-      {/* Particle layer for continuity with hero */}
-      <ParticleBackground density={35} colorVariable="--s" />
-
       {/* Floating ambient gradients for cinematic depth */}
       <motion.div
         className="absolute w-96 h-96 bg-primary/10 rounded-full blur-3xl -top-24 -left-24 opacity-60"
@@ -124,7 +121,11 @@ const WhatWeDoSection = () => {
                   }`}
                   initial={{ y: 25, opacity: 0 }}
                   whileInView={{ y: 0, opacity: 1 }}
-                  transition={{ delay: i * 0.05, type: "spring", stiffness: 100 }}
+                  transition={{
+                    delay: i * 0.05,
+                    type: "spring",
+                    stiffness: 100,
+                  }}
                 >
                   {word}
                 </motion.span>
@@ -135,8 +136,8 @@ const WhatWeDoSection = () => {
               variants={fadeInUp}
               className="text-lg text-base-content/70 leading-relaxed mb-8"
             >
-              In today’s digital landscape, security and efficiency can no longer
-              exist in silos. We design, implement, and manage integrated
+              In today’s digital landscape, security and efficiency can no
+              longer exist in silos. We design, implement, and manage integrated
               solutions that fortify your defenses and optimize operations.
             </motion.p>
 

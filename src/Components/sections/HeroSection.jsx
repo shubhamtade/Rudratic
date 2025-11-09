@@ -6,8 +6,8 @@ import {
   AnimatePresence,
 } from "framer-motion";
 import { Calendar, Play, Zap, ArrowRight } from "lucide-react";
-import { fadeInUp, staggerContainer } from "../utils/animations";
-import ParticleBackground from "./ParticleBackground";
+import { fadeInUp, staggerContainer } from "../../utils/animations";
+import ParticleBackground from "../ui/ParticleBackground";
 
 // A more robust, forward-ref ready AuroraCard component that is also a motion component
 const AuroraCard = React.forwardRef(({ children, className, ...rest }, ref) => {
@@ -84,7 +84,7 @@ const HeroSection = () => {
   return (
     <section
       ref={heroRef}
-      className="relative min-h-screen bg-base-100 flex items-center pt-32 lg:pt-0 lg:pb-0 overflow-hidden"
+      className="relative min-h-screen bg-base-100 flex items-center -mt-24 pt-20 sm:pt-0 pb-16 sm:pb-0 overflow-hidden"
     >
       <ParticleBackground density={50} colorVariable="--p" />
 
@@ -117,7 +117,7 @@ const HeroSection = () => {
 
             <motion.h1
               variants={sentence}
-              className="text-4xl sm:text-5xl lg:text-[56px] font-bold leading-tight mb-6 text-base-content tracking-tighter"
+              className="text-4xl sm:text-5xl lg:text-[56px] font-bold leading-tight mb-3 text-base-content tracking-tighter"
             >
               {headlineText.split(" ").map((char, index) => {
                 const isGradient =
@@ -161,6 +161,15 @@ const HeroSection = () => {
               })}
             </motion.h1>
 
+            {/* Tagline for clarity */}
+            <motion.p
+              variants={fadeInUp}
+              className="text-xl text-primary font-semibold mb-2 max-w-xl"
+            >
+              Secure. Automate. Empower. Your trusted partner for IT security
+              and digital transformation.
+            </motion.p>
+
             <motion.p
               variants={fadeInUp}
               className="text-lg text-base-content/60 mb-10 leading-relaxed max-w-lg"
@@ -169,6 +178,27 @@ const HeroSection = () => {
               operations through expert consulting, implementation, and
               management of advanced IT solutions.
             </motion.p>
+            {/* Scroll cue at bottom of hero */}
+            <div className="absolute left-1/2 bottom-8 -translate-x-1/2 z-20 flex flex-col items-center">
+              <span className="text-base-content/60 text-xs mb-1">
+                Scroll Down
+              </span>
+              <span className="animate-bounce text-primary">
+                <svg
+                  width="24"
+                  height="24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="feather feather-chevron-down"
+                  viewBox="0 0 24 24"
+                >
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </span>
+            </div>
 
             <motion.div
               variants={fadeInUp}
@@ -198,6 +228,13 @@ const HeroSection = () => {
               >
                 <Play size={18} /> Watch Demo Video
               </motion.button>
+              {/* Quick jump to Products on the homepage */}
+              <a
+                href="#products"
+                className="btn btn-outline btn-lg hidden sm:inline-flex items-center justify-center"
+              >
+                Explore Products
+              </a>
             </motion.div>
 
             {/* --- FIX APPLIED HERE --- */}

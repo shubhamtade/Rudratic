@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import Footer from '../Components/Footer';
+import Footer from '../layouts/Footer';
 import { Box, Sliders, Users, BarChart } from 'lucide-react';
 
 const TawnyWorkspacePage = () => {

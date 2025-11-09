@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Database, BookOpen, Settings, BarChart3, Target, Award, Check, ArrowRight } from 'lucide-react';
-import Footer from '../../Components/Footer';
+import Footer from '../../layouts/Footer';
 
 // --- Reusable Components (Defined in-page) ---
 

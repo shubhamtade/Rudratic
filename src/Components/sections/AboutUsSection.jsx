@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { Phone } from "lucide-react";
-import { fadeInUp, staggerContainer, fadeInRight } from "../utils/animations";
+import { fadeInUp, staggerContainer, fadeInRight } from "../../utils/animations";
 import { Link } from "react-router-dom";
 
 const AboutUsSection = () => {

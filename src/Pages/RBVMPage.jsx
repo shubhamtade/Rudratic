@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import Footer from '../Components/Footer';
+import Footer from '../layouts/Footer';
 import { Shield, Target, TrendingUp, Zap } from 'lucide-react';
 
 const RBVMPage = () => {
