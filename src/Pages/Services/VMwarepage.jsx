@@ -11,7 +11,7 @@ const sectionTitleVariants = {
 };
 
 const PageHero = ({ badge, title, subtitle, buttonText }) => (
-  <section className="relative text-center container mx-auto px-4 pt-20 pb-16 md:pt-28 md:pb-24">
+  <section className="relative text-center container mx-auto px-4 pt-26 pb-16 md:pt-28 md:pb-24">
     <motion.div initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.2 } } }}>
       <motion.div variants={sectionTitleVariants} className="badge badge-lg badge-outline border-primary/50 bg-primary/10 text-primary p-4 mb-6 font-semibold">{badge}</motion.div>
       <motion.h1 variants={sectionTitleVariants} className="text-4xl sm:text-5xl lg:text-7xl font-bold mb-6 tracking-tight gradient-text">{title}</motion.h1>
