@@ -127,7 +127,7 @@ const ProductsSection = () => {
           </div>
         </motion.div>
 
-  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8 mt-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8 mt-12">
           {filtered.map((product, i) => {
             const Icon = iconMap[product.icon] || null;
             return (
@@ -136,7 +136,7 @@ const ProductsSection = () => {
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: i * 0.12, type: 'spring' }}
+                transition={{ duration: 0.7, delay: i * 0.12, type: "spring" }}
                 whileHover={{ y: -10, scale: 1.03 }}
                 className="group relative bg-white/70 dark:bg-base-200/80 backdrop-blur-2xl rounded-3xl border border-base-300 shadow-xl hover:shadow-2xl hover:border-primary/60 transition-all duration-300 p-6 sm:p-8 flex flex-col items-stretch min-h-[500px] sm:min-h-[600px] overflow-hidden"
               >
@@ -146,7 +146,7 @@ const ProductsSection = () => {
                 </span>
 
                 {/* Icon area with gradient ring */}
-                  {/* Icon area removed */}
+                {/* Icon area removed */}
 
                 {/* Product image */}
                 <Link to={product.href} className="w-full block relative mb-4">
@@ -154,7 +154,9 @@ const ProductsSection = () => {
                     whileHover={{ scale: 1.04 }}
                     className="relative overflow-hidden rounded-2xl border border-base-200 shadow-lg group-hover:shadow-xl transition-all duration-300"
                   >
-                    <div className={`absolute inset-0 ${product.gradient} opacity-60 group-hover:opacity-80 transition-opacity`} />
+                    <div
+                      className={`absolute inset-0 ${product.gradient} opacity-60 group-hover:opacity-80 transition-opacity`}
+                    />
                     <img
                       src={product.imagePath}
                       alt={product.title}
@@ -164,7 +166,12 @@ const ProductsSection = () => {
                 </Link>
 
                 {/* Title & description */}
-                <h3 className="text-xl sm:text-2xl font-bold mb-2 mt-1 text-base-content" style={{ color: product.color }}>{product.title}</h3>
+                <h3
+                  className="text-xl sm:text-2xl font-bold mb-2 mt-1 text-base-content"
+                  style={{ color: product.color }}
+                >
+                  {product.title}
+                </h3>
                 <p className="text-base-content/80 text-sm mb-4 line-clamp-3 max-w-xs sm:max-w-sm mx-auto">
                   {product.description}
                 </p>
@@ -180,7 +187,11 @@ const ProductsSection = () => {
                       className="flex items-center gap-3 text-base-content/90 text-sm group-hover:translate-x-1 transition-transform"
                     >
                       <span className="shrink-0">
-                        <Check size={16} style={{ color: product.color }} className="transform transition-transform group-hover:scale-110" />
+                        <Check
+                          size={16}
+                          style={{ color: product.color }}
+                          className="transform transition-transform group-hover:scale-110"
+                        />
                       </span>
                       {f}
                     </motion.li>
@@ -197,7 +208,10 @@ const ProductsSection = () => {
                       className="w-full px-6 py-3 rounded-full font-semibold border-2 bg-primary/10 text-primary border-primary/30 flex items-center justify-center gap-3 group transition-all duration-300 hover:bg-primary/20 hover:text-primary-content text-sm relative overflow-hidden shadow-md"
                     >
                       <span className="relative z-10">Learn More</span>
-                      <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
+                      <ArrowRight
+                        size={18}
+                        className="transition-transform group-hover:translate-x-1"
+                      />
                       <div className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300 bg-primary" />
                     </motion.button>
                   </Link>
@@ -207,118 +221,114 @@ const ProductsSection = () => {
           })}
         </div>
 
-          <AnimatePresence>
-            {selected && (
+        <AnimatePresence>
+          {selected && (
+            <motion.div
+              className="fixed inset-0 z-50 flex items-center justify-center"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <div
+                className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+                onClick={() => setSelected(null)}
+              />
               <motion.div
-                className="fixed inset-0 z-50 flex items-center justify-center"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
+                initial={{ y: 20, scale: 0.98 }}
+                animate={{ y: 0, scale: 1 }}
+                exit={{ y: 20, scale: 0.98 }}
+                transition={{ type: "spring", stiffness: 300 }}
+                className="relative z-10 w-full max-w-3xl mx-4 bg-base-100 rounded-2xl shadow-2xl overflow-hidden border border-base-200"
               >
-                <div
-                  className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-                  onClick={() => setSelected(null)}
-                />
-                <motion.div
-                  initial={{ y: 20, scale: 0.98 }}
-                  animate={{ y: 0, scale: 1 }}
-                  exit={{ y: 20, scale: 0.98 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                  className="relative z-10 w-full max-w-3xl mx-4 bg-base-100 rounded-2xl shadow-2xl overflow-hidden border border-base-200"
-                >
-                  <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6 p-4 sm:p-6 max-h-[90vh] overflow-y-auto">
-                    <div className="w-full sm:w-48 h-48 sm:h-32 relative rounded-lg overflow-hidden shrink-0">
-                      <img
-                        src={selected.imagePath}
-                        alt={selected.title}
-                        className="w-full h-full object-cover"
-                      />
-                      <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent"></div>
+                <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6 p-4 sm:p-6 max-h-[90vh] overflow-y-auto">
+                  <div className="w-full sm:w-48 h-48 sm:h-32 relative rounded-lg overflow-hidden shrink-0">
+                    <img
+                      src={selected.imagePath}
+                      alt={selected.title}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent"></div>
+                  </div>
+                  <div className="flex-1 w-full">
+                    <div className="flex items-start sm:items-center justify-between gap-2">
+                      <h3
+                        className="text-xl sm:text-2xl font-bold"
+                        style={{ color: selected.color }}
+                      >
+                        {selected.title}
+                      </h3>
+                      <button
+                        onClick={() => setSelected(null)}
+                        aria-label="Close"
+                        className="btn btn-ghost btn-sm sm:btn-md btn-circle"
+                      >
+                        <X />
+                      </button>
                     </div>
-                    <div className="flex-1 w-full">
-                      <div className="flex items-start sm:items-center justify-between gap-2">
-                        <h3
-                          className="text-xl sm:text-2xl font-bold"
-                          style={{ color: selected.color }}
-                        >
-                          {selected.title}
-                        </h3>
-                        <button
-                          onClick={() => setSelected(null)}
-                          aria-label="Close"
-                          className="btn btn-ghost btn-sm sm:btn-md btn-circle"
-                        >
-                          <X />
-                        </button>
-                      </div>
-                      <p className="text-base-content/80 mt-2 text-sm sm:text-base">
-                        {selected.description}
-                      </p>
-                      <ul className="mt-4 space-y-2">
-                        {selected.features.map((f, i) => (
-                          <li
-                            key={i}
-                            className="flex items-start gap-2 text-sm"
-                          >
-                            <Check
-                              size={16}
-                              style={{ color: selected.color }}
-                              className="mt-1 shrink-0"
-                            />
-                            <span>{f}</span>
-                          </li>
-                        ))}
-                      </ul>
-                      <div className="mt-6 flex flex-wrap gap-2 sm:gap-3">
-                        <button
-                          onClick={() =>
-                            window.openDemoModal ? window.openDemoModal() : null
-                          }
-                          className="btn btn-primary btn-sm sm:btn-md gap-2"
-                        >
-                          <Calendar className="hidden sm:inline" /> Book Demo
-                        </button>
-                        <Link
-                          to={selected.href}
-                          className="btn btn-ghost btn-sm sm:btn-md"
-                        >
-                          View Product
-                        </Link>
-                        <button
-                          onClick={() => setSelected(null)}
-                          className="btn btn-outline btn-sm sm:btn-md sm:hidden"
-                        >
-                          Close
-                        </button>
-                      </div>
+                    <p className="text-base-content/80 mt-2 text-sm sm:text-base">
+                      {selected.description}
+                    </p>
+                    <ul className="mt-4 space-y-2">
+                      {selected.features.map((f, i) => (
+                        <li key={i} className="flex items-start gap-2 text-sm">
+                          <Check
+                            size={16}
+                            style={{ color: selected.color }}
+                            className="mt-1 shrink-0"
+                          />
+                          <span>{f}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="mt-6 flex flex-wrap gap-2 sm:gap-3">
+                      <button
+                        onClick={() =>
+                          window.openDemoModal ? window.openDemoModal() : null
+                        }
+                        className="btn btn-primary btn-sm sm:btn-md gap-2"
+                      >
+                        <Calendar className="hidden sm:inline" /> Book Demo
+                      </button>
+                      <Link
+                        to={selected.href}
+                        className="btn btn-ghost btn-sm sm:btn-md"
+                      >
+                        View Product
+                      </Link>
+                      <button
+                        onClick={() => setSelected(null)}
+                        className="btn btn-outline btn-sm sm:btn-md sm:hidden"
+                      >
+                        Close
+                      </button>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               </motion.div>
-            )}
-          </AnimatePresence>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
-          <motion.div
-            className="mt-16 flex justify-center"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-          >
-            <Link to="/solutions" className="inline-block">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.98 }}
-                className="btn btn-primary btn-lg px-8 gap-3 relative overflow-hidden group"
-              >
-                <span>View All Products</span>
-                <ArrowRight className="transform transition-transform group-hover:translate-x-1" />
-                <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
-              </motion.button>
-            </Link>
-          </motion.div>
-        </div>
-      
+        <motion.div
+          className="mt-16 flex justify-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+        >
+          <Link to="/solutions" className="inline-block">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
+              className="btn btn-primary btn-lg px-8 gap-3 relative overflow-hidden group"
+            >
+              <span>View All Products</span>
+              <ArrowRight className="transform transition-transform group-hover:translate-x-1" />
+              <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
+            </motion.button>
+          </Link>
+        </motion.div>
+      </div>
     </section>
   );
 };
