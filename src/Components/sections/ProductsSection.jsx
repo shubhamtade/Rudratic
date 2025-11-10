@@ -127,165 +127,85 @@ const ProductsSection = () => {
           </div>
         </motion.div>
 
-        <div className="relative">
-          <div className="overflow-hidden relative">
-            {/* Navigation Buttons */}
-            <button
-              onClick={goToPrev}
-              disabled={currentPage === 0}
-              className="absolute left-0 top-1/2 -translate-y-1/2 z-20 btn btn-circle btn-ghost bg-base-100/80 backdrop-blur-sm border-2 border-base-300 hover:bg-base-200 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              <ArrowRight className="rotate-180" />
-            </button>
-            <button
-              onClick={goToNext}
-              disabled={currentPage >= Math.ceil(filtered.length / 2) - 1}
-              className="absolute right-0 top-1/2 -translate-y-1/2 z-20 btn btn-circle btn-ghost bg-base-100/80 backdrop-blur-sm border-2 border-base-300 hover:bg-base-200 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              <ArrowRight />
-            </button>
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8 mt-12">
+          {filtered.map((product, i) => {
+            const Icon = iconMap[product.icon] || null;
+            return (
+              <motion.article
+                key={product.title}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, delay: i * 0.12, type: 'spring' }}
+                whileHover={{ y: -10, scale: 1.03 }}
+                className="group relative bg-white/70 dark:bg-base-200/80 backdrop-blur-2xl rounded-3xl border border-base-300 shadow-xl hover:shadow-2xl hover:border-primary/60 transition-all duration-300 p-6 sm:p-8 flex flex-col items-stretch min-h-[500px] sm:min-h-[600px] overflow-hidden"
+              >
+                {/* Group badge */}
+                <span className="absolute top-6 left-6 bg-gradient-to-r from-primary/20 to-accent/20 text-primary px-3 py-1.5 rounded-full text-xs font-semibold tracking-wide z-20 shadow backdrop-blur border border-primary/10">
+                  {product.group}
+                </span>
 
-            {/* Pagination Dots */}
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center justify-center gap-2 z-20">
-              {[...Array(Math.ceil(filtered.length / 2))].map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setCurrentPage(i)}
-                  className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                    i === currentPage
-                      ? "bg-primary scale-125"
-                      : "bg-base-content/20 hover:bg-base-content/40"
-                  }`}
-                />
-              ))}
-            </div>
+                {/* Icon area with gradient ring */}
+                  {/* Icon area removed */}
 
-            {/* Products Slider */}
-            <motion.div
-              className="flex gap-8 transition-transform duration-500 ease-out px-4"
-              animate={{ x: -currentPage * (480 + 32) }}
-              style={{ width: "max-content" }}
-            >
-              {filtered.map((product, i) => {
-                const Icon = iconMap[product.icon] || null;
-                // Use animate on mount instead of whileInView so cards are
-                // reliably visible on mobile/tablet where IntersectionObserver
-                // may not trigger in some environments. Keeps the same
-                // entrance timing via transition/delay.
-                return (
-                  <motion.article
-                    style={{ width: "480px", flexShrink: 0 }}
-                    key={product.title}
-                    initial={{ opacity: 1, y: 0 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: i * 0.04 }}
-                    whileHover={{ y: -8, scale: 1.02 }}
-                    className="group bg-base-100/80 backdrop-blur-md rounded-3xl border border-base-300 shadow-xl hover:shadow-2xl p-8 flex flex-col items-center text-center transform-gpu transition-all duration-300 min-h-[600px]"
+                {/* Product image */}
+                <Link to={product.href} className="w-full block relative mb-4">
+                  <motion.div
+                    whileHover={{ scale: 1.04 }}
+                    className="relative overflow-hidden rounded-2xl border border-base-200 shadow-lg group-hover:shadow-xl transition-all duration-300"
                   >
-                    <div className="w-full flex justify-between items-start gap-2 relative z-10">
-                      <motion.div
-                        className="w-20 sm:w-24 h-20 sm:h-24 rounded-2xl flex items-center justify-center transform-gpu group-hover:scale-110 transition-transform duration-300"
-                        style={{
-                          background: `linear-gradient(135deg, ${product.color}30, ${product.color}10)`,
-                        }}
-                        whileHover={{ rotate: [0, -10, 10, -5, 5, 0] }}
-                        transition={{ duration: 0.5 }}
-                      >
-                        {Icon && (
-                          <Icon size={32} style={{ color: product.color }} />
-                        )}
-                      </motion.div>
-                      <button
-                        onClick={() => setSelected(product)}
-                        aria-label={`Quick view ${product.title}`}
-                        className="text-xs sm:text-sm font-medium px-2.5 sm:px-3 py-1.5 rounded-full bg-base-content/5 text-base-content/70 hover:bg-base-content/10 hover:text-base-content transition-colors flex items-center gap-1"
-                      >
-                        <span className="hidden sm:inline">Quick</span> View
-                      </button>
-                    </div>
+                    <div className={`absolute inset-0 ${product.gradient} opacity-60 group-hover:opacity-80 transition-opacity`} />
+                    <img
+                      src={product.imagePath}
+                      alt={product.title}
+                      className="w-full h-36 sm:h-48 object-cover rounded-2xl transform transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </motion.div>
+                </Link>
 
-                    <Link
-                      to={product.href}
-                      className="w-full mt-4 block relative"
+                {/* Title & description */}
+                <h3 className="text-xl sm:text-2xl font-bold mb-2 mt-1 text-base-content" style={{ color: product.color }}>{product.title}</h3>
+                <p className="text-base-content/80 text-sm mb-4 line-clamp-3 max-w-xs sm:max-w-sm mx-auto">
+                  {product.description}
+                </p>
+
+                {/* Features */}
+                <ul className="space-y-2 mb-6 text-left w-full max-w-xs mx-auto">
+                  {product.features.slice(0, 3).map((f, idx) => (
+                    <motion.li
+                      key={idx}
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.1 * idx }}
+                      className="flex items-center gap-3 text-base-content/90 text-sm group-hover:translate-x-1 transition-transform"
                     >
-                      <motion.div
-                        whileHover={{ scale: 1.03 }}
-                        className="relative overflow-hidden rounded-xl border border-base-200 shadow-lg group-hover:shadow-xl transition-all duration-300"
-                      >
-                        <div
-                          className={`absolute inset-0 ${product.gradient} opacity-60 group-hover:opacity-75 transition-opacity`}
-                        />
-                        <img
-                          src={product.imagePath}
-                          alt={product.title}
-                          className="w-full h-56 object-cover rounded-xl transform transition-transform duration-500 group-hover:scale-105"
-                        />
-                      </motion.div>
-                    </Link>
+                      <span className="shrink-0">
+                        <Check size={16} style={{ color: product.color }} className="transform transition-transform group-hover:scale-110" />
+                      </span>
+                      {f}
+                    </motion.li>
+                  ))}
+                </ul>
 
-                    <h3
-                      className="text-xl sm:text-2xl font-bold mb-2 mt-4"
-                      style={{ color: product.color }}
+                {/* CTA button */}
+                <div className="w-full mt-auto flex flex-col items-center">
+                  <Link to={product.href} className="w-full block">
+                    <motion.button
+                      whileHover={{ scale: 1.04 }}
+                      whileTap={{ scale: 0.98 }}
+                      transition={{ type: "spring", stiffness: 400 }}
+                      className="w-full px-6 py-3 rounded-full font-semibold border-2 bg-primary/10 text-primary border-primary/30 flex items-center justify-center gap-3 group transition-all duration-300 hover:bg-primary/20 hover:text-primary-content text-sm relative overflow-hidden shadow-md"
                     >
-                      {product.title}
-                    </h3>
-                    <p className="text-base-content/80 text-sm mb-4 line-clamp-3 max-w-sm">
-                      {product.description}
-                    </p>
-
-                    <ul className="space-y-2 mb-6 text-left w-full max-w-xs mx-auto">
-                      {product.features.slice(0, 3).map((f, idx) => (
-                        <motion.li
-                          key={idx}
-                          initial={{ opacity: 0, x: -10 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          transition={{ delay: 0.1 * idx }}
-                          className="flex items-center gap-3 text-base-content/90 text-sm group-hover:transform group-hover:translate-x-1 transition-transform"
-                        >
-                          <span className="shrink-0">
-                            <Check
-                              size={16}
-                              style={{ color: product.color }}
-                              className="transform transition-transform group-hover:scale-110"
-                            />
-                          </span>
-                          {f}
-                        </motion.li>
-                      ))}
-                    </ul>
-
-                    <div className="w-full mt-auto">
-                      <Link to={product.href} className="w-full block">
-                        <motion.button
-                          whileHover={{ scale: 1.03 }}
-                          whileTap={{ scale: 0.98 }}
-                          transition={{ type: "spring", stiffness: 400 }}
-                          className="w-full px-6 py-3 rounded-full font-semibold border-2 bg-base-100/50 backdrop-blur-md flex items-center justify-center gap-3 group transition-all duration-300 hover:shadow-lg text-sm relative overflow-hidden"
-                          style={{ borderColor: product.color }}
-                        >
-                          <span
-                            className="relative z-10"
-                            style={{ color: product.color }}
-                          >
-                            Learn More
-                          </span>
-                          <ArrowRight
-                            size={16}
-                            className="transform transition-transform group-hover:translate-x-1"
-                            style={{ color: product.color }}
-                          />
-                          <div
-                            className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300"
-                            style={{ background: product.color }}
-                          />
-                        </motion.button>
-                      </Link>
-                    </div>
-                  </motion.article>
-                );
-              })}
-            </motion.div>
-          </div>
+                      <span className="relative z-10">Learn More</span>
+                      <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
+                      <div className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300 bg-primary" />
+                    </motion.button>
+                  </Link>
+                </div>
+              </motion.article>
+            );
+          })}
+        </div>
 
           <AnimatePresence>
             {selected && (
@@ -398,7 +318,7 @@ const ProductsSection = () => {
             </Link>
           </motion.div>
         </div>
-      </div>
+      
     </section>
   );
 };
