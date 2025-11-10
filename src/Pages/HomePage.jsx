@@ -27,14 +27,10 @@ const HomePage = () => {
     <>
       <HeroSection />
 
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={sectionFade}
-      >
-        <ProductsSection />
-      </motion.section>
+      {/* Render ProductsSection without whileInView wrapper because some
+          mobile browsers limit IntersectionObserver and can leave sections
+          invisible. ProductsSection handles its own animations now. */}
+      <ProductsSection />
 
       <motion.section
         initial="hidden"

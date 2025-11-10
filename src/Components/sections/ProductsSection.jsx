@@ -122,9 +122,12 @@ const ProductsSection = () => {
             return (
               <motion.article
                 key={product.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
+                // Use animate on mount instead of whileInView so cards are
+                // reliably visible on mobile/tablet where IntersectionObserver
+                // may not trigger in some environments. Keeps the same
+                // entrance timing via transition/delay.
+                initial={{ opacity: 1, y: 0 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: i * 0.04 }}
                 whileHover={{ y: -8, scale: 1.02 }}
                 className="group bg-base-100/80 backdrop-blur-md rounded-2xl border border-base-300 shadow-xl hover:shadow-2xl p-6 flex flex-col items-center text-center transform-gpu transition-all duration-300"
