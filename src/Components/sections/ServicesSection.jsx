@@ -106,17 +106,7 @@ const ServicesSection = () => {
         "Real-time processing at the source. 70-80% bandwidth reduction, millisecond latency.",
       gradient: "from-emerald-600/20 via-emerald-600/5 to-transparent",
     },
-    {
-      icon: (
-        <span className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-rose-100 text-rose-600 shadow-sm mb-2">
-          <Globe2 size={32} />
-        </span>
-      ),
-      title: "Digital Twin Solutions",
-      description:
-        "Virtual replicas for predictive maintenance. Asset-intensive industries see 40%+ efficiency gains.",
-      gradient: "from-rose-600/20 via-rose-600/5 to-transparent",
-    },
+   
   ];
 
   const visibleServices = showAll ? services : services.slice(0, 4);

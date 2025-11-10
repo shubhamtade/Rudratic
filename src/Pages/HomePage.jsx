@@ -76,14 +76,7 @@ const HomePage = () => {
         <IndustriesSection />
       </motion.section>
 
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={sectionFade}
-      >
-        <IntegratedApproach />
-      </motion.section>
+      
 
       <motion.section
         initial="hidden"
