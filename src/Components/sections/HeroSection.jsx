@@ -84,7 +84,7 @@ const HeroSection = () => {
   return (
     <section
       ref={heroRef}
-      className="relative min-h-screen bg-base-100 flex items-center -mt-24 pt-20 sm:pt-0 pb-16 sm:pb-0 overflow-hidden"
+      className="relative min-h-screen bg-base-100 flex items-center pt-36 pb-16 sm:pb-0 overflow-hidden"
     >
       <ParticleBackground density={50} colorVariable="--p" />
 
@@ -291,7 +291,7 @@ const HeroSection = () => {
             </motion.div>
 
             <motion.div style={{ y: y2 }} className="grid grid-cols-2 gap-5">
-              {["/map image.png", "/hero1.png"].map((imagePath, idx) => (
+              {["/map_image.png", "/hero1.png"].map((imagePath, idx) => (
                 <motion.div
                   key={idx}
                   initial={{ opacity: 0, y: 50 }}

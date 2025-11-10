@@ -113,7 +113,7 @@ function App() {
   return (
     <Router>
       <Navigation theme={theme} toggleTheme={toggleTheme} />
-      <main className="relative z-[2] pt-24">
+      <main className="relative z-[2]">
         <AnimatedRoutes />
       </main>
       <ClientLoginModal
