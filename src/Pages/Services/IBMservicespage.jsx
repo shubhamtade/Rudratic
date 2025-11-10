@@ -94,7 +94,7 @@ const IBMservicespage = () => {
   return (
     <div className="bg-base-100 relative min-h-screen overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-[600px] bg-gradient-to-b from-primary/5 to-transparent -z-0"></div>
-      <div className="relative z-10 pt-24">
+      <div className="relative z-10">
         <PageHero
           badge="IBM Business Partner"
           title="IBM Services & Enterprise Solutions"

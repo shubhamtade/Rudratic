@@ -142,7 +142,7 @@ const Appdevelopmentpage = () => {
 
   return (
     <div className="bg-base-100 relative min-h-screen overflow-x-hidden">
-      <div className="relative z-10 pt-24">
+      <div className="relative z-10">
         <PageHero
           badge="Enterprise Solutions"
           title="Application Development That Transforms Business"

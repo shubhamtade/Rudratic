@@ -107,7 +107,7 @@ const AboutUsSection = () => {
               className="rounded-2xl overflow-hidden border border-base-content/10 shadow-2xl hover:shadow-primary/20 transition-all duration-500 backdrop-blur-sm card-tilt"
             >
               <img
-                src="/public/map_image.png"
+                src="/map image.png"
                 alt="Global Map"
                 className="w-full h-full object-cover floating-image"
               />
