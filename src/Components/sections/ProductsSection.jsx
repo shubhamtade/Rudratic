@@ -25,6 +25,7 @@ const ProductsSection = () => {
   const products = productsData;
   const [activeGroup, setActiveGroup] = useState("All");
   const [selected, setSelected] = useState(null);
+  const [currentPage, setCurrentPage] = useState(0);
 
   const iconMap = {
     Shield,
@@ -34,6 +35,16 @@ const ProductsSection = () => {
     Zap,
     TrendingUp,
     LayoutGrid,
+  };
+
+  const goToNext = () => {
+    setCurrentPage((prev) =>
+      Math.min(prev + 1, Math.ceil(filtered.length / 2) - 1)
+    );
+  };
+
+  const goToPrev = () => {
+    setCurrentPage((prev) => Math.max(prev - 1, 0));
   };
 
   const groups = useMemo(() => {
@@ -116,230 +127,277 @@ const ProductsSection = () => {
           </div>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-8">
-          {filtered.map((product, i) => {
-            const Icon = iconMap[product.icon] || null;
-            return (
-              <motion.article
-                key={product.title}
+        <div className="relative">
+          <div className="overflow-hidden relative">
+            {/* Navigation Buttons */}
+            <button
+              onClick={goToPrev}
+              disabled={currentPage === 0}
+              className="absolute left-0 top-1/2 -translate-y-1/2 z-20 btn btn-circle btn-ghost bg-base-100/80 backdrop-blur-sm border-2 border-base-300 hover:bg-base-200 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <ArrowRight className="rotate-180" />
+            </button>
+            <button
+              onClick={goToNext}
+              disabled={currentPage >= Math.ceil(filtered.length / 2) - 1}
+              className="absolute right-0 top-1/2 -translate-y-1/2 z-20 btn btn-circle btn-ghost bg-base-100/80 backdrop-blur-sm border-2 border-base-300 hover:bg-base-200 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <ArrowRight />
+            </button>
+
+            {/* Pagination Dots */}
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center justify-center gap-2 z-20">
+              {[...Array(Math.ceil(filtered.length / 2))].map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrentPage(i)}
+                  className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                    i === currentPage
+                      ? "bg-primary scale-125"
+                      : "bg-base-content/20 hover:bg-base-content/40"
+                  }`}
+                />
+              ))}
+            </div>
+
+            {/* Products Slider */}
+            <motion.div
+              className="flex gap-8 transition-transform duration-500 ease-out px-4"
+              animate={{ x: -currentPage * (480 + 32) }}
+              style={{ width: "max-content" }}
+            >
+              {filtered.map((product, i) => {
+                const Icon = iconMap[product.icon] || null;
                 // Use animate on mount instead of whileInView so cards are
                 // reliably visible on mobile/tablet where IntersectionObserver
                 // may not trigger in some environments. Keeps the same
                 // entrance timing via transition/delay.
-                initial={{ opacity: 1, y: 0 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: i * 0.04 }}
-                whileHover={{ y: -8, scale: 1.02 }}
-                className="group bg-base-100/80 backdrop-blur-md rounded-2xl border border-base-300 shadow-xl hover:shadow-2xl p-6 flex flex-col items-center text-center transform-gpu transition-all duration-300"
-              >
-                <div className="w-full flex justify-between items-start gap-2 relative z-10">
-                  <motion.div
-                    className="w-14 sm:w-16 h-14 sm:h-16 rounded-2xl flex items-center justify-center transform-gpu group-hover:scale-110 transition-transform duration-300"
-                    style={{
-                      background: `linear-gradient(135deg, ${product.color}30, ${product.color}10)`,
-                    }}
-                    whileHover={{ rotate: [0, -10, 10, -5, 5, 0] }}
-                    transition={{ duration: 0.5 }}
+                return (
+                  <motion.article
+                    style={{ width: "480px", flexShrink: 0 }}
+                    key={product.title}
+                    initial={{ opacity: 1, y: 0 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: i * 0.04 }}
+                    whileHover={{ y: -8, scale: 1.02 }}
+                    className="group bg-base-100/80 backdrop-blur-md rounded-3xl border border-base-300 shadow-xl hover:shadow-2xl p-8 flex flex-col items-center text-center transform-gpu transition-all duration-300 min-h-[600px]"
                   >
-                    {Icon && (
-                      <Icon size={24} style={{ color: product.color }} />
-                    )}
-                  </motion.div>
-                  <button
-                    onClick={() => setSelected(product)}
-                    aria-label={`Quick view ${product.title}`}
-                    className="text-xs sm:text-sm font-medium px-2.5 sm:px-3 py-1.5 rounded-full bg-base-content/5 text-base-content/70 hover:bg-base-content/10 hover:text-base-content transition-colors flex items-center gap-1"
-                  >
-                    <span className="hidden sm:inline">Quick</span> View
-                  </button>
-                </div>
-
-                <Link to={product.href} className="w-full mt-4 block relative">
-                  <motion.div
-                    whileHover={{ scale: 1.03 }}
-                    className="relative overflow-hidden rounded-xl border border-base-200 shadow-lg group-hover:shadow-xl transition-all duration-300"
-                  >
-                    <div
-                      className={`absolute inset-0 ${product.gradient} opacity-60 group-hover:opacity-75 transition-opacity`}
-                    />
-                    <img
-                      src={product.imagePath}
-                      alt={product.title}
-                      className="w-full h-40 object-cover rounded-xl transform transition-transform duration-500 group-hover:scale-105"
-                    />
-                  </motion.div>
-                </Link>
-
-                <h3
-                  className="text-xl sm:text-2xl font-bold mb-2 mt-4"
-                  style={{ color: product.color }}
-                >
-                  {product.title}
-                </h3>
-                <p className="text-base-content/80 text-sm mb-4 line-clamp-3 max-w-sm">
-                  {product.description}
-                </p>
-
-                <ul className="space-y-2 mb-6 text-left w-full max-w-xs mx-auto">
-                  {product.features.slice(0, 3).map((f, idx) => (
-                    <motion.li
-                      key={idx}
-                      initial={{ opacity: 0, x: -10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.1 * idx }}
-                      className="flex items-center gap-3 text-base-content/90 text-sm group-hover:transform group-hover:translate-x-1 transition-transform"
-                    >
-                      <span className="shrink-0">
-                        <Check
-                          size={16}
-                          style={{ color: product.color }}
-                          className="transform transition-transform group-hover:scale-110"
-                        />
-                      </span>
-                      {f}
-                    </motion.li>
-                  ))}
-                </ul>
-
-                <div className="w-full mt-auto">
-                  <Link to={product.href} className="w-full block">
-                    <motion.button
-                      whileHover={{ scale: 1.03 }}
-                      whileTap={{ scale: 0.98 }}
-                      transition={{ type: "spring", stiffness: 400 }}
-                      className="w-full px-6 py-3 rounded-full font-semibold border-2 bg-base-100/50 backdrop-blur-md flex items-center justify-center gap-3 group transition-all duration-300 hover:shadow-lg text-sm relative overflow-hidden"
-                      style={{ borderColor: product.color }}
-                    >
-                      <span
-                        className="relative z-10"
-                        style={{ color: product.color }}
+                    <div className="w-full flex justify-between items-start gap-2 relative z-10">
+                      <motion.div
+                        className="w-20 sm:w-24 h-20 sm:h-24 rounded-2xl flex items-center justify-center transform-gpu group-hover:scale-110 transition-transform duration-300"
+                        style={{
+                          background: `linear-gradient(135deg, ${product.color}30, ${product.color}10)`,
+                        }}
+                        whileHover={{ rotate: [0, -10, 10, -5, 5, 0] }}
+                        transition={{ duration: 0.5 }}
                       >
-                        Learn More
-                      </span>
-                      <ArrowRight
-                        size={16}
-                        className="transform transition-transform group-hover:translate-x-1"
-                        style={{ color: product.color }}
-                      />
-                      <div
-                        className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300"
-                        style={{ background: product.color }}
-                      />
-                    </motion.button>
-                  </Link>
-                </div>
-              </motion.article>
-            );
-          })}
-        </div>
-
-        <AnimatePresence>
-          {selected && (
-            <motion.div
-              className="fixed inset-0 z-50 flex items-center justify-center"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            >
-              <div
-                className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-                onClick={() => setSelected(null)}
-              />
-              <motion.div
-                initial={{ y: 20, scale: 0.98 }}
-                animate={{ y: 0, scale: 1 }}
-                exit={{ y: 20, scale: 0.98 }}
-                transition={{ type: "spring", stiffness: 300 }}
-                className="relative z-10 w-full max-w-3xl mx-4 bg-base-100 rounded-2xl shadow-2xl overflow-hidden border border-base-200"
-              >
-                <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6 p-4 sm:p-6 max-h-[90vh] overflow-y-auto">
-                  <div className="w-full sm:w-48 h-48 sm:h-32 relative rounded-lg overflow-hidden shrink-0">
-                    <img
-                      src={selected.imagePath}
-                      alt={selected.title}
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent"></div>
-                  </div>
-                  <div className="flex-1 w-full">
-                    <div className="flex items-start sm:items-center justify-between gap-2">
-                      <h3
-                        className="text-xl sm:text-2xl font-bold"
-                        style={{ color: selected.color }}
-                      >
-                        {selected.title}
-                      </h3>
+                        {Icon && (
+                          <Icon size={32} style={{ color: product.color }} />
+                        )}
+                      </motion.div>
                       <button
-                        onClick={() => setSelected(null)}
-                        aria-label="Close"
-                        className="btn btn-ghost btn-sm sm:btn-md btn-circle"
+                        onClick={() => setSelected(product)}
+                        aria-label={`Quick view ${product.title}`}
+                        className="text-xs sm:text-sm font-medium px-2.5 sm:px-3 py-1.5 rounded-full bg-base-content/5 text-base-content/70 hover:bg-base-content/10 hover:text-base-content transition-colors flex items-center gap-1"
                       >
-                        <X />
+                        <span className="hidden sm:inline">Quick</span> View
                       </button>
                     </div>
-                    <p className="text-base-content/80 mt-2 text-sm sm:text-base">
-                      {selected.description}
+
+                    <Link
+                      to={product.href}
+                      className="w-full mt-4 block relative"
+                    >
+                      <motion.div
+                        whileHover={{ scale: 1.03 }}
+                        className="relative overflow-hidden rounded-xl border border-base-200 shadow-lg group-hover:shadow-xl transition-all duration-300"
+                      >
+                        <div
+                          className={`absolute inset-0 ${product.gradient} opacity-60 group-hover:opacity-75 transition-opacity`}
+                        />
+                        <img
+                          src={product.imagePath}
+                          alt={product.title}
+                          className="w-full h-56 object-cover rounded-xl transform transition-transform duration-500 group-hover:scale-105"
+                        />
+                      </motion.div>
+                    </Link>
+
+                    <h3
+                      className="text-xl sm:text-2xl font-bold mb-2 mt-4"
+                      style={{ color: product.color }}
+                    >
+                      {product.title}
+                    </h3>
+                    <p className="text-base-content/80 text-sm mb-4 line-clamp-3 max-w-sm">
+                      {product.description}
                     </p>
-                    <ul className="mt-4 space-y-2">
-                      {selected.features.map((f, i) => (
-                        <li key={i} className="flex items-start gap-2 text-sm">
-                          <Check
-                            size={16}
-                            style={{ color: selected.color }}
-                            className="mt-1 shrink-0"
-                          />
-                          <span>{f}</span>
-                        </li>
+
+                    <ul className="space-y-2 mb-6 text-left w-full max-w-xs mx-auto">
+                      {product.features.slice(0, 3).map((f, idx) => (
+                        <motion.li
+                          key={idx}
+                          initial={{ opacity: 0, x: -10 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.1 * idx }}
+                          className="flex items-center gap-3 text-base-content/90 text-sm group-hover:transform group-hover:translate-x-1 transition-transform"
+                        >
+                          <span className="shrink-0">
+                            <Check
+                              size={16}
+                              style={{ color: product.color }}
+                              className="transform transition-transform group-hover:scale-110"
+                            />
+                          </span>
+                          {f}
+                        </motion.li>
                       ))}
                     </ul>
-                    <div className="mt-6 flex flex-wrap gap-2 sm:gap-3">
-                      <button
-                        onClick={() =>
-                          window.openDemoModal ? window.openDemoModal() : null
-                        }
-                        className="btn btn-primary btn-sm sm:btn-md gap-2"
-                      >
-                        <Calendar className="hidden sm:inline" /> Book Demo
-                      </button>
-                      <Link
-                        to={selected.href}
-                        className="btn btn-ghost btn-sm sm:btn-md"
-                      >
-                        View Product
+
+                    <div className="w-full mt-auto">
+                      <Link to={product.href} className="w-full block">
+                        <motion.button
+                          whileHover={{ scale: 1.03 }}
+                          whileTap={{ scale: 0.98 }}
+                          transition={{ type: "spring", stiffness: 400 }}
+                          className="w-full px-6 py-3 rounded-full font-semibold border-2 bg-base-100/50 backdrop-blur-md flex items-center justify-center gap-3 group transition-all duration-300 hover:shadow-lg text-sm relative overflow-hidden"
+                          style={{ borderColor: product.color }}
+                        >
+                          <span
+                            className="relative z-10"
+                            style={{ color: product.color }}
+                          >
+                            Learn More
+                          </span>
+                          <ArrowRight
+                            size={16}
+                            className="transform transition-transform group-hover:translate-x-1"
+                            style={{ color: product.color }}
+                          />
+                          <div
+                            className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300"
+                            style={{ background: product.color }}
+                          />
+                        </motion.button>
                       </Link>
-                      <button
-                        onClick={() => setSelected(null)}
-                        className="btn btn-outline btn-sm sm:btn-md sm:hidden"
-                      >
-                        Close
-                      </button>
+                    </div>
+                  </motion.article>
+                );
+              })}
+            </motion.div>
+          </div>
+
+          <AnimatePresence>
+            {selected && (
+              <motion.div
+                className="fixed inset-0 z-50 flex items-center justify-center"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+              >
+                <div
+                  className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+                  onClick={() => setSelected(null)}
+                />
+                <motion.div
+                  initial={{ y: 20, scale: 0.98 }}
+                  animate={{ y: 0, scale: 1 }}
+                  exit={{ y: 20, scale: 0.98 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                  className="relative z-10 w-full max-w-3xl mx-4 bg-base-100 rounded-2xl shadow-2xl overflow-hidden border border-base-200"
+                >
+                  <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6 p-4 sm:p-6 max-h-[90vh] overflow-y-auto">
+                    <div className="w-full sm:w-48 h-48 sm:h-32 relative rounded-lg overflow-hidden shrink-0">
+                      <img
+                        src={selected.imagePath}
+                        alt={selected.title}
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent"></div>
+                    </div>
+                    <div className="flex-1 w-full">
+                      <div className="flex items-start sm:items-center justify-between gap-2">
+                        <h3
+                          className="text-xl sm:text-2xl font-bold"
+                          style={{ color: selected.color }}
+                        >
+                          {selected.title}
+                        </h3>
+                        <button
+                          onClick={() => setSelected(null)}
+                          aria-label="Close"
+                          className="btn btn-ghost btn-sm sm:btn-md btn-circle"
+                        >
+                          <X />
+                        </button>
+                      </div>
+                      <p className="text-base-content/80 mt-2 text-sm sm:text-base">
+                        {selected.description}
+                      </p>
+                      <ul className="mt-4 space-y-2">
+                        {selected.features.map((f, i) => (
+                          <li
+                            key={i}
+                            className="flex items-start gap-2 text-sm"
+                          >
+                            <Check
+                              size={16}
+                              style={{ color: selected.color }}
+                              className="mt-1 shrink-0"
+                            />
+                            <span>{f}</span>
+                          </li>
+                        ))}
+                      </ul>
+                      <div className="mt-6 flex flex-wrap gap-2 sm:gap-3">
+                        <button
+                          onClick={() =>
+                            window.openDemoModal ? window.openDemoModal() : null
+                          }
+                          className="btn btn-primary btn-sm sm:btn-md gap-2"
+                        >
+                          <Calendar className="hidden sm:inline" /> Book Demo
+                        </button>
+                        <Link
+                          to={selected.href}
+                          className="btn btn-ghost btn-sm sm:btn-md"
+                        >
+                          View Product
+                        </Link>
+                        <button
+                          onClick={() => setSelected(null)}
+                          className="btn btn-outline btn-sm sm:btn-md sm:hidden"
+                        >
+                          Close
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+            )}
+          </AnimatePresence>
 
-        <motion.div
-          className="mt-16 flex justify-center"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
-        >
-          <Link to="/solutions" className="inline-block">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.98 }}
-              className="btn btn-primary btn-lg px-8 gap-3 relative overflow-hidden group"
-            >
-              <span>View All Products</span>
-              <ArrowRight className="transform transition-transform group-hover:translate-x-1" />
-              <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
-            </motion.button>
-          </Link>
-        </motion.div>
+          <motion.div
+            className="mt-16 flex justify-center"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+          >
+            <Link to="/solutions" className="inline-block">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
+                className="btn btn-primary btn-lg px-8 gap-3 relative overflow-hidden group"
+              >
+                <span>View All Products</span>
+                <ArrowRight className="transform transition-transform group-hover:translate-x-1" />
+                <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
+              </motion.button>
+            </Link>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

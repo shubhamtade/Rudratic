@@ -4,13 +4,15 @@ import HeroSection from "../Components/sections/HeroSection.jsx";
 import ProductsSection from "../Components/sections/ProductsSection.jsx";
 import ServicesSection from "../Components/sections/ServicesSection.jsx";
 import TestimonialsSection from "../Components/sections/TestimonialsSection.jsx";
-import AboutUsSection from "../Components/sections/AboutUsSection.jsx";
 import CTASection from "../Components/sections/CTASection.jsx";
 import HowItWorksSection from "../Components/sections/HowItWorksSection.jsx";
 import WhatWeDoSection from "../Components/sections/WhatWeDoSection.jsx";
 import IntegratedApproach from "../Components/sections/IntegratedApproach.jsx";
 import Footer from "../layouts/Footer.jsx";
 import TechPartners from "../Components/sections/TechPartners.jsx";
+import StatsBar from "../Components/sections/StatsBar.jsx";
+import IndustriesSection from "../Components/sections/IndustriesSection.jsx";
+import WhyChooseUs from "../Components/sections/WhyChooseUs.jsx";
 
 const HomePage = () => {
   // Animation for scroll reveal
@@ -26,11 +28,17 @@ const HomePage = () => {
   return (
     <>
       <HeroSection />
-
-      {/* Render ProductsSection without whileInView wrapper because some
-          mobile browsers limit IntersectionObserver and can leave sections
-          invisible. ProductsSection handles its own animations now. */}
+      <StatsBar />
       <ProductsSection />
+
+      <motion.section
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={sectionFade}
+      >
+        <ServicesSection />
+      </motion.section>
 
       <motion.section
         initial="hidden"
@@ -41,7 +49,6 @@ const HomePage = () => {
         <HowItWorksSection />
       </motion.section>
 
-      {/* <TechPartners /> */}
       <motion.section
         initial="hidden"
         whileInView="visible"
@@ -57,7 +64,16 @@ const HomePage = () => {
         viewport={{ once: true, amount: 0.2 }}
         variants={sectionFade}
       >
-        <ServicesSection />
+        <WhyChooseUs />
+      </motion.section>
+
+      <motion.section
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={sectionFade}
+      >
+        <IndustriesSection />
       </motion.section>
 
       <motion.section
@@ -76,15 +92,6 @@ const HomePage = () => {
         variants={sectionFade}
       >
         <TestimonialsSection />
-      </motion.section>
-
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={sectionFade}
-      >
-        <AboutUsSection />
       </motion.section>
 
       <motion.section
