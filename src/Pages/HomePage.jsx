@@ -28,7 +28,7 @@ const HomePage = () => {
   return (
     <>
       <HeroSection />
-      <StatsBar />
+      {/* <StatsBar /> */}
       <ProductsSection />
 
       <motion.section
