@@ -34,7 +34,7 @@ const AnimatedTitle = ({ text }) => {
 };
 
 const PageHero = ({ badge, title, subtitle, buttonText }) => (
-  <section className="relative text-center container mx-auto px-4 pt-26 pb-16 md:pt-28 md:pb-24 overflow-hidden">
+  <section className="relative text-center container mx-auto px-4 pt-36 pb-16 md:pt-28 md:pb-24 overflow-hidden">
     <div className="animated-grid-background"></div>
     <motion.div initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.2 } } }}>
       <motion.div variants={sectionTitleVariants} className="badge badge-lg badge-outline border-primary/50 bg-primary/10 text-primary p-4 mb-6 font-semibold">{badge}</motion.div>
