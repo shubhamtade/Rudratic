@@ -1,3 +1,7 @@
+/* Animated border pulse for industry cards */
+.animated-pulse-border {
+  animation: pulseBorder 2.5s infinite;
+}
 @import "tailwindcss";
 
 /* DaisyUI v5+ plugin for Tailwind v4+ */

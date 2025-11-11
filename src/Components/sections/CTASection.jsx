@@ -49,7 +49,7 @@ const CTASection = () => {
           {/* CTA Buttons */}
           <motion.div
             variants={fadeInUp}
-            className="flex flex-col sm:flex-row gap-4 justify-center mb-20"
+            className="flex flex-col sm:flex-row gap-4 justify-center "
           >
             <motion.button
               whileHover={{ scale: 1.07, y: -3 }}
@@ -74,45 +74,7 @@ const CTASection = () => {
             </motion.button>
           </motion.div>
 
-          {/* Animated Divider Line */}
-          <motion.div
-            variants={fadeInUp}
-            className="relative mx-auto w-32 h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent mb-12 animate-glow-line"
-          />
-
-          {/* Animated Statistics */}
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="grid grid-cols-1 sm:grid-cols-3 gap-12 text-center"
-          >
-            {[
-              { value: "500+", label: "Global Clients" },
-              { value: "99.9%", label: "System Uptime" },
-              { value: "24/7", label: "Technical Support" },
-            ].map((stat, index) => (
-              <motion.div
-                key={index}
-                variants={fadeInUp}
-                whileHover={{ scale: 1.05 }}
-                className="stat-card"
-              >
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.2, duration: 0.5 }}
-                  className="text-5xl font-extrabold gradient-text mb-3 drop-shadow-sm"
-                >
-                  {stat.value}
-                </motion.div>
-                <p className="text-sm font-semibold text-base-content/60 uppercase tracking-wider">
-                  {stat.label}
-                </p>
-              </motion.div>
-            ))}
-          </motion.div>
+          
         </motion.div>
       </div>
     </section>
