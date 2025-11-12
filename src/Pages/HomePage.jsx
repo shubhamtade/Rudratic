@@ -40,23 +40,7 @@ const HomePage = () => {
         <ServicesSection />
       </motion.section>
 
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={sectionFade}
-      >
-        <HowItWorksSection />
-      </motion.section>
-
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={sectionFade}
-      >
-        <WhatWeDoSection />
-      </motion.section>
+    
 
       <motion.section
         initial="hidden"
@@ -78,15 +62,7 @@ const HomePage = () => {
 
       
 
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={sectionFade}
-      >
-        <TestimonialsSection />
-      </motion.section>
-
+      
       <motion.section
         initial="hidden"
         whileInView="visible"

@@ -106,7 +106,7 @@ const WhyChooseUs = () => {
         >
           <div className="inline-block mb-4 px-6 py-2 bg-accent/10 backdrop-blur-sm rounded-full">
             <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent font-semibold">
-              WHY CHOOSE RUDRATIC
+              OUR EDGE IN INDUSTRY
             </span>
           </div>
 
