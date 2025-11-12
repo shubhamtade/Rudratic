@@ -178,7 +178,7 @@ const ProductsSection = () => {
 
                 {/* Features */}
                 <ul className="space-y-2 mb-6 text-left w-full max-w-xs mx-auto">
-                  {product.features.slice(0, 3).map((f, idx) => (
+                  {product.features.map((f, idx) => (
                     <motion.li
                       key={idx}
                       initial={{ opacity: 0, x: -10 }}

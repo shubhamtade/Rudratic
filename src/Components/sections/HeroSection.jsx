@@ -3,7 +3,7 @@ import {
   motion,
   useTransform,
   useScroll,
-  AnimatePresence,
+  AnimatePresence, // Kept for potential future use or if AuroraCard is moved
 } from "framer-motion";
 import {
   Calendar,
@@ -20,22 +20,26 @@ import { fadeInUp, staggerContainer } from "../../utils/animations";
 import ParticleBackground from "../ui/ParticleBackground";
 
 // AuroraCard: glowing motion-reactive card
+// Kept for reusability, although not used in HeroSection after modifications
 const AuroraCard = React.forwardRef(({ children, className, ...rest }, ref) => {
-  const cardRef = useRef(null);
+  const cardRef = useRef(null); // Internal ref
+
+  // Determine which ref to use for mouse events
+  const elementRef = ref || cardRef; 
 
   const handleMouseMove = (e) => {
-    const internalRef = cardRef.current || ref?.current;
-    if (!internalRef) return;
-    const rect = internalRef.getBoundingClientRect();
+    const currentRef = elementRef.current;
+    if (!currentRef) return;
+    const rect = currentRef.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    internalRef.style.setProperty("--x", `${x}px`);
-    internalRef.style.setProperty("--y", `${y}px`);
+    currentRef.style.setProperty("--x", `${x}px`);
+    currentRef.style.setProperty("--y", `${y}px`);
   };
 
   return (
     <motion.div
-      ref={cardRef}
+      ref={elementRef} // Assign ref to the motion.div
       onMouseMove={handleMouseMove}
       className={`relative overflow-hidden rounded-2xl p-[1px] bg-gradient-to-br from-primary/20 via-transparent to-accent/30 transition-all duration-500 hover:from-primary/40 hover:to-accent/50 ${className}`}
       {...rest}
@@ -47,13 +51,7 @@ const AuroraCard = React.forwardRef(({ children, className, ...rest }, ref) => {
 });
 
 const HeroSection = () => {
-  const stats = [
-    { value: "100+", label: "Global Enterprises" },
-    { value: "24/7", label: "Proactive Support" },
-    { value: "99.99%", label: "Uptime SLA" },
-    { value: "1M+", label: "Identities Secured" },
-  ];
-
+  // Removed 'stats' as they were part of the right section
   const features = [
     { label: "SWOT PAM", icon: ShieldCheck },
     { label: "SWOT Cloud PAM", icon: Cloud },
@@ -108,13 +106,15 @@ const HeroSection = () => {
       />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center justify-between">
-          {/* LEFT SIDE */}
+        {/* Adjusted parent div to center content */}
+        <div className="flex flex-col gap-12 items-center justify-center">
+          {/* LEFT SIDE - Now centered and taking up appropriate width */}
           <motion.div
             initial="hidden"
             animate="visible"
             variants={staggerContainer}
-            className="w-full lg:w-1/2 flex flex-col gap-6"
+            // Centering and max-width for the content block
+            className="w-full max-w-4xl mx-auto flex flex-col gap-6 items-center text-center"
           >
             <motion.h1
               variants={sentence}
@@ -157,10 +157,10 @@ const HeroSection = () => {
               and unlock real-time intelligence.
             </motion.p>
 
-            {/* Buttons */}
+            {/* Buttons - Centered */}
             <motion.div
               variants={fadeInUp}
-              className="flex flex-col sm:flex-row gap-4 mb-2"
+              className="flex flex-col sm:flex-row gap-4 mb-2 justify-center" // Added justify-center
             >
               <motion.button
                 whileHover={{ scale: 1.06, y: -2 }}
@@ -186,8 +186,8 @@ const HeroSection = () => {
               </a>
             </motion.div>
 
-            {/* Floating Feature Chips */}
-            <motion.div variants={fadeInUp} className="flex flex-wrap gap-2">
+            {/* Floating Feature Chips - Centered */}
+            <motion.div variants={fadeInUp} className="flex flex-wrap gap-2 justify-center"> {/* Added justify-center */}
               {features.map(({ label, icon: Icon }) => (
                 <motion.span
                   key={label}
@@ -199,81 +199,22 @@ const HeroSection = () => {
                 </motion.span>
               ))}
             </motion.div>
+            
+            {/* Trust Badge - Moved from right section, now below feature chips */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.1, duration: 0.7, type: "spring" }}
+              className="mt-8 bg-base-100/90 border border-primary/40 rounded-full px-5 py-2 shadow-lg flex items-center gap-2 backdrop-blur-md"
+            >
+              <ShieldCheck size={18} className="text-primary" />
+              <span className="text-xs font-semibold text-primary">
+                Trusted by Global Enterprises
+              </span>
+            </motion.div>
           </motion.div>
 
-          {/* RIGHT SIDE */}
-          <div className="w-full lg:w-1/2 flex flex-col gap-8 items-center relative">
-            {/* Video Card */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.92, y: 40 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{
-                duration: 1,
-                ease: [0.16, 1, 0.3, 1],
-                delay: 0.3,
-              }}
-              className="relative w-full max-w-lg mx-auto"
-            >
-              <motion.div
-                whileHover={{ rotateY: 3, rotateX: 2, scale: 1.03 }}
-                transition={{ type: "spring", stiffness: 120, damping: 12 }}
-                className="card bg-base-content/5 backdrop-blur-2xl border border-base-content/10 shadow-2xl p-4 aspect-video rounded-2xl overflow-hidden flex items-center justify-center"
-              >
-                <video
-                  className="w-full h-full object-cover rounded-xl"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  src="/rutradic.mp4"
-                />
-              </motion.div>
-
-              {/* Trust Badge */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.1, duration: 0.7, type: "spring" }}
-                className="absolute -top-8 right-4 bg-base-100/90 border border-primary/40 rounded-full px-5 py-2 shadow-lg flex items-center gap-2 backdrop-blur-md"
-              >
-                <ShieldCheck size={18} className="text-primary" />
-                <span className="text-xs font-semibold text-primary">
-                  Trusted by Global Enterprises
-                </span>
-              </motion.div>
-            </motion.div>
-
-            {/* Stats Cards */}
-            <motion.div
-              variants={staggerContainer}
-              className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-lg"
-            >
-              <AnimatePresence>
-                {stats.map((stat, idx) => (
-                  <AuroraCard
-                    key={idx}
-                    whileHover={{ y: -6, scale: 1.05 }}
-                    transition={{ type: "spring", stiffness: 200, damping: 14 }}
-                    className="aurora-card bg-base-content/10 backdrop-blur-xl border border-primary/20 hover:border-primary/40 hover:bg-primary/10"
-                  >
-                    <div className="card-body items-center text-center p-4">
-                      <motion.h2
-                        className="card-title text-2xl font-bold text-primary drop-shadow-lg"
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2 * idx }}
-                      >
-                        {stat.value}
-                      </motion.h2>
-                      <p className="text-xs text-base-content/60 font-medium tracking-wider uppercase">
-                        {stat.label}
-                      </p>
-                    </div>
-                  </AuroraCard>
-                ))}
-              </AnimatePresence>
-            </motion.div>
-          </div>
+          {/* RIGHT SIDE content (video, stats cards) has been removed */}
         </div>
       </div>
 
@@ -285,7 +226,7 @@ const HeroSection = () => {
           100% { background-position: 0% 50%; }
         }
       `}</style>
-      {/* Business Impact Section */}
+      {/* Business Impact Section - remains at the bottom, centered */}
       <div className="w-full flex flex-col items-center mt-10">
         <div className="max-w-4xl w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 bg-base-100/80 rounded-2xl shadow-xl p-6 border border-primary/10">
           {/* 90% Faster Threat Response */}
