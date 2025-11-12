@@ -159,7 +159,7 @@ const AiquinoxPage = () => {
         {
           icon: Shield,
           text: "Redefining Performance Monitoring",
-          desc: "Aiquinox transforms how digital teams monitor, analyze, and act — turning data noise into clear, actionable intelligence.",
+          desc: "Aiquinox transforms how digital teams monitor, analyze, and act   turning data noise into clear, actionable intelligence.",
         },
       ],
     },

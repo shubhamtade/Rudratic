@@ -17,6 +17,7 @@ import {
 import {
   fadeInLeft,
   fadeInRight,
+  fadeInUp,
   staggerContainer,
 } from "../../utils/animations";
 import { Link } from "react-router-dom";
@@ -87,7 +88,7 @@ const ProductsSection = () => {
   return (
     <section
       id="products"
-      className="relative py-24 sm:py-32 overflow-hidden bg-gradient-to-b from-base-100 to-base-200"
+      className="relative py-20 sm:py-32 overflow-hidden bg-gradient-to-b from-base-100 to-base-200"
     >
       {/* Background decorative elements */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -102,31 +103,36 @@ const ProductsSection = () => {
           whileInView="visible"
           viewport={{ once: true }}
           variants={staggerContainer}
-          className="mb-12"
         >
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-            <div>
-              <motion.div
-                variants={fadeInRight}
-                className="relative inline-block"
-              >
-                <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-base-content mb-1 relative z-10">
-                  Our Products
-                </h2>
-                <div className="absolute -bottom-2 left-0 w-full h-3 bg-primary/20 rounded-full -skew-x-6"></div>
-              </motion.div>
-              <motion.p
-                className="text-base-content/80 text-lg max-w-2xl mt-3"
-                variants={fadeInLeft}
-              >
-                Explore our comprehensive suite of enterprise solutions designed
-                to secure, automate, and transform your business.
-              </motion.p>
-            </div>
+          {/* Section Header */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+            className="text-center max-w-3xl mx-auto mb-20"
+          >
+            <motion.div variants={fadeInUp}>
+              <div className="inline-block bg-primary backdrop-blur-sm px-6 py-2 rounded-full text-white text-sm font-semibold tracking-wider mb-4">
+                OUR PRODUCTS
+              </div>
+            </motion.div>
+            <motion.h2
+              variants={fadeInUp}
+              className="text-4xl sm:text-5xl  font-bold mb-6 bg-gradient-to-r from-primary via-gray to-accent bg-clip-text text-transparent"
+            >
+              Enterprise Security & Intelligence Platforms
+            </motion.h2>
+            <motion.p
+              variants={fadeInUp}
+              className="text-lg sm:text-xl text-base-content/80"
+            >
+              AI-powered products designed for modern enterprises facing complex
+              security and data challenges
+            </motion.p>
 
-            {/* Group Filter Buttons */}
-            <motion.div
-              className="flex items-center justify-center sm:justify-start gap-2 flex-wrap"
+             <motion.div
+              className="flex items-center justify-center mt-5 gap-2 flex-wrap"
               variants={fadeInLeft}
             >
               {groups.map((g) => (
@@ -144,11 +150,12 @@ const ProductsSection = () => {
                 </button>
               ))}
             </motion.div>
-          </div>
+          </motion.div>
+        
         </motion.div>
 
         {/* Products Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8 mt-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8 ">
           {filtered.map((product, i) => {
             const Icon = iconMap[product.icon] || null;
             return (
@@ -157,7 +164,12 @@ const ProductsSection = () => {
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.1 }} // Animation triggers when 10% of element is visible
-                transition={{ duration: 0.7, delay: i * 0.12, type: "spring", stiffness: 100 }}
+                transition={{
+                  duration: 0.7,
+                  delay: i * 0.12,
+                  type: "spring",
+                  stiffness: 100,
+                }}
                 whileHover={{ y: -10, scale: 1.03 }}
                 className="group relative bg-white/70 dark:bg-base-200/80 backdrop-blur-2xl rounded-3xl border border-base-300 shadow-xl hover:shadow-2xl hover:border-primary/60 transition-all duration-300 p-6 sm:p-8 flex flex-col items-stretch"
               >
@@ -170,20 +182,27 @@ const ProductsSection = () => {
                 <div
                   className={`relative w-20 h-20 sm:w-24 sm:h-24 mx-auto rounded-3xl mb-6 sm:mb-8 flex items-center justify-center overflow-hidden transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl`}
                   style={{
-                    background: product.gradient || `linear-gradient(to bottom right, ${product.color}aa, ${product.color}66)`,
+                    background:
+                      product.gradient ||
+                      `linear-gradient(to bottom right, ${product.color}aa, ${product.color}66)`,
                   }}
                 >
                   <motion.div
                     initial={{ scale: 0.8, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
-                    transition={{ delay: 0.2, duration: 0.5, type: "spring", stiffness: 150 }}
+                    transition={{
+                      delay: 0.2,
+                      duration: 0.5,
+                      type: "spring",
+                      stiffness: 150,
+                    }}
                     className="absolute inset-0 bg-white/10 dark:bg-black/10 mix-blend-overlay rounded-3xl"
                   />
                   {Icon && (
                     <Icon
                       size={48} // Larger icon size
                       className="text-white relative z-10 drop-shadow-lg"
-                      style={{ color: 'white' }} // Ensure icon color is white for contrast with gradient background
+                      style={{ color: "white" }} // Ensure icon color is white for contrast with gradient background
                     />
                   )}
                 </div>
@@ -210,7 +229,9 @@ const ProductsSection = () => {
                       transition={{ delay: 0.05 * idx }}
                       className="flex items-center gap-3 text-base-content/90 text-sm group-hover:translate-x-1 transition-transform"
                     >
-                      <span className="shrink-0 p-0.5 rounded-full bg-primary/10"> {/* Subtle background for checkmark */}
+                      <span className="shrink-0 p-0.5 rounded-full bg-primary/10">
+                        {" "}
+                        {/* Subtle background for checkmark */}
                         <Check
                           size={16}
                           style={{ color: product.color }}
@@ -226,7 +247,11 @@ const ProductsSection = () => {
                 <div className="w-full mt-auto flex flex-col items-center">
                   <Link to={product.href} className="w-full block">
                     <motion.button
-                      whileHover={{ scale: 1.04, boxShadow: "0 10px 20px rgba(0,0,0,0.1), 0 6px 6px rgba(0,0,0,0.05)" }}
+                      whileHover={{
+                        scale: 1.04,
+                        boxShadow:
+                          "0 10px 20px rgba(0,0,0,0.1), 0 6px 6px rgba(0,0,0,0.05)",
+                      }}
                       whileTap={{ scale: 0.98 }}
                       transition={{ type: "spring", stiffness: 400 }}
                       onClick={() => setSelected(product)} // Added onClick to open modal for details
@@ -271,15 +296,16 @@ const ProductsSection = () => {
                   <div
                     className={`w-24 h-24 sm:w-32 sm:h-32 relative rounded-xl overflow-hidden shrink-0 flex items-center justify-center`}
                     style={{
-                      background: selected.gradient || `linear-gradient(to bottom right, ${selected.color}aa, ${selected.color}66)`,
+                      background:
+                        selected.gradient ||
+                        `linear-gradient(to bottom right, ${selected.color}aa, ${selected.color}66)`,
                     }}
                   >
-                    {iconMap[selected.icon] && (
+                    {iconMap[selected.icon] &&
                       React.createElement(iconMap[selected.icon], {
                         size: 56, // Larger icon in modal
                         className: "text-white relative z-10 drop-shadow-md",
-                      })
-                    )}
+                      })}
                     <div className="absolute inset-0 bg-white/10 dark:bg-black/10 mix-blend-overlay rounded-xl"></div>
                   </div>
                   <div className="flex-1 w-full">

@@ -85,8 +85,8 @@ const HeroSection = () => {
     },
   };
 
-  const headlineText = "Transform Your Enterprise Security & Data Intelligence";
-  const subHeadline = "Transform Your Enterprise Security & Data Intelligence";
+  const headlineText = "Secure. Intelligent. Reliable.";
+  const subHeadline = "Transforming Enterprise IT with AI-Powered Security, Cloud Solutions, and Next-Generation Software Development";
 
   return (
     <section
@@ -116,6 +116,16 @@ const HeroSection = () => {
             // Centering and max-width for the content block
             className="w-full max-w-4xl mx-auto flex flex-col gap-6 items-center text-center"
           >
+             <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.1, duration: 0.7, type: "spring" }}
+              className="mt-2 bg-base-100/90 border border-primary/40 rounded-full px-5 py-2 shadow-lg flex items-center gap-2 backdrop-blur-md"
+            >
+              <span className="text-xs font-semibold text-primary">
+                 Enterprise Technology Leader
+              </span>
+            </motion.div>
             <motion.h1
               variants={sentence}
               className="text-4xl sm:text-5xl lg:text-[56px] font-extrabold leading-tight tracking-tighter drop-shadow-lg animate-gradient-x bg-linear-to-r from-primary via-secondary to-accent bg-clip-text text-transparent"
@@ -145,17 +155,13 @@ const HeroSection = () => {
               variants={fadeInUp}
               className="text-base sm:text-lg text-base-content/80 mb-1 max-w-xl font-medium"
             >
-              World-class AI-powered solutions for privileged access,
-              database monitoring, and intelligent automation.
+              Trusted by global enterprises for privileged access management, database security, cloud infrastructure, and comprehensive IT services
             </motion.p>
 
-            <motion.p
-              variants={fadeInUp}
-              className="text-sm text-base-content/60 mb-4 max-w-lg"
-            >
-              Trusted by enterprises worldwide to secure critical infrastructure
-              and unlock real-time intelligence.
-            </motion.p>
+           
+
+           
+          
 
             {/* Buttons - Centered */}
             <motion.div
@@ -167,8 +173,7 @@ const HeroSection = () => {
                 whileTap={{ scale: 0.98 }}
                 className="btn btn-primary btn-lg group btn-primary-glow shadow-xl px-8"
               >
-                <Calendar size={20} />
-                Get Started Now
+                Explore Our Products
                 <motion.span
                   className="inline-block"
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
@@ -182,7 +187,7 @@ const HeroSection = () => {
                 href="#solutions"
                 className="btn btn-outline btn-lg px-8 border-primary/60 text-primary hover:bg-primary/10 shadow-md"
               >
-                Explore Solutions
+                View Services
               </a>
             </motion.div>
 

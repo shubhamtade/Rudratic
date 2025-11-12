@@ -11,6 +11,7 @@ import {
   Database,
   Settings2,
   Globe2,
+  Globe2Icon,
 } from "lucide-react";
 import { fadeInUp, staggerContainer } from "../../utils/animations";
 
@@ -106,6 +107,17 @@ const ServicesSection = () => {
         "Real-time processing at the source. 70-80% bandwidth reduction, millisecond latency.",
       gradient: "from-emerald-600/20 via-emerald-600/5 to-transparent",
     },
+     {
+      icon: (
+        <span className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-red-100 text-red-600 shadow-sm mb-2">
+          <Globe2Icon size={32} />
+        </span>
+      ),
+      title: "Digital Twin Solutions",
+      description:
+        "Virtual replicas for predictive maintenance. Asset-intensive industries see 40%+ efficiency gains.",
+      gradient: "from-red-600/20 via-red-600/5 to-transparent",
+    },
    
   ];
 
@@ -133,13 +145,13 @@ const ServicesSection = () => {
           className="text-center max-w-3xl mx-auto mb-20"
         >
           <motion.div variants={fadeInUp}>
-            <div className="inline-block bg-accent/10 backdrop-blur-sm px-6 py-2 rounded-full text-accent text-sm font-semibold tracking-wider mb-4">
+            <div className="inline-block bg-primary backdrop-blur-sm px-6 py-2 rounded-full text-white text-sm font-semibold tracking-wider mb-4">
               OUR SERVICES
             </div>
           </motion.div>
           <motion.h2
             variants={fadeInUp}
-            className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent"
+            className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-primary  to-accent bg-clip-text text-transparent"
           >
             Comprehensive IT Services Portfolio
           </motion.h2>
@@ -147,7 +159,7 @@ const ServicesSection = () => {
             variants={fadeInUp}
             className="text-lg sm:text-xl text-base-content/80"
           >
-            From enterprise software development to advanced cybersecurity—we
+            From enterprise software development to advanced cybersecurity we
             deliver excellence across the technology spectrum
           </motion.p>
         </motion.div>
@@ -197,7 +209,7 @@ const ServicesSection = () => {
                   </p>
                   {/* Explore Link */}
                   <motion.a
-                    href="#"
+                    href="/contact"
                     className="inline-flex items-center gap-2 text-primary font-semibold group/link"
                     whileHover={{ x: 5 }}
                   >
@@ -213,22 +225,7 @@ const ServicesSection = () => {
           ))}
         </div>
 
-        {/* Bottom CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.5 }}
-          className="mt-16 text-center"
-        >
-          <a
-            href="#contact"
-            className="inline-flex items-center gap-2 bg-primary/10 hover:bg-primary/20 text-primary font-semibold px-8 py-4 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/20"
-          >
-            View All Services
-            <ArrowRight size={20} />
-          </a>
-        </motion.div>
+        
       </div>
     </section>
   );

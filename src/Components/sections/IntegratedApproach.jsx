@@ -138,7 +138,7 @@ const IntegratedApproach = () => {
               <p className="text-base-content/70 leading-relaxed">
                 In today’s fast-paced digital world, IT security and operational
                 efficiency can no longer function in isolation. Our integrated
-                approach blends security, automation, and monitoring — empowering
+                approach blends security, automation, and monitoring   empowering
                 organizations to operate smarter, faster, and safer.
               </p>
               <div className="pt-2">

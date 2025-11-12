@@ -151,7 +151,7 @@ const PAMPage = () => {
             </h3>
             <p className="text-base-content/80">
               Our unique combination enables us to understand context, intent,
-              and behavior patterns with unprecedented accuracy—all while
+              and behavior patterns with unprecedented accuracy all while
               maintaining complete data privacy and security. This is not an
               add-on; it's the foundation of everything we build.
             </p>

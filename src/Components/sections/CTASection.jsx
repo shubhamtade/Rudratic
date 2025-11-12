@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Calendar, PlayCircle } from "lucide-react";
+import { Calendar, Phone, PlayCircle } from "lucide-react";
 import { fadeInUp, staggerContainer } from "../../utils/animations";
 import ParticleBackground from "../ui/ParticleBackground";
 
@@ -36,14 +36,14 @@ const CTASection = () => {
             variants={fadeInUp}
             className="text-3xl sm:text-5xl font-bold text-base-content mb-6 leading-tight drop-shadow-md"
           >
-            Let’s Secure &amp; <span className="text-primary">Empower</span> Your IT Future
+           Ready to  &amp; <span className="text-primary">Transform</span>  Your Enterprise IT?
           </motion.h2>
 
           <motion.p
             variants={fadeInUp}
             className="text-lg text-base-content/70 max-w-3xl mx-auto mb-12"
           >
-            Collaborate with <span className="font-semibold text-secondary">Rudratic Technologies</span> to streamline, safeguard, and scale your IT infrastructure with unmatched reliability.
+           Let's discuss how <span className="font-semibold text-secondary">Rudratic</span>  can secure, optimize, and accelerate your technology operations.
           </motion.p>
 
           {/* CTA Buttons */}
@@ -69,8 +69,8 @@ const CTASection = () => {
               className="btn btn-outline btn-lg border-base-content/30 hover:border-primary hover:text-primary magnetic-btn"
               onClick={() => window.openDemoModal && window.openDemoModal()}
             >
-              <PlayCircle size={20} />
-              Request a Demo
+              <Phone size={20} />
+              Call Us Now
             </motion.button>
           </motion.div>
 

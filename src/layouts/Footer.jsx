@@ -127,35 +127,58 @@ const Footer = () => {
           className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-8 gap-y-12"
         >
           {/* Logo + Info */}
-          <motion.div variants={fadeInUp} className="col-span-2 md:col-span-2">
-            <Link to="/" className="flex justify-start mb-6">
-              <motion.img
-                src="/rudratic new logo.png"
-                alt="Rudratic Logo"
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 200 }}
-                className="h-12 w-auto drop-shadow-[0_0_10px_hsla(var(--p)/0.7)]"
-              />
-            </Link>
-            <p className="text-base-content/70 leading-relaxed mb-6 max-w-sm">
-              Rudratic Technologies delivers end-to-end IT solutions across
-              security, monitoring, and automation for enterprises worldwide.
-            </p>
-            {/* Social Icons */}
-            <div className="flex gap-3">
-              {socialIcons.map(({ icon: Icon, link }, i) => (
-                <motion.a
-                  key={i}
-                  href={link}
-                  whileHover={{ scale: 1.1, y: -2 }}
-                  className="relative w-10 h-10 rounded-xl bg-base-content/5 border border-base-content/10 flex items-center justify-center hover:text-primary transition-all duration-300 group"
-                >
-                  <Icon size={18} />
-                  <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-primary/30 to-secondary/30 opacity-0 group-hover:opacity-100 blur-md transition-all" />
-                </motion.a>
-              ))}
-            </div>
-          </motion.div>
+         <motion.div variants={fadeInUp} className="col-span-2 md:col-span-2">
+  <Link to="/" className="flex justify-start mb-6">
+    <motion.img
+      src="/rudratic new logo.png"
+      alt="Rudratic Logo"
+      whileHover={{ scale: 1.05 }}
+      transition={{ type: "spring", stiffness: 200 }}
+      className="h-12 w-auto drop-shadow-[0_0_10px_hsla(var(--p)/0.7)]"
+    />
+  </Link>
+
+  <p className="text-base-content/70 leading-relaxed mb-4 max-w-sm">
+    Rudratic Technologies delivers end-to-end IT solutions across security,
+    monitoring, and automation for enterprises worldwide.
+  </p>
+
+  {/* Addresses */}
+  <div className="text-sm text-base-content/60 leading-relaxed mb-6 space-y-3">
+    <div>
+      <h4 className="font-semibold text-base-content mb-1">UK Office:</h4>
+      <p>
+        Rudratic Technologies Ltd., <br />
+        47, Courtside, 47-49 Penywern Road, <br />
+        London, SW5 9TU
+      </p>
+    </div>
+
+    <div>
+      <h4 className="font-semibold text-base-content mb-1">India Office:</h4>
+      <p>
+        No.187, 2nd Cross Street, Shanthi Nagar, <br />
+        Chromepet, Chennai – 600044
+      </p>
+    </div>
+  </div>
+
+  {/* Social Icons */}
+  <div className="flex gap-3">
+    {socialIcons.map(({ icon: Icon, link }, i) => (
+      <motion.a
+        key={i}
+        href={link}
+        whileHover={{ scale: 1.1, y: -2 }}
+        className="relative w-10 h-10 rounded-xl bg-base-content/5 border border-base-content/10 flex items-center justify-center hover:text-primary transition-all duration-300 group"
+      >
+        <Icon size={18} />
+        <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-primary/30 to-secondary/30 opacity-0 group-hover:opacity-100 blur-md transition-all" />
+      </motion.a>
+    ))}
+  </div>
+</motion.div>
+
 
           {/* Footer Columns */}
           {[

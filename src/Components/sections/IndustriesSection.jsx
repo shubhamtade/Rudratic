@@ -1,46 +1,46 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Banknote, Stethoscope, Building2, ShoppingCart, Factory, Landmark } from "lucide-react";
+import { Banknote, Stethoscope, Building2, ShoppingCart, Factory, Landmark, LandmarkIcon } from "lucide-react";
 
 const industries = [
   {
     title: "Financial Services",
-    description: "Secure banking operations, protect customer data, and maintain regulatory compliance",
-    icon: Banknote,
-    color: "from-blue-500 via-cyan-400 to-blue-300",
+    description: "SOX compliance, trading systems, risk management, fraud prevention",
+    icon: LandmarkIcon,
+    color: "from-gray-600 via-slate-400 to-gray-300",
     iconBg: "bg-blue-100/60",
   },
   {
     title: "Healthcare",
-    description: "HIPAA compliance, patient data protection, and secure medical systems",
+    description: "HIPAA compliance, EHR systems, patient data protection, telemedicine",
     icon: Stethoscope,
     color: "from-pink-500 via-rose-400 to-pink-300",
     iconBg: "bg-pink-100/60",
   },
   {
-    title: "Enterprise",
-    description: "Scalable security for large organizations with complex infrastructure",
+    title: "Technology & SaaS",
+    description: "DevOps security, API management, cloud-native architecture, scalability",
     icon: Building2,
     color: "from-purple-500 via-indigo-400 to-purple-300",
     iconBg: "bg-purple-100/60",
   },
   {
     title: "Retail & E-commerce",
-    description: "PCI-DSS compliance and customer data protection",
+    description: "PCI DSS compliance, payment systems, inventory management, analytics",
     icon: ShoppingCart,
     color: "from-orange-400 via-yellow-300 to-orange-200",
     iconBg: "bg-orange-100/60",
   },
   {
     title: "Manufacturing",
-    description: "Industrial security, OT/IT convergence, and supply chain protection",
+    description: "Production systems, supply chain, predictive maintenance, IoT/Edge",
     icon: Factory,
     color: "from-green-500 via-lime-400 to-green-200",
     iconBg: "bg-green-100/60",
   },
   {
     title: "Government",
-    description: "Critical infrastructure protection and classified data security",
+    description: "FedRAMP, classified systems, public sector compliance, security clearances",
     icon: Landmark,
     color: "from-gray-600 via-slate-400 to-gray-300",
     iconBg: "bg-gray-100/60",

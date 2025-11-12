@@ -28,7 +28,7 @@ const productsData = [
     imagePath: "/product3.jpg",
     gradient: "from-secondary/20 via-secondary/10 to-transparent",
     description:
-      "Next-generation database audit and monitoring with Semantic Data Intelligence—combining advanced threat detection with natural language data discovery.",
+      "Next-generation database audit and monitoring with Semantic Data Intelligence combining advanced threat detection with natural language data discovery.",
     features: [
       "Insider threats detected in <7 days",
       "Natural language querying (no SQL required)",

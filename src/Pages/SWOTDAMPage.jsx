@@ -715,7 +715,7 @@ const SWOTDAMPage = () => {
             className="max-w-3xl mx-auto text-xl text-base-content/80 leading-relaxed mb-10 font-medium"
           >
             <span className="inline-block bg-gradient-to-r from-primary/10 to-cyan-400/10 px-4 py-2 rounded-xl shadow-sm">
-              AI-driven database monitoring + semantic intelligence — built to
+              AI-driven database monitoring + semantic intelligence   built to
               predict, protect, and empower your entire organization.
             </span>
           </motion.p>

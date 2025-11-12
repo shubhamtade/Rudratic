@@ -65,10 +65,10 @@ const AboutUsSection = () => {
               className="text-base-content/80 text-lg leading-relaxed mb-8 text-justify"
             >
               At <span className="text-primary font-semibold">Rudratic Technologies</span>, our vision is simple:
-              <strong> "Make IT Easy"</strong> — even for the most complex business processes.
+              <strong> "Make IT Easy"</strong>   even for the most complex business processes.
               <br /><br />
               Our spirited team delivers efficient, secure, and scalable solutions in audit,
-              monitoring, and automation — ensuring compliance with security, risk, and regulatory standards.
+              monitoring, and automation   ensuring compliance with security, risk, and regulatory standards.
               We proudly provide consulting services across global leaders like{" "}
               <span className="font-medium text-secondary">Oracle</span>,{" "}
               <span className="font-medium text-secondary">IBM</span>, and{" "}

@@ -106,7 +106,7 @@ const HeroSection = () => (
 // Core Pillars Section
 const CorePillarsSection = () => {
   const pillars = [
-    { icon: Layers, title: 'Seamless Integration', subtitle: 'Everything Works Together — Effortlessly', description: 'We unify your systems—security, monitoring, and automation—into one cohesive ecosystem, ensuring smooth, reliable operations that save time and fuel growth.', color: "hsl(var(--in))" },
+    { icon: Layers, title: 'Seamless Integration', subtitle: 'Everything Works Together   Effortlessly', description: 'We unify your systems security, monitoring, and automation into one cohesive ecosystem, ensuring smooth, reliable operations that save time and fuel growth.', color: "hsl(var(--in))" },
     { icon: Users2, title: 'Proven Expertise', subtitle: '15+ Years of Real-World Experience', description: 'Our expert team has guided hundreds of organizations through complex challenges. With deep industry knowledge, we deliver clear outcomes and lasting success.', color: "hsl(var(--s))" },
     { icon: Target, title: 'Client-Centric Partnership', subtitle: 'Solutions Built Around You', description: 'We listen, understand, and tailor our support to your unique goals. From day one, we\'re here to guide, support, and grow alongside you as a dedicated partner.', color: "hsl(var(--p))" }
   ];

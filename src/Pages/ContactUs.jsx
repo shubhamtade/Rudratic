@@ -416,27 +416,6 @@ const ContactUs = () => {
           </motion.div>
         </div>
 
-        {/* --- Interactive Map Section --- */}
-        <div className="container mx-auto px-4 lg:px-8 pb-24">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.8, ease: "easeOut" }}
-            className="w-full h-[400px] md:h-[500px] rounded-2xl overflow-hidden border-2 border-white/10 shadow-2xl bg-base-300"
-          >
-            {/* IMPORTANT: Replace this with your actual Google Maps embed link */}
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2484.512687611598!2d-0.19472532351982236!3d51.48821421258163!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48760f85b7501b7d%3A0xe543c5b70c3d9730!2s47%20Penywern%20Rd%2C%20London%20SW5%209TU%2C%20UK!5e0!3m2!1sen!2sin!4v1700000000000"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen=""
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Rudratic Technologies London Office"
-            ></iframe>
-          </motion.div>
-        </div>
       </main>
 
       <Footer />

@@ -164,7 +164,7 @@ const BPMAutomationPage = () => {
         {
           icon: Cpu,
           text: "Seamless End-to-End Integration",
-          desc: "Connect to any system—ERP, CRM, databases, legacy applications, and modern APIs—for true end-to-end process automation.",
+          desc: "Connect to any system ERP, CRM, databases, legacy applications, and modern APIs for true end-to-end process automation.",
         },
       ],
     },

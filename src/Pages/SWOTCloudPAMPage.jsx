@@ -173,7 +173,7 @@ const SWOTCloudPAMPage = () => {
           >
             Stop reacting to security threats. SWOT Cloud PAM predicts,
             prevents, and automatically responds to privilege abuse in
-            real-time—combining zero standing privileges and behavioral
+            real-time combining zero standing privileges and behavioral
             intelligence.
           </motion.p>
           <motion.div

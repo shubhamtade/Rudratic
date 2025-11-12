@@ -16,16 +16,16 @@ Big-picture architecture (what to know)
   3. Add a `<Route path="/my-new" element={wrapWithMotion(<MyNewPage/>)} />` to `AnimatedRoutes`.
 - Navigation & menus: `src/Components/Navigation.jsx` builds the mega-menu and mobile menu from three helper functions (`getProductsContent`, `getServicesContent`, `getCompanyContent`). Update those functions to add/remove menu entries (they include `title`, `subtitle`, `href`, `icon`, `group`).
 - Theme: `src/hooks/useTheme.js` syncs a `data-theme` attribute on the root and uses localStorage. Default is `'cupcake'` (light) and toggles to `'night'`. Many styles rely on CSS variables and these theme names.
-- Global modals: `App.jsx` exposes `window.openLoginModal()` and `window.openDemoModal()` — other components rely on calling these globals to open modals.
+- Global modals: `App.jsx` exposes `window.openLoginModal()` and `window.openDemoModal()`   other components rely on calling these globals to open modals.
 - Assets: static assets referenced with absolute paths (e.g. `/rudratic new logo.png`, `/products-video.mp4`) live under `public/`.
 
 Project-specific patterns and conventions
 
 - Pages folder: `src/Pages/` holds route pages and `src/Pages/Services/` contains service-specific pages.
-- Animated route wrapper: Routes are wrapped with Framer Motion `motion.div` via `wrapWithMotion` in `App.jsx` — follow this when creating pages for consistent transitions.
+- Animated route wrapper: Routes are wrapped with Framer Motion `motion.div` via `wrapWithMotion` in `App.jsx`   follow this when creating pages for consistent transitions.
 - Menu data-driven approach: Navigation uses JS arrays to build menus and grouping. Prefer updating the arrays over hardcoded JSX when adding items.
-- Single source for route additions: Routes are not auto-discovered — add imports and routes manually in `App.jsx` (there are commented markers `// ✅ ADD IMPORTS FOR NEW PAGES` and `// ✅ ADD NEW ROUTES HERE`).
-- Styling: Tailwind config in `tailwind.config.js` defines custom animations. The project uses DaisyUI-like theme names (`cupcake`, `night`) though `daisyui` plugin is not added in `tailwind.config.js`; styles may come from `britive-theme.css` and `index.css` — check these when changing theme tokens.
+- Single source for route additions: Routes are not auto-discovered   add imports and routes manually in `App.jsx` (there are commented markers `// ✅ ADD IMPORTS FOR NEW PAGES` and `// ✅ ADD NEW ROUTES HERE`).
+- Styling: Tailwind config in `tailwind.config.js` defines custom animations. The project uses DaisyUI-like theme names (`cupcake`, `night`) though `daisyui` plugin is not added in `tailwind.config.js`; styles may come from `britive-theme.css` and `index.css`   check these when changing theme tokens.
 - Vite config: `vite.config.js` applies `babel-plugin-react-compiler` for React compiler transforms; keep the plugin configuration when adding Babel transforms.
 
 Integration points and gotchas
@@ -33,7 +33,7 @@ Integration points and gotchas
 - Vite override: package.json uses an override to `rolldown-vite`. If troubleshooting dev-server behavior, check `package.json` `overrides` and `vite.config.js`.
 - React Compiler: the project enables `babel-plugin-react-compiler` in Vite. Be careful adding other Babel plugins that conflict.
 - Global functions: `window.openLoginModal` and `window.openDemoModal` are set in `App.jsx`. If tests or components assume modal state via context, update these globals accordingly.
-- Icon library: `lucide-react` icons are imported and used directly inside menu data structures — prefer using the same pattern.
+- Icon library: `lucide-react` icons are imported and used directly inside menu data structures   prefer using the same pattern.
 
 Examples (copy-paste friendly)
 

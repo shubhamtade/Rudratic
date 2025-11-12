@@ -9,15 +9,21 @@ import {
   Award,
   Zap,
   ArrowRight,
+  Rocket,
+  Target,
+  Lock,
+  Lightbulb,
+  Handshake,
+  ChartColumnBig,
 } from "lucide-react";
 
 const WhyChooseUs = () => {
   const valueProps = [
     {
-      icon: Sparkles,
-      title: "AI-First Innovation",
+      icon: Rocket,
+      title: "Rapid Implementation",
       description:
-        "Built from the ground up with artificial intelligence at the core. Our solutions don't just use AI—they think, learn, and evolve autonomously.",
+        "Deploy in weeks, not months. 50-70% faster than traditional consultants while maintaining enterprise quality.",
       gradient: "from-fuchsia-600/20 to-pink-500/20",
       borderGradient: "from-fuchsia-500 to-pink-400",
       iconBg: "from-fuchsia-500/20 to-pink-500/20",
@@ -26,10 +32,10 @@ const WhyChooseUs = () => {
       iconColor: "text-fuchsia-400",
     },
     {
-      icon: TrendingUp,
-      title: "Proven Enterprise Success",
+      icon: Target,
+      title: "Outcome-Based Pricing",
       description:
-        "Trusted by Fortune 500 companies and government agencies worldwide. Battle-tested in the most demanding environments.",
+        "Fees tied to your success metrics. ROI guarantees mean we don't get paid until you hit targets.",
       gradient: "from-blue-600/20 to-cyan-500/20",
       borderGradient: "from-blue-500 to-cyan-400",
       iconBg: "from-blue-500/20 to-cyan-500/20",
@@ -38,10 +44,10 @@ const WhyChooseUs = () => {
       iconColor: "text-blue-400",
     },
     {
-      icon: Users,
-      title: "Expert Support",
+      icon: Lock,
+      title: "Security-First DNA",
       description:
-        "24/7 dedicated security experts, rapid response times, and personalized implementation support. Your success is our mission.",
+        "ISO 27001 certified. Security built into every solution from day one, not retrofitted.",
       gradient: "from-emerald-600/20 to-teal-500/20",
       borderGradient: "from-emerald-500 to-teal-400",
       iconBg: "from-emerald-500/20 to-teal-500/20",
@@ -50,10 +56,10 @@ const WhyChooseUs = () => {
       iconColor: "text-emerald-400",
     },
     {
-      icon: Award,
-      title: "Industry Recognition",
+      icon: Lightbulb,
+      title: "AI & Innovation Leadership",
       description:
-        "Award-winning solutions recognized by leading analysts. Consistently ranked as a top security vendor.",
+        "World's first AI-native PAM. Proprietary VLP + Offline LLM technology unavailable elsewhere.",
       gradient: "from-amber-600/20 to-yellow-500/20",
       borderGradient: "from-amber-500 to-yellow-400",
       iconBg: "from-amber-500/20 to-yellow-500/20",
@@ -62,10 +68,10 @@ const WhyChooseUs = () => {
       iconColor: "text-amber-400",
     },
     {
-      icon: Zap,
-      title: "Rapid Deployment",
+      icon: Handshake,
+      title: "Dedicated Partnership",
       description:
-        "Go from zero to secure in hours, not months. Our solutions integrate seamlessly with your existing infrastructure.",
+        "Same team throughout. Former Big Four partners personally leading your engagements.",
       gradient: "from-purple-600/20 to-pink-500/20",
       borderGradient: "from-purple-500 to-pink-400",
       iconBg: "from-purple-500/20 to-pink-500/20",
@@ -74,10 +80,10 @@ const WhyChooseUs = () => {
       iconColor: "text-purple-400",
     },
     {
-      icon: Shield,
-      title: "Zero-Trust Security",
+      icon: ChartColumnBig,
+      title: "Transparent Accountability",
       description:
-        "Built on modern zero-trust principles with defense-in-depth. Never trust, always verify, continuously adapt.",
+        "Fixed timelines, measurable ROI, regular updates. No surprises, no scope creep.",
       gradient: "from-indigo-600/20 to-blue-500/20",
       borderGradient: "from-indigo-500 to-blue-400",
       iconBg: "from-indigo-500/20 to-blue-500/20",
@@ -111,11 +117,11 @@ const WhyChooseUs = () => {
           </div>
 
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-base-content via-base-content/80 to-base-content bg-clip-text text-transparent">
-            Why Choose Rudratic?
+            Why Global Enterprises Choose Rudratic
           </h2>
 
           <p className="text-lg sm:text-xl text-base-content/70">
-            More than just security software—a strategic partner in your digital transformation
+            Enterprise expertise meets startup agility. Former Big Four consultants delivering boutique-level service.
           </p>
         </motion.div>
 

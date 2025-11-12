@@ -2,7 +2,16 @@ import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
 import {
-  LogIn, Calendar, Sun, Moon, Menu, X, Home, Box, Wrench, Building, Phone, ChevronDown, Shield, Cloud, Server, Code, Zap, LayoutGrid, AlertTriangle, TrendingUp, Users, BookOpen, Briefcase, Target,
+  LogIn, Calendar, Sun,
+   Moon, Menu, X, Home, Box, Wrench, Building, Phone, ChevronDown, Shield, Cloud, Server, Code, Zap, LayoutGrid, AlertTriangle, TrendingUp, Users, BookOpen, Briefcase, Target,
+   Globe2Icon,
+   Settings2,
+   Database,
+   ShieldCheck,
+   Bot,
+   Smartphone,
+   Code2,
+   LockIcon,
 } from "lucide-react";
 
 // --- Data Structure with Icons (Unchanged) ---
@@ -13,17 +22,84 @@ const getProductsContent = () => [
   { title: "SWOTDAM", subtitle: "Digital Asset Management", color: "hsl(var(--s))", href: "/products/SWOTDAMPage", icon: Box, group: "Enterprise Platforms" },
   { title: "BPMAutomation", subtitle: "Business Process Management", color: "hsl(var(--p))", href: "/products/BPMAutomationPage", icon: Zap, group: "Enterprise Platforms" },
   { title: "AIquinox", subtitle: "Performance Monitoring Platform", color: "hsl(var(--s))", href: "/products/AiquinoxPage", icon: TrendingUp, group: "Platforms & Analytics" },
-  { title: "Tawny Workspace", subtitle: "Products Management Suite", color: "hsl(var(--p))", href: "/products/tawny-workspace", icon: LayoutGrid, group: "Platforms & Analytics" },
 ];
 
 const getServicesContent = () => [
-  { title: "Application Development", subtitle: "Custom Solutions", color: "hsl(var(--p))", href: "/services/app-development", icon: Code, group: "Core Development" },
-  { title: "IT Infrastructure", subtitle: "Network & Systems", color: "hsl(var(--s))", href: "/services/it-infrastructure", icon: Server, group: "Managed Infra" },
-  { title: "VMware Solutions", subtitle: "Virtualization & Cloud", color: "hsl(var(--p))", href: "/services/vmware", icon: Cloud, group: "Managed Infra" },
-  { title: "Oracle Services", subtitle: "Enterprise Solutions", color: "hsl(var(--p))", href: "/services/oracle", icon: Briefcase, group: "Platform Consulting" },
-  { title: "SAP Consulting", subtitle: "Business Integration", color: "hsl(var(--s))", href: "/services/sap", icon: Briefcase, group: "Platform Consulting" },
-  { title: "IBM Services", subtitle: "Infrastructure Management", color: "hsl(var(--p))", href: "/services/ibm", icon: Briefcase, group: "Platform Consulting" },
+  {
+    title: "Software Development",
+    subtitle: "Enterprise Applications",
+    color: "hsl(var(--p))",
+    href: "/underDevlopment",
+    icon: Code2,
+    group: "Core Development",
+  },
+  {
+    title: "Mobile App Development",
+    subtitle: "iOS & Android",
+    color: "hsl(var(--s))",
+    href: "/underDevlopment",
+    icon: Smartphone,
+    group: "Core Development",
+  },
+  {
+    title: "AI & Automation",
+    subtitle: "AI Agents & RPA",
+    color: "hsl(var(--p))",
+    href: "/underDevlopment",
+    icon: Bot,
+    group: "Intelligent Systems",
+  },
+  {
+    title: "Cybersecurity",
+    subtitle: "PenTesting & Compliance",
+    color: "hsl(var(--s))",
+    href: "/underDevlopment",
+    icon: ShieldCheck,
+    group: "Security & Compliance",
+  },
+  {
+    title: "Cloud Infrastructure",
+    subtitle: "AWS | Azure | GCP",
+    color: "hsl(var(--p))",
+    href: "/underDevlopment",
+    icon: Cloud,
+    group: "Managed Infra",
+  },
+  {
+    title: "Private Cloud Consulting",
+    subtitle: "Compliance-Ready Infra",
+    color: "hsl(var(--s))",
+    href: "/underDevlopment",
+    icon: LockIcon,
+    group: "Managed Infra",
+  },
+  {
+    title: "Database Services",
+    subtitle: "Optimization & Management",
+    color: "hsl(var(--p))",
+    href: "/underDevlopment",
+    icon: Database,
+    group: "Platform Consulting",
+  },
+  {
+    title: "IoT & Edge Computing",
+    subtitle: "Real-time Processing",
+    color: "hsl(var(--s))",
+    href: "/underDevlopment",
+    icon: Settings2,
+    group: "Intelligent Systems",
+  },
+  {
+    title: "Digital Twin Solutions",
+    subtitle: "Predictive Maintenance",
+    color: "hsl(var(--p))",
+    href: "/underDevlopment",
+    icon: Globe2Icon,
+    group: "Intelligent Systems",
+  },
 ];
+
+
 
 const getCompanyContent = () => [
   { title: "Solutions", color: "hsl(var(--p))", href: "/solutions", icon: BookOpen },

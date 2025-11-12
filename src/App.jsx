@@ -28,6 +28,8 @@ import VMwarepage from "./Pages/Services/VMwarepage.jsx";
 import RequestDemoModal from "./Components/modals/RequestDemoModal";
 import { useTheme } from "./hooks/useTheme.js";
 
+import UnderDevlopment from "./layouts/UnderDevelopment.jsx"
+
 // ✅ ADD IMPORTS FOR NEW PAGES
 import RBVMPage from "./Pages/RBVMPage.jsx";
 import TawnyWorkspacePage from "./Pages/TawnyWorkspacePage.jsx";
@@ -91,6 +93,9 @@ function AnimatedRoutes() {
         <Route path="/services/ibm" element={wrapWithMotion(<IBMservicespage />)} />
         <Route path="/services/it-infrastructure" element={wrapWithMotion(<ITinfrastructurepage />)} />
         <Route path="/services/vmware" element={wrapWithMotion(<VMwarepage />)} />
+
+
+        <Route path="/underDevlopment" element={wrapWithMotion(<UnderDevlopment />)} />
       </Routes>
     </AnimatePresence>
   );
