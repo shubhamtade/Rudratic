@@ -23,6 +23,13 @@ import {
   LifeBuoy,
   Lock,
   CheckCircle,
+  Code2,
+  Smartphone,
+  Bot,
+  ShieldCheck,
+  LockIcon,
+  Database,
+  Settings2,
 } from "lucide-react";
 import { fadeInUp, staggerContainer } from "../utils/animations";
 
@@ -37,19 +44,21 @@ const products = [
 
 const services = [
   {
-    title: "Application Development",
-    href: "/services/app-development",
-    icon: Box,
+    title: "Software Development",
+    href: "#",
+    icon: Code2,
   },
   {
-    title: "IT Infrastructure",
-    href: "/services/it-infrastructure",
-    icon: Server,
+    title: "Mobile App Development",
+    href: "#",
+    icon: Smartphone,
   },
-  { title: "VMware Solutions", href: "/services/vmware", icon: Cloud },
-  { title: "Oracle Services", href: "/services/oracle", icon: Briefcase },
-  { title: "SAP Consulting", href: "/services/sap", icon: Briefcase },
-  { title: "IBM Services", href: "/services/ibm", icon: Briefcase },
+  { title: "AI & Automation", href: "#", icon: Bot },
+  { title: "Cybersecurity", href: "#", icon: ShieldCheck },
+  { title: "Cloud Infrastructure", href: "#", icon: Cloud },
+  { title: "Private Cloud Consulting", href: "#", icon: LockIcon },
+  { title: "Database Services", href: "#", icon: Database },
+  { title: "IoT & Edge Computing", href: "#", icon: Settings2 },
 ];
 
 const company = [
