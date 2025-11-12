@@ -185,7 +185,7 @@ const Footer = () => {
 
         {/* Bottom Section */}
         <div className="flex flex-col items-center gap-4 text-center text-sm text-base-content/70">
-          <div className="flex justify-between w-full">
+          <div className="flex flex-col md:flex-row justify-center md:justify-between w-full">
             {" "}
             <div className="flex flex-col sm:flex-row items-center gap-4 flex-wrap justify-center">
               <span className="flex items-center gap-2">
@@ -209,7 +209,7 @@ const Footer = () => {
           </div>
 
           {/* Legal Links */}
-          <div className="flex justify-start w-full gap-10 text-sm opacity-50">
+          <div className="flex justify-center md:justify-start w-full gap-3 md:gap-10  text-[10px] md:text-sm opacity-50">
             {legalLinks.map(({ title, href }, i) => (
               <Link
                 key={i}
