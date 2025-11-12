@@ -4,14 +4,15 @@ import {
   ArrowRight,
   Check,
   X,
-  Shield,
-  Cloud,
-  AlertTriangle,
-  Box,
-  Zap,
-  TrendingUp,
-  LayoutGrid,
-  Calendar,
+  Shield, // Example icon for Security
+  Cloud, // Example icon for Cloud Solutions
+  AlertTriangle, // Example icon for Compliance/Monitoring
+  Box, // Example icon for Integrations/Packages
+  Zap, // Example icon for Automation/Performance
+  TrendingUp, // Example icon for Analytics/Growth
+  LayoutGrid, // Example icon for Platform/Dashboards
+  Calendar, // For Book Demo
+  // Add any other Lucide icons used in your productsData
 } from "lucide-react";
 import {
   fadeInLeft,
@@ -19,13 +20,39 @@ import {
   staggerContainer,
 } from "../../utils/animations";
 import { Link } from "react-router-dom";
+// Assuming productsData is an array of objects, where each object
+// now represents a product without an imagePath, but with an icon string,
+// a color, and optionally a gradient string.
 import productsData from "../../features/products/data/products";
 
 const ProductsSection = () => {
+  // Example productsData structure (make sure your actual data matches this for best results)
+  // [
+  //   {
+  //     title: "Cyber Shield Pro",
+  //     group: "Security",
+  //     description: "Advanced AI-driven threat detection and real-time incident response.",
+  //     features: ["Real-time threat monitoring", "AI-powered detection", "Automated incident response", "Compliance reporting"],
+  //     color: "#1E88E5", // A valid CSS color string (e.g., #RRGGBB, rgb(), hsl(), etc.)
+  //     icon: "Shield", // Name of the Lucide icon
+  //     href: "/products/cyber-shield-pro",
+  //     gradient: "linear-gradient(to bottom right, #1E88E5, #0D47A1)", // Optional: specific gradient string
+  //   },
+  //   {
+  //     title: "CloudFlow Automate",
+  //     group: "Automation",
+  //     description: "Streamline your workflows with intelligent cloud automation solutions.",
+  //     features: ["Workflow orchestration", "Resource auto-scaling", "Cost optimization", "Serverless deployment"],
+  //     color: "#FFD54F",
+  //     icon: "Cloud",
+  //     href: "/products/cloudflow-automate",
+  //     gradient: "linear-gradient(to bottom right, #FFD54F, #FFC107)",
+  //   },
+  //   // ... more products
+  // ]
   const products = productsData;
   const [activeGroup, setActiveGroup] = useState("All");
   const [selected, setSelected] = useState(null);
-  const [currentPage, setCurrentPage] = useState(0);
 
   const iconMap = {
     Shield,
@@ -35,16 +62,7 @@ const ProductsSection = () => {
     Zap,
     TrendingUp,
     LayoutGrid,
-  };
-
-  const goToNext = () => {
-    setCurrentPage((prev) =>
-      Math.min(prev + 1, Math.ceil(filtered.length / 2) - 1)
-    );
-  };
-
-  const goToPrev = () => {
-    setCurrentPage((prev) => Math.max(prev - 1, 0));
+    // Ensure all icon names used in productsData.icon are mapped here
   };
 
   const groups = useMemo(() => {
@@ -69,11 +87,12 @@ const ProductsSection = () => {
   return (
     <section
       id="products"
-      className="relative py-24 sm:py-32 overflow-hidden bg-linear-to-b from-base-100 to-base-200"
+      className="relative py-24 sm:py-32 overflow-hidden bg-gradient-to-b from-base-100 to-base-200"
     >
+      {/* Background decorative elements */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute -top-40 left-1/4 w-[800px] h-[800px] bg-linear-to-r from-primary/20 via-primary/10 to-transparent rounded-full blur-3xl animate-pulse-slow"></div>
-        <div className="absolute bottom-0 right-1/4 w-[700px] h-[700px] bg-linear-to-t from-secondary/20 via-secondary/10 to-transparent rounded-full blur-3xl animate-pulse-slower"></div>
+        <div className="absolute -top-40 left-1/4 w-[800px] h-[800px] bg-gradient-to-r from-primary/20 via-primary/10 to-transparent rounded-full blur-3xl animate-pulse-slow"></div>
+        <div className="absolute bottom-0 right-1/4 w-[700px] h-[700px] bg-gradient-to-t from-secondary/20 via-secondary/10 to-transparent rounded-full blur-3xl animate-pulse-slower"></div>
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(ellipse_at_center,var(--tw-gradient-stops))] from-accent/5 via-transparent to-transparent opacity-70"></div>
       </div>
 
@@ -83,9 +102,9 @@ const ProductsSection = () => {
           whileInView="visible"
           viewport={{ once: true }}
           variants={staggerContainer}
-          className="mb-6"
+          className="mb-12"
         >
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
             <div>
               <motion.div
                 variants={fadeInRight}
@@ -105,6 +124,7 @@ const ProductsSection = () => {
               </motion.p>
             </div>
 
+            {/* Group Filter Buttons */}
             <motion.div
               className="flex items-center justify-center sm:justify-start gap-2 flex-wrap"
               variants={fadeInLeft}
@@ -127,6 +147,7 @@ const ProductsSection = () => {
           </div>
         </motion.div>
 
+        {/* Products Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8 mt-12">
           {filtered.map((product, i) => {
             const Icon = iconMap[product.icon] || null;
@@ -135,58 +156,61 @@ const ProductsSection = () => {
                 key={product.title}
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: i * 0.12, type: "spring" }}
+                viewport={{ once: true, amount: 0.1 }} // Animation triggers when 10% of element is visible
+                transition={{ duration: 0.7, delay: i * 0.12, type: "spring", stiffness: 100 }}
                 whileHover={{ y: -10, scale: 1.03 }}
-                className="group relative bg-white/70 dark:bg-base-200/80 backdrop-blur-2xl rounded-3xl border border-base-300 shadow-xl hover:shadow-2xl hover:border-primary/60 transition-all duration-300 p-6 sm:p-8 flex flex-col items-stretch min-h-[500px] sm:min-h-[600px] overflow-hidden"
+                className="group relative bg-white/70 dark:bg-base-200/80 backdrop-blur-2xl rounded-3xl border border-base-300 shadow-xl hover:shadow-2xl hover:border-primary/60 transition-all duration-300 p-6 sm:p-8 flex flex-col items-stretch"
               >
                 {/* Group badge */}
-                <span className="absolute top-6 left-6 bg-gradient-to-r from-primary/20 to-accent/20 text-primary px-3 py-1.5 rounded-full text-xs font-semibold tracking-wide z-20 shadow backdrop-blur border border-primary/10">
+                <span className="absolute top-6 right-6 bg-gradient-to-r from-primary/20 to-accent/20 text-primary px-3 py-1.5 rounded-full text-xs font-semibold tracking-wide z-20 shadow backdrop-blur border border-primary/10">
                   {product.group}
                 </span>
 
-                {/* Icon area with gradient ring */}
-                {/* Icon area removed */}
-
-                {/* Product image */}
-                <Link to={product.href} className="w-full block relative mb-4">
+                {/* New Prominent Icon Area */}
+                <div
+                  className={`relative w-20 h-20 sm:w-24 sm:h-24 mx-auto rounded-3xl mb-6 sm:mb-8 flex items-center justify-center overflow-hidden transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl`}
+                  style={{
+                    background: product.gradient || `linear-gradient(to bottom right, ${product.color}aa, ${product.color}66)`,
+                  }}
+                >
                   <motion.div
-                    whileHover={{ scale: 1.04 }}
-                    className="relative overflow-hidden rounded-2xl border border-base-200 shadow-lg group-hover:shadow-xl transition-all duration-300"
-                  >
-                    <div
-                      className={`absolute inset-0 ${product.gradient} opacity-60 group-hover:opacity-80 transition-opacity`}
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ delay: 0.2, duration: 0.5, type: "spring", stiffness: 150 }}
+                    className="absolute inset-0 bg-white/10 dark:bg-black/10 mix-blend-overlay rounded-3xl"
+                  />
+                  {Icon && (
+                    <Icon
+                      size={48} // Larger icon size
+                      className="text-white relative z-10 drop-shadow-lg"
+                      style={{ color: 'white' }} // Ensure icon color is white for contrast with gradient background
                     />
-                    <img
-                      src={product.imagePath}
-                      alt={product.title}
-                      className="w-full h-36 sm:h-48 object-cover rounded-2xl transform transition-transform duration-500 group-hover:scale-105"
-                    />
-                  </motion.div>
-                </Link>
+                  )}
+                </div>
 
                 {/* Title & description */}
                 <h3
-                  className="text-xl sm:text-2xl font-bold mb-2 mt-1 text-base-content"
+                  className="text-2xl sm:text-3xl font-bold mb-3 text-center text-base-content leading-tight"
                   style={{ color: product.color }}
                 >
                   {product.title}
                 </h3>
-                <p className="text-base-content/80 text-sm mb-4 line-clamp-3 max-w-xs sm:max-w-sm mx-auto">
+                <p className="text-base-content/80 text-sm mb-6 text-center line-clamp-3 max-w-xs sm:max-w-sm mx-auto flex-grow">
                   {product.description}
                 </p>
 
-                {/* Features */}
-                <ul className="space-y-2 mb-6 text-left w-full max-w-xs mx-auto">
+                {/* Features List */}
+                <ul className="space-y-2 mb-8 text-left w-full max-w-[280px] mx-auto">
                   {product.features.map((f, idx) => (
                     <motion.li
                       key={idx}
                       initial={{ opacity: 0, x: -10 }}
                       whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.1 * idx }}
+                      viewport={{ once: true, amount: 0.5 }} // Features animate as they enter view
+                      transition={{ delay: 0.05 * idx }}
                       className="flex items-center gap-3 text-base-content/90 text-sm group-hover:translate-x-1 transition-transform"
                     >
-                      <span className="shrink-0">
+                      <span className="shrink-0 p-0.5 rounded-full bg-primary/10"> {/* Subtle background for checkmark */}
                         <Check
                           size={16}
                           style={{ color: product.color }}
@@ -198,13 +222,14 @@ const ProductsSection = () => {
                   ))}
                 </ul>
 
-                {/* CTA button */}
+                {/* Call to Action Button */}
                 <div className="w-full mt-auto flex flex-col items-center">
                   <Link to={product.href} className="w-full block">
                     <motion.button
-                      whileHover={{ scale: 1.04 }}
+                      whileHover={{ scale: 1.04, boxShadow: "0 10px 20px rgba(0,0,0,0.1), 0 6px 6px rgba(0,0,0,0.05)" }}
                       whileTap={{ scale: 0.98 }}
                       transition={{ type: "spring", stiffness: 400 }}
+                      onClick={() => setSelected(product)} // Added onClick to open modal for details
                       className="w-full px-6 py-3 rounded-full font-semibold border-2 bg-primary/10 text-primary border-primary/30 flex items-center justify-center gap-3 group transition-all duration-300 hover:bg-primary/20 hover:text-primary-content text-sm relative overflow-hidden shadow-md"
                     >
                       <span className="relative z-10">Learn More</span>
@@ -221,10 +246,11 @@ const ProductsSection = () => {
           })}
         </div>
 
+        {/* Product Detail Modal */}
         <AnimatePresence>
           {selected && (
             <motion.div
-              className="fixed inset-0 z-50 flex items-center justify-center"
+              className="fixed inset-0 z-50 flex items-center justify-center p-4"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -238,16 +264,23 @@ const ProductsSection = () => {
                 animate={{ y: 0, scale: 1 }}
                 exit={{ y: 20, scale: 0.98 }}
                 transition={{ type: "spring", stiffness: 300 }}
-                className="relative z-10 w-full max-w-3xl mx-4 bg-base-100 rounded-2xl shadow-2xl overflow-hidden border border-base-200"
+                className="relative z-10 w-full max-w-3xl mx-auto bg-base-100 rounded-2xl shadow-2xl overflow-hidden border border-base-200"
               >
                 <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6 p-4 sm:p-6 max-h-[90vh] overflow-y-auto">
-                  <div className="w-full sm:w-48 h-48 sm:h-32 relative rounded-lg overflow-hidden shrink-0">
-                    <img
-                      src={selected.imagePath}
-                      alt={selected.title}
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent"></div>
+                  {/* Icon in modal (replaces image) */}
+                  <div
+                    className={`w-24 h-24 sm:w-32 sm:h-32 relative rounded-xl overflow-hidden shrink-0 flex items-center justify-center`}
+                    style={{
+                      background: selected.gradient || `linear-gradient(to bottom right, ${selected.color}aa, ${selected.color}66)`,
+                    }}
+                  >
+                    {iconMap[selected.icon] && (
+                      React.createElement(iconMap[selected.icon], {
+                        size: 56, // Larger icon in modal
+                        className: "text-white relative z-10 drop-shadow-md",
+                      })
+                    )}
+                    <div className="absolute inset-0 bg-white/10 dark:bg-black/10 mix-blend-overlay rounded-xl"></div>
                   </div>
                   <div className="flex-1 w-full">
                     <div className="flex items-start sm:items-center justify-between gap-2">
@@ -309,6 +342,7 @@ const ProductsSection = () => {
           )}
         </AnimatePresence>
 
+        {/* View All Products Button */}
         <motion.div
           className="mt-16 flex justify-center"
           initial={{ opacity: 0, y: 20 }}

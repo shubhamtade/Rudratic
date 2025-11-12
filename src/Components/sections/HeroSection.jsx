@@ -85,7 +85,7 @@ const HeroSection = () => {
     },
   };
 
-  const headlineText = "Enterprise Grade Security & Intelligence";
+  const headlineText = "Transform Your Enterprise Security & Data Intelligence";
   const subHeadline = "Transform Your Enterprise Security & Data Intelligence";
 
   return (
