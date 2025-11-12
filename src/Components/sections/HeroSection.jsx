@@ -12,6 +12,9 @@ import {
   Cloud,
   Database,
   Bot,
+  Box,
+  TrendingUp,
+  Zap,
 } from "lucide-react";
 import { fadeInUp, staggerContainer } from "../../utils/animations";
 import ParticleBackground from "../ui/ParticleBackground";
@@ -52,10 +55,12 @@ const HeroSection = () => {
   ];
 
   const features = [
-    { label: "AI-Native PAM", icon: ShieldCheck },
-    { label: "Cloud PAM", icon: Cloud },
-    { label: "Database Audit", icon: Database },
-    { label: "AI Automation", icon: Bot },
+    { label: "SWOT PAM", icon: ShieldCheck },
+    { label: "SWOT Cloud PAM", icon: Cloud },
+    { label: "SWOT DAM", icon: Box },
+    { label: "AIquinox", icon: TrendingUp },
+    { label: "BPMAutomation", icon: Zap },
+    { label: "RBVM", icon: Box },
   ];
 
   const heroRef = useRef(null);
@@ -82,7 +87,7 @@ const HeroSection = () => {
     },
   };
 
-  const headlineText = "Enterprise-Grade Security & Intelligence";
+  const headlineText = "Enterprise Grade Security & Intelligence";
   const subHeadline = "Transform Your Enterprise Security & Data Intelligence";
 
   return (

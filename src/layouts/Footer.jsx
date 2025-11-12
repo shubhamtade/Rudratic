@@ -27,12 +27,12 @@ import {
 import { fadeInUp, staggerContainer } from "../utils/animations";
 
 const products = [
-  { title: "SWOT-PAM", href: "/products/pam", icon: Shield },
+  { title: "SWOT PAM", href: "/products/pam", icon: Shield },
   { title: "SWOTCloudPAM", href: "/products/SWOTCloudPAMPage", icon: Cloud },
-  { title: "RBVM", href: "/products/rbvm", icon: Box },
-  { title: "SWOTDAM", href: "/products/SWOTDAMPage", icon: Box },
-  { title: "BPMAutomation", href: "/products/BPMAutomationPage", icon: Zap },
+  { title: "SWOT DAM", href: "/products/SWOTDAMPage", icon: Box },
   { title: "AIquinox", href: "/products/AiquinoxPage", icon: TrendingUp },
+  { title: "BPMAutomation", href: "/products/BPMAutomationPage", icon: Zap },
+  { title: "RBVM", href: "/products/rbvm", icon: Box },
 ];
 
 const services = [
@@ -55,7 +55,7 @@ const services = [
 const company = [
   { title: "Solutions", href: "/solutions", icon: BookOpen },
   { title: "About Us", href: "/about-us", icon: Users },
-  { title: "Client Success", href: "/client-success", icon: Briefcase },
+  // { title: "Client Success", href: "/client-success", icon: Briefcase },
   { title: "Why Rudratic", href: "/why-rudratic", icon: Target },
 ];
 
@@ -83,11 +83,11 @@ const legalLinks = [
 const Footer = () => {
   return (
     <footer className="relative overflow-hidden border-t border-base-content/10 bg-gradient-to-b from-base-300/60 to-base-200/60 backdrop-blur-xl">
-
-<img src="/rudratic new logo.png" alt="LOGO" className="fixed -bottom-50 w-full opacity-5"/>
-
-
-
+      <img
+        src="/rudratic new logo.png"
+        alt="LOGO"
+        className="fixed -bottom-50 w-full opacity-5"
+      />
 
       {/* Background Shapes */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
