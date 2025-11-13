@@ -7,8 +7,12 @@ import Footer from '../../layouts/Footer';
 // --- Reusable Components (Defined in-page for convenience) ---
 
 const sectionTitleVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: 'easeOut', staggerChildren: 0.2 },
+  },
 };
 
 const AnimatedTitle = ({ text }) => {
@@ -34,8 +38,8 @@ const AnimatedTitle = ({ text }) => {
 };
 
 const PageHero = ({ badge, title, subtitle, buttonText }) => (
-  <section className="relative text-center container mx-auto px-4 pt-36 pb-16 md:pt-28 md:pb-24 overflow-hidden">
-    <div className="animated-grid-background"></div>
+  <section className="relative text-center container mx-auto px-4 pt-36  md:pt-40  overflow-hidden">
+    <div className="absolute inset-0 -z-10 bg-[radial-gradient(45rem_45rem_at_top,theme(colors.base-200),transparent)] opacity-30" />
     <motion.div initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.2 } } }}>
       <motion.div variants={sectionTitleVariants} className="badge badge-lg badge-outline border-primary/50 bg-primary/10 text-primary p-4 mb-6 font-semibold">{badge}</motion.div>
       <AnimatedTitle text={title} />
@@ -48,11 +52,11 @@ const PageHero = ({ badge, title, subtitle, buttonText }) => (
 );
 
 const Section = ({ title, subtitle, children, isAlternateBg = false }) => (
-  <section className={`py-16 md:py-24 ${isAlternateBg ? 'bg-base-200/50' : ''}`}>
+  <section className={` ${isAlternateBg ? 'bg-base-200/50' : ''}`}>
     <div className="container mx-auto px-4">
       <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={sectionTitleVariants} className="text-center mb-16">
-        <h2 className="text-3xl sm:text-4xl font-bold">{title}</h2>
-        {subtitle && <p className="text-lg text-base-content/60 mt-4 max-w-2xl mx-auto">{subtitle}</p>}
+        <h2 className="text-3xl sm:text-4xl font-extrabold">{title}</h2>
+        {subtitle && <p className="text-lg text-base-content/70 mt-4 max-w-2xl mx-auto">{subtitle}</p>}
         <div className="mt-4 h-1 w-24 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full"></div>
       </motion.div>
       {children}
@@ -60,32 +64,27 @@ const Section = ({ title, subtitle, children, isAlternateBg = false }) => (
   </section>
 );
 
-const FeatureCard = ({ feature, index, isHighlighted = false }) => {
+const FeatureCard = ({ feature, index }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
   
   const color = feature.color || 'primary';
   const colorStyles = {
-    primary: { text: "text-primary", bg: "bg-primary/10" },
-    secondary: { text: "text-secondary", bg: "bg-secondary/10" },
+    primary: { text: "text-primary", bg: "bg-primary/10", shadow: "hover:shadow-primary/10" },
+    secondary: { text: "text-secondary", bg: "bg-secondary/10", shadow: "hover:shadow-secondary/10" },
   };
   const styles = colorStyles[color];
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 40 },
-    visible: { opacity: 1, y: 0 }
-  };
 
   return (
     <motion.div
       ref={ref}
-      variants={itemVariants}
-      initial="hidden"
+      initial={{ opacity: 0, y: 40 }}
       animate={isInView ? "visible" : "hidden"}
+      variants={{ visible: { opacity: 1, y: 0 } }}
       transition={{ duration: 0.5, delay: index * 0.1, ease: 'easeOut' }}
-      className={`boder border-base-content feature-item ${isHighlighted ? 'feature-item-highlight' : ''}`}
+      className={`card bg-base-200/30 backdrop-blur-lg border border-base-content/10 p-8 text-center items-center shadow-lg ${styles.shadow} transition-all duration-300 group hover:-translate-y-2`}
     >
-      <div className={`icon-chip ${styles.bg}`}>
+      <div className={`p-4 ${styles.bg} rounded-full mb-4 transition-transform duration-300 group-hover:scale-110`}>
         <feature.icon size={28} className={styles.text} />
       </div>
       <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
@@ -96,23 +95,23 @@ const FeatureCard = ({ feature, index, isHighlighted = false }) => {
 
 const ProcessCard = ({ item, index }) => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.3 });
+  const isInView = useInView(ref, { once: true, amount: 0.5 });
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 50 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay: index * 0.15 }}
-      className="process-card relative bg-base-100/50 rounded-2xl border border-base-content/10 p-8"
-    >
-      <div className="step-number gradient-text">{item.step}</div>
-      <div className="timeline-marker">
-        <h3 className="text-xl font-bold text-primary">{item.step}</h3>
-      </div>
-      <div className="relative z-10">
-        <h3 className="card-title text-xl font-bold mb-2">{item.title}</h3>
-        <p className="text-base-content/70">{item.description}</p>
-      </div>
+     <motion.div
+        ref={ref}
+        initial={{ opacity: 0, y: 50 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.5, delay: index * 0.15 }}
+        className="relative pl-16"
+      >
+        <div className="absolute left-0 top-0 flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-primary to-secondary text-primary-content font-bold text-xl">
+          {item.step}
+        </div>
+        <div className="absolute left-6 top-14 bottom-0 w-0.5 bg-primary/20"></div>
+        <div className="ml-4">
+            <h3 className="text-xl font-bold mb-2 text-primary">{item.title}</h3>
+            <p className="text-base-content/70">{item.description}</p>
+        </div>
     </motion.div>
   );
 };
@@ -151,20 +150,19 @@ const Appdevelopmentpage = () => {
         />
         
         <Section title="Comprehensive Development Services" subtitle="Full-stack expertise across multiple platforms and technologies.">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
               <FeatureCard 
                 key={index} 
                 feature={feature} 
-                index={index} 
-                isHighlighted={feature.title === "Web Applications"}
+                index={index}
               />
             ))}
           </div>
         </Section>
         
         <Section title="Our Development Process" subtitle="A proven methodology that delivers results." isAlternateBg>
-          <div className="process-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16">
             {process.map((item, index) => <ProcessCard key={index} item={item} index={index} />)}
           </div>
         </Section>
@@ -175,7 +173,7 @@ const Appdevelopmentpage = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.7, ease: 'easeOut' }}
-            className="card bg-base-200/50 backdrop-blur-xl border border-primary/20 shadow-xl rounded-2xl p-8 md:p-12"
+            className="card bg-base-200/30 backdrop-blur-lg border border-primary/20 shadow-xl rounded-2xl p-8 md:p-12"
           >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6">
                   {benefits.map((benefit, index) => (

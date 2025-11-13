@@ -152,7 +152,9 @@ const CustomStyles = () => (
       position: relative;
       overflow: hidden;
       border-radius: 0.75rem;
-      background-color: hsl(var(--b1) / 0.6); /* Slightly transparent background */
+      background-color: hsl(
+        var(--b1) / 0.6
+      ); /* Slightly transparent background */
       backdrop-filter: blur(8px); /* Blur effect */
     }
     .glass-border::before {
@@ -338,14 +340,23 @@ const staggerContainer = {
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
+  },
 };
 
 const floatUp = {
   hidden: { y: 6 },
   visible: {
     y: -6,
-    transition: { repeat: Infinity, repeatType: "reverse", duration: 3, ease: "easeInOut" },
+    transition: {
+      repeat: Infinity,
+      repeatType: "reverse",
+      duration: 3,
+      ease: "easeInOut",
+    },
   },
 };
 
@@ -367,169 +378,96 @@ const SWOTCloudPAMPage = () => {
         <ParticleSVG />
       </div>
 
-      {/* Navigation */}
-      <motion.nav
-        ref={navRef}
-        className={`bg-base-100/98 py-4 shadow-md z-50 rounded-b-2xl border transition-all duration-300 fixed left-[25%] top-[10%] ${
-          isInView ? " top-0 shadow-xl" : ""
-        }`}
-      >
-        <div className="container mx-auto px-4">
-          <ul className="flex justify-center gap-x-8 gap-y-2 list-none flex-wrap">
-            <li>
-              <a
-                href="#features"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById("features").scrollIntoView({ behavior: "smooth" });
-                }}
-                className="text-info font-medium text-lg hover:text-primary transition-colors"
-              >
-                Features
-              </a>
-            </li>
-            <li>
-              <a
-                href="#usecases"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById("usecases").scrollIntoView({ behavior: "smooth" });
-                }}
-                className="text-info font-medium text-lg hover:text-primary transition-colors"
-              >
-                Use Cases
-              </a>
-            </li>
-            <li>
-              <a
-                href="#roi"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById("roi").scrollIntoView({ behavior: "smooth" });
-                }}
-                className="text-info font-medium text-lg hover:text-primary transition-colors"
-              >
-                ROI & Metrics
-              </a>
-            </li>
-            <li>
-              <a
-                href="#comparison"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById("comparison").scrollIntoView({ behavior: "smooth" });
-                }}
-                className="text-info font-medium text-lg hover:text-primary transition-colors"
-              >
-                Comparison
-              </a>
-            </li>
-            <li>
-              <a
-                href="#integrations"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById("integrations").scrollIntoView({ behavior: "smooth" });
-                }}
-                className="text-info font-medium text-lg hover:text-primary transition-colors"
-              >
-                Integrations
-              </a>
-            </li>
-            <li>
-              <a
-                href="#contact"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById("contact").scrollIntoView({ behavior: "smooth" });
-                }}
-                className="text-info font-medium text-lg hover:text-primary transition-colors"
-              >
-                Contact
-              </a>
-            </li>
-          </ul>
-        </div>
-      </motion.nav>
+     
 
       {/* Header Hero Section */}
       <motion.header
-  initial="hidden"
-  animate="visible"
-  variants={staggerContainer}
-  className="relative overflow-hidden text-center pb-28 pt-32 md:pt-[20%] header-hero bg-gradient-to-b from-base-100 via-base-200 to-base-100"
->
-  {/* Decorative Background Glow and Animated Shapes */}
-  <div className="absolute inset-0">
-    <div className="absolute -top-40 -left-40 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-pulse" />
-    <div className="absolute top-20 right-[-120px] w-[400px] h-[400px] bg-info/10 rounded-full blur-3xl animate-pulse" />
-    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.05),transparent_70%)]" />
-  </div>
-
-  <div className="container mx-auto px-6 relative z-10">
-    {/* Title */}
-    <motion.h1
-      variants={fadeInUp}
-      className="text-5xl md:text-7xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-primary to-info drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]"
-    >
-      SWOT Cloud PAM
-    </motion.h1>
-
-    {/* Subtitle */}
-    <motion.p
-      variants={fadeInUp}
-      className="text-2xl md:text-3xl mt-4 mb-6 font-medium text-info/90 leading-snug"
-    >
-      The Only <span className="text-primary font-semibold">AI-Native Platform</span> Designed to
-      Eliminate Privilege Abuse Before It Happens
-    </motion.p>
-
-    {/* Description */}
-    <motion.p
-      variants={fadeInUp}
-      className="text-lg md:text-xl text-base-content/90 max-w-5xl mx-auto mb-12 leading-relaxed italic"
-    >
-      Stop reacting to threats — <span className="font-semibold text-primary">predict, prevent, and respond</span> 
-      with SWOT Cloud PAM. From detecting insider threats to securing multi-cloud environments, 
-      SWOT unifies <span className="text-info">zero standing privileges</span>, <span className="text-primary">behavioral intelligence</span>, 
-      and <span className="text-accent">autonomous defense</span> into a single adaptive platform.
-    </motion.p>
-
-    {/* Call-to-Action Buttons */}
-    <motion.div
-      variants={fadeInUp}
-      className="flex flex-col sm:flex-row justify-center gap-5 mt-8"
-    >
-      <motion.button
-        {...cardHover}
-        onClick={() =>
-          document.getElementById("contact").scrollIntoView({ behavior: "smooth" })
-        }
-        className="btn btn-info btn-lg shadow-xl hover:shadow-info/50 hover:scale-105 transition-transform duration-300"
+        initial="hidden"
+        animate="visible"
+        variants={staggerContainer}
+        className="relative overflow-hidden text-center pb-28 pt-32 md:pt-[20%] header-hero bg-gradient-to-b from-base-100 via-base-200 to-base-100"
       >
-        🚀 Request Demo
-      </motion.button>
+        {/* Decorative Background Glow and Animated Shapes */}
+        <div className="absolute inset-0">
+          <div className="absolute -top-40 -left-40 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute top-20 right-[-120px] w-[400px] h-[400px] bg-info/10 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.05),transparent_70%)]" />
+        </div>
 
-      <motion.button
-        {...cardHover}
-        onClick={() => alert('Downloading ROI Report...')}
-        className="btn btn-outline btn-info btn-lg shadow-lg hover:bg-info hover:text-base-100 transition-all duration-300"
-      >
-        📄 Download ROI Report
-      </motion.button>
-    </motion.div>
-  </div>
+        <div className="container mx-auto px-6 relative z-10">
+          {/* Title */}
+          <motion.h1
+            variants={fadeInUp}
+            className="text-5xl md:text-7xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-primary to-info drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]"
+          >
+            SWOT Cloud PAM
+          </motion.h1>
 
-  {/* Floating Animated Elements */}
-  <motion.div
-    animate={{ y: [0, -10, 0] }}
-    transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
-    className="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-info/60 text-sm"
-  >
-    <ArrowDownIcon className="mx-auto animate-bounce" size={24} />
-  </motion.div>
-</motion.header>
+          {/* Subtitle */}
+          <motion.p
+            variants={fadeInUp}
+            className="text-2xl md:text-3xl mt-4 mb-6 font-medium text-info/90 leading-snug"
+          >
+            The Only{" "}
+            <span className="text-primary font-semibold">
+              AI-Native Platform
+            </span>{" "}
+            Designed to Eliminate Privilege Abuse Before It Happens
+          </motion.p>
 
+          {/* Description */}
+          <motion.p
+            variants={fadeInUp}
+            className="text-lg md:text-xl text-base-content/90 max-w-5xl mx-auto mb-12 leading-relaxed italic"
+          >
+            Stop reacting to threats —{" "}
+            <span className="font-semibold text-primary">
+              predict, prevent, and respond
+            </span>
+            with SWOT Cloud PAM. From detecting insider threats to securing
+            multi-cloud environments, SWOT unifies{" "}
+            <span className="text-info">zero standing privileges</span>,{" "}
+            <span className="text-primary">behavioral intelligence</span>, and{" "}
+            <span className="text-accent">autonomous defense</span> into a
+            single adaptive platform.
+          </motion.p>
+
+          {/* Call-to-Action Buttons */}
+          <motion.div
+            variants={fadeInUp}
+            className="flex flex-col sm:flex-row justify-center gap-5 mt-8"
+          >
+            <motion.button
+              {...cardHover}
+              onClick={() =>
+                document
+                  .getElementById("contact")
+                  .scrollIntoView({ behavior: "smooth" })
+              }
+              className="btn btn-info btn-lg shadow-xl hover:shadow-info/50 hover:scale-105 transition-transform duration-300"
+            >
+              🚀 Request Demo
+            </motion.button>
+
+            <motion.button
+              {...cardHover}
+              onClick={() => alert("Downloading ROI Report...")}
+              className="btn btn-outline btn-info btn-lg shadow-lg hover:bg-info hover:text-base-100 transition-all duration-300"
+            >
+              📄 Download ROI Report
+            </motion.button>
+          </motion.div>
+        </div>
+
+        {/* Floating Animated Elements */}
+        <motion.div
+          animate={{ y: [0, -10, 0] }}
+          transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
+          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-info/60 text-sm"
+        >
+          <ArrowDownIcon className="mx-auto animate-bounce" size={24} />
+        </motion.div>
+      </motion.header>
 
       <div className="container mx-auto px-4">
         {/* Introduction / Why SWOT Cloud PAM? */}
@@ -552,9 +490,15 @@ const SWOTCloudPAMPage = () => {
               variants={fadeInUp}
               {...cardHover} // Apply cardHover animation
               className="stat-box border relative p-6 rounded-xl tilt-3d text-accent shadow-xl" // Apply tilt-3d
-              style={{ background: "linear-gradient(180deg, hsl(var(--p)), hsl(var(--in)))" }} // Specific gradient
+              style={{
+                background:
+                  "linear-gradient(180deg, hsl(var(--p)), hsl(var(--in)))",
+              }} // Specific gradient
             >
-              <div className="text-4xl md:text-5xl font-extrabold mb-2" style={{ color: "hsl(var(--a))" }}>
+              <div
+                className="text-4xl md:text-5xl font-extrabold mb-2"
+                style={{ color: "hsl(var(--a))" }}
+              >
                 77%
               </div>
               <div className="text-sm opacity-90">
@@ -566,20 +510,34 @@ const SWOTCloudPAMPage = () => {
               variants={fadeInUp}
               {...cardHover} // Apply cardHover animation
               className="stat-box border relative p-6 rounded-xl tilt-3d text-accent shadow-xl" // Apply tilt-3d
-              style={{ background: "linear-gradient(180deg, hsl(var(--p)), hsl(var(--in)))" }} // Specific gradient
+              style={{
+                background:
+                  "linear-gradient(180deg, hsl(var(--p)), hsl(var(--in)))",
+              }} // Specific gradient
             >
-              <div className="text-4xl md:text-5xl font-extrabold mb-2" style={{ color: "hsl(var(--a))" }}>
+              <div
+                className="text-4xl md:text-5xl font-extrabold mb-2"
+                style={{ color: "hsl(var(--a))" }}
+              >
                 $4.88M
               </div>
-              <div className="text-sm opacity-90">Average cost of a data breach in 2024</div>
+              <div className="text-sm opacity-90">
+                Average cost of a data breach in 2024
+              </div>
             </motion.div>
             <motion.div
               variants={fadeInUp}
               {...cardHover} // Apply cardHover animation
               className="stat-box border relative p-6 rounded-xl tilt-3d text-accent shadow-xl" // Apply tilt-3d
-              style={{ background: "linear-gradient(180deg, hsl(var(--p)), hsl(var(--in)))" }} // Specific gradient
+              style={{
+                background:
+                  "linear-gradient(180deg, hsl(var(--p)), hsl(var(--in)))",
+              }} // Specific gradient
             >
-              <div className="text-4xl md:text-5xl font-extrabold mb-2" style={{ color: "hsl(var(--a))" }}>
+              <div
+                className="text-4xl md:text-5xl font-extrabold mb-2"
+                style={{ color: "hsl(var(--a))" }}
+              >
                 68%
               </div>
               <div className="text-sm opacity-90">
@@ -590,9 +548,15 @@ const SWOTCloudPAMPage = () => {
               variants={fadeInUp}
               {...cardHover} // Apply cardHover animation
               className="stat-box border relative p-6 rounded-xl tilt-3d text-accent shadow-xl" // Apply tilt-3d
-              style={{ background: "linear-gradient(180deg, hsl(var(--p)), hsl(var(--in)))" }} // Specific gradient
+              style={{
+                background:
+                  "linear-gradient(180deg, hsl(var(--p)), hsl(var(--in)))",
+              }} // Specific gradient
             >
-              <div className="text-4xl md:text-5xl font-extrabold mb-2" style={{ color: "hsl(var(--a))" }}>
+              <div
+                className="text-4xl md:text-5xl font-extrabold mb-2"
+                style={{ color: "hsl(var(--a))" }}
+              >
                 3-4 Weeks
               </div>
               <div className="text-sm opacity-90">
@@ -607,12 +571,18 @@ const SWOTCloudPAMPage = () => {
           >
             The Problem: Traditional PAM Can't Keep Up
           </motion.h3>
-          <motion.p variants={fadeInUp} className="mb-4 text-base-content leading-relaxed">
+          <motion.p
+            variants={fadeInUp}
+            className="mb-4 text-base-content leading-relaxed"
+          >
             Traditional Privileged Access Management solutions were built for
             static, on-premises data centers. They fail in today's cloud-first
             world where:
           </motion.p>
-          <motion.ul variants={staggerContainer} className="ml-10 mb-8 text-base-content text-lg leading-relaxed list-disc">
+          <motion.ul
+            variants={staggerContainer}
+            className="ml-10 mb-8 text-base-content text-lg leading-relaxed list-disc"
+          >
             <motion.li variants={fadeInUp} className="my-2">
               <strong>Infrastructure is dynamic</strong> - Cloud resources spin
               up and down by the minute, but PAM policies stay static
@@ -622,8 +592,8 @@ const SWOTCloudPAMPage = () => {
               compromised accounts hide within normal behavior patterns
             </motion.li>
             <motion.li variants={fadeInUp} className="my-2">
-              <strong>Compliance is constant</strong> - Manual audit
-              preparation costs thousands in labor while missing threats
+              <strong>Compliance is constant</strong> - Manual audit preparation
+              costs thousands in labor while missing threats
             </motion.li>
             <motion.li variants={fadeInUp} className="my-2">
               <strong>Multi-cloud is mandatory</strong> - AWS, Azure, GCP, plus
@@ -641,7 +611,10 @@ const SWOTCloudPAMPage = () => {
           >
             The SWOT Solution: AI-Native from the Ground Up
           </motion.h3>
-          <motion.p variants={fadeInUp} className="text-base-content leading-relaxed">
+          <motion.p
+            variants={fadeInUp}
+            className="text-base-content leading-relaxed"
+          >
             SWOT Cloud PAM was built for the modern security landscape. Unlike
             bolted-on AI additions to legacy platforms, SWOT's intelligence is
             woven into every component—from credential management to threat
@@ -844,7 +817,10 @@ const SWOTCloudPAMPage = () => {
           >
             Real-World Use Cases
           </motion.h2>
-          <motion.p variants={fadeInUp} className="text-lg mb-8 text-base-content/80">
+          <motion.p
+            variants={fadeInUp}
+            className="text-lg mb-8 text-base-content/80"
+          >
             How organizations are transforming security with SWOT Cloud PAM
           </motion.p>
 
@@ -883,7 +859,9 @@ const SWOTCloudPAMPage = () => {
               </p>
             </div>
             <div className="roi bg-gradient-to-br from-warning/10 to-orange-200/50 p-4 rounded-md mt-3 border-l-4 border-warning-content">
-              <strong className="text-warning-content block mb-2">Results:</strong>
+              <strong className="text-warning-content block mb-2">
+                Results:
+              </strong>
               <p className="text-base-content/80 leading-relaxed">
                 ✓ Compliance audit time reduced from 4 weeks to 2 days
                 <br />✓ $180K annual cost savings (consulting + internal labor)
@@ -928,7 +906,9 @@ const SWOTCloudPAMPage = () => {
               </p>
             </div>
             <div className="roi bg-gradient-to-br from-warning/10 to-orange-200/50 p-4 rounded-md mt-3 border-l-4 border-warning-content">
-              <strong className="text-warning-content block mb-2">Results:</strong>
+              <strong className="text-warning-content block mb-2">
+                Results:
+              </strong>
               <p className="text-base-content/80 leading-relaxed">
                 ✓ HIPAA audit passed on first attempt (saved $120K in
                 remediation costs)
@@ -976,10 +956,11 @@ const SWOTCloudPAMPage = () => {
               </p>
             </div>
             <div className="roi bg-gradient-to-br from-warning/10 to-orange-200/50 p-4 rounded-md mt-3 border-l-4 border-warning-content">
-              <strong className="text-warning-content block mb-2">Results:</strong>
+              <strong className="text-warning-content block mb-2">
+                Results:
+              </strong>
               <p className="text-base-content/80 leading-relaxed">
-                ✓ Access provisioning time reduced from 30 minutes to 30
-                seconds
+                ✓ Access provisioning time reduced from 30 minutes to 30 seconds
                 <br />✓ Developer productivity increased 15% (no security
                 bottlenecks)
                 <br />✓ 2,000 hardcoded API keys removed from code repositories
@@ -1022,7 +1003,9 @@ const SWOTCloudPAMPage = () => {
               </p>
             </div>
             <div className="roi bg-gradient-to-br from-warning/10 to-orange-200/50 p-4 rounded-md mt-3 border-l-4 border-warning-content">
-              <strong className="text-warning-content block mb-2">Results:</strong>
+              <strong className="text-warning-content block mb-2">
+                Results:
+              </strong>
               <p className="text-base-content/80 leading-relaxed">
                 ✓ Centralized third-party access control across all 500 customer
                 environments
@@ -1069,7 +1052,9 @@ const SWOTCloudPAMPage = () => {
               </p>
             </div>
             <div className="roi bg-gradient-to-br from-warning/10 to-orange-200/50 p-4 rounded-md mt-3 border-l-4 border-warning-content">
-              <strong className="text-warning-content block mb-2">Results:</strong>
+              <strong className="text-warning-content block mb-2">
+                Results:
+              </strong>
               <p className="text-base-content/80 leading-relaxed">
                 ✓ Consolidated 4 separate PAM tools into one platform
                 <br />✓ $500K+ annual licensing and maintenance cost savings
@@ -1277,7 +1262,10 @@ const SWOTCloudPAMPage = () => {
           <h3 className="text-2xl font-semibold text-info mt-10 mb-6">
             Sample ROI Calculation
           </h3>
-          <motion.p variants={fadeInUp} className="font-semibold text-info text-lg my-5">
+          <motion.p
+            variants={fadeInUp}
+            className="font-semibold text-info text-lg my-5"
+          >
             For a Mid-Market Enterprise (500 employees, 50 privileged users):
           </motion.p>
           <motion.table
@@ -1334,7 +1322,9 @@ const SWOTCloudPAMPage = () => {
                 </td>
               </tr>
               <tr className="bg-info/20 font-semibold">
-                <td className="p-3 border border-base-content/20">Total Annual ROI</td>
+                <td className="p-3 border border-base-content/20">
+                  Total Annual ROI
+                </td>
                 <td className="p-3 border border-base-content/20">
                   <strong>$565,000</strong>
                 </td>
@@ -1643,7 +1633,8 @@ const SWOTCloudPAMPage = () => {
             className="text-lg text-center max-w-3xl mx-auto text-base-content/80 mb-16"
           >
             SWOT provides seamless, out-of-the-box integrations for the tools
-            you already use, ensuring a unified security posture with zero friction.
+            you already use, ensuring a unified security posture with zero
+            friction.
           </motion.p>
 
           <div className="space-y-16">
@@ -1716,7 +1707,7 @@ const SWOTCloudPAMPage = () => {
                 ))}
               </motion.div>
             </motion.div>
-            
+
             {/* Category: ITSM */}
             <motion.div variants={fadeInUp}>
               <h3 className="flex items-center gap-3 text-2xl font-semibold text-info mb-6">
@@ -1820,7 +1811,9 @@ const SWOTCloudPAMPage = () => {
             <motion.button
               {...cardHover} // Apply cardHover animation
               onClick={() =>
-                document.getElementById("contact").scrollIntoView({ behavior: "smooth" })
+                document
+                  .getElementById("contact")
+                  .scrollIntoView({ behavior: "smooth" })
               }
               className="btn btn-warning btn-lg shadow-lg"
             >
@@ -1851,13 +1844,14 @@ const SWOTCloudPAMPage = () => {
           >
             Contact SWOT Cloud PAM
           </motion.h2>
-          <motion.p variants={fadeInUp} className="text-lg intro-text mb-8 text-base-content/80">
+          <motion.p
+            variants={fadeInUp}
+            className="text-lg intro-text mb-8 text-base-content/80"
+          >
             Let our security experts show you how SWOT's AI-powered PAM platform
             can transform your organization's security posture and deliver
             immediate ROI.
           </motion.p>
-
-       
 
           <motion.h3
             variants={fadeInUp}

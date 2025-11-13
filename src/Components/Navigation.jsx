@@ -2,16 +2,35 @@ import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
 import {
-  LogIn, Calendar, Sun,
-   Moon, Menu, X, Home, Box, Wrench, Building, Phone, ChevronDown, Shield, Cloud, Server, Code, Zap, LayoutGrid, AlertTriangle, TrendingUp, Users, BookOpen, Briefcase, Target,
-   Globe2Icon,
-   Settings2,
-   Database,
-   ShieldCheck,
-   Bot,
-   Smartphone,
-   Code2,
-   LockIcon,
+  LogIn,
+  Calendar,
+  Sun,
+  Moon,
+  Menu,
+  X,
+  Home,
+  Box,
+  Wrench,
+  Building,
+  Phone,
+  ChevronDown,
+  Shield,
+  Cloud,
+  AlertTriangle,
+  TrendingUp,
+  Users,
+  BookOpen,
+  Briefcase,
+  Target,
+  Globe2Icon,
+  Settings2,
+  Database,
+  ShieldCheck,
+  Bot,
+  Smartphone,
+  Code2,
+  LockIcon,
+  Zap, // Added Zap if not already imported, it was in a comment
 } from "lucide-react";
 
 // --- Data Structure with Icons (Unchanged) ---
@@ -24,82 +43,18 @@ const getProductsContent = () => [
   { title: "AIquinox", subtitle: "Performance Monitoring Platform", color: "hsl(var(--s))", href: "/products/AiquinoxPage", icon: TrendingUp, group: "Platforms & Analytics" },
 ];
 
+// ✅ MODIFIED: Updated hrefs to point to new pages
 const getServicesContent = () => [
-  {
-    title: "Software Development",
-    subtitle: "Enterprise Applications",
-    color: "hsl(var(--p))",
-    href: "/underDevlopment",
-    icon: Code2,
-    group: "Core Development",
-  },
-  {
-    title: "Mobile App Development",
-    subtitle: "iOS & Android",
-    color: "hsl(var(--s))",
-    href: "/underDevlopment",
-    icon: Smartphone,
-    group: "Core Development",
-  },
-  {
-    title: "AI & Automation",
-    subtitle: "AI Agents & RPA",
-    color: "hsl(var(--p))",
-    href: "/underDevlopment",
-    icon: Bot,
-    group: "Intelligent Systems",
-  },
-  {
-    title: "Cybersecurity",
-    subtitle: "PenTesting & Compliance",
-    color: "hsl(var(--s))",
-    href: "/underDevlopment",
-    icon: ShieldCheck,
-    group: "Security & Compliance",
-  },
-  {
-    title: "Cloud Infrastructure",
-    subtitle: "AWS | Azure | GCP",
-    color: "hsl(var(--p))",
-    href: "/underDevlopment",
-    icon: Cloud,
-    group: "Managed Infra",
-  },
-  {
-    title: "Private Cloud Consulting",
-    subtitle: "Compliance-Ready Infra",
-    color: "hsl(var(--s))",
-    href: "/underDevlopment",
-    icon: LockIcon,
-    group: "Managed Infra",
-  },
-  {
-    title: "Database Services",
-    subtitle: "Optimization & Management",
-    color: "hsl(var(--p))",
-    href: "/underDevlopment",
-    icon: Database,
-    group: "Platform Consulting",
-  },
-  {
-    title: "IoT & Edge Computing",
-    subtitle: "Real-time Processing",
-    color: "hsl(var(--s))",
-    href: "/underDevlopment",
-    icon: Settings2,
-    group: "Intelligent Systems",
-  },
-  {
-    title: "Digital Twin Solutions",
-    subtitle: "Predictive Maintenance",
-    color: "hsl(var(--p))",
-    href: "/underDevlopment",
-    icon: Globe2Icon,
-    group: "Intelligent Systems",
-  },
+  { title: "Software Development", subtitle: "Enterprise Applications", color: "hsl(var(--p))", href: "/services/software-development", icon: Code2, group: "Core Development", },
+  { title: "Mobile App Development", subtitle: "iOS & Android", color: "hsl(var(--s))", href: "/services/mobile-app-development", icon: Smartphone, group: "Core Development", },
+  { title: "AI & Automation", subtitle: "AI Agents & RPA", color: "hsl(var(--p))", href: "/services/ai-automation", icon: Bot, group: "Intelligent Systems", },
+  { title: "Cybersecurity", subtitle: "PenTesting & Compliance", color: "hsl(var(--s))", href: "/services/cybersecurity", icon: ShieldCheck, group: "Security & Compliance", },
+  { title: "Cloud Infrastructure", subtitle: "AWS | Azure | GCP", color: "hsl(var(--p))", href: "/services/cloud-infrastructure", icon: Cloud, group: "Managed Infra", },
+  { title: "Private Cloud Consulting", subtitle: "Compliance-Ready Infra", color: "hsl(var(--s))", href: "/services/private-cloud", icon: LockIcon, group: "Managed Infra", },
+  { title: "Database Services", subtitle: "Optimization & Management", color: "hsl(var(--p))", href: "/services/database-services", icon: Database, group: "Platform Consulting", },
+  { title: "IoT & Edge Computing", subtitle: "Real-time Processing", color: "hsl(var(--s))", href: "/services/iot-edge-computing", icon: Settings2, group: "Intelligent Systems", },
+  { title: "Digital Twin Solutions", subtitle: "Predictive Maintenance", color: "hsl(var(--p))", href: "/services/digital-twin", icon: Globe2Icon, group: "Intelligent Systems", },
 ];
-
-
 
 const getCompanyContent = () => [
   { title: "Solutions", color: "hsl(var(--p))", href: "/solutions", icon: BookOpen },
@@ -107,7 +62,6 @@ const getCompanyContent = () => [
   { title: "Client Success", color: "hsl(var(--p))", href: "/client-success", icon: Briefcase },
   { title: "Why Rudratic", color: "hsl(var(--s))", href: "/why-rudratic", icon: Target },
 ];
-
 
 const Navigation = ({ theme, toggleTheme }) => {
   const [scrolled, setScrolled] = useState(false);
@@ -126,12 +80,14 @@ const Navigation = ({ theme, toggleTheme }) => {
   }, []);
 
   useEffect(() => {
+    // Close mobile menu and dropdowns on route change
     setIsMobileMenuOpen(false);
     setActiveDropdown(null);
-    document.body.style.overflow = "";
+    document.body.style.overflow = ""; // Re-enable scroll
   }, [location.pathname]);
 
   useEffect(() => {
+    // Control body scroll when mobile menu is open/closed
     document.body.style.overflow = isMobileMenuOpen ? "hidden" : "";
   }, [isMobileMenuOpen]);
 
@@ -145,11 +101,11 @@ const Navigation = ({ theme, toggleTheme }) => {
 
   const getActiveIndex = () => {
     const path = location.pathname;
-    if (path.startsWith("/contact")) return 4;
+    if (path === "/") return 0;
     if (path.startsWith("/products") || productsContent.some(p => p.href === path)) return 1;
     if (path.startsWith("/services") || servicesContent.some(s => s.href === path)) return 2;
     if (companyContent.some(c => c.href === path)) return 3;
-    if (path === "/") return 0;
+    if (path.startsWith("/contact")) return 4;
     return -1;
   };
   const activeIndex = getActiveIndex();
@@ -160,46 +116,33 @@ const Navigation = ({ theme, toggleTheme }) => {
     transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
   };
 
-  const navClass = `fixed left-1/2 -translate-x-1/2 z-[1000] w-[calc(100%-2rem)] md:w-[calc(100%-4rem)] max-w-[1400px]
-  rounded-2xl px-4 md:px-10 py-3 md:py-4 transition-all duration-500`;
+  // FIX: Removed trailing semicolon from className string
+  const navClass = "fixed left-1/2 -translate-x-1/2 z-[1000] w-[calc(100%-2rem)] md:w-[calc(100%-4rem)] max-w-[1400px] rounded-2xl px-4 md:px-10 py-3 md:py-4 transition-all duration-500";
 
+  // FIX: Corrected border property using template literal
   const navStyle = {
     top: scrolled ? "1rem" : "1.5rem",
-    background:
-      theme === "night"
-        ? scrolled
-          ? "linear-gradient(135deg, rgba(30,30,35,0.95), rgba(15,15,20,0.85))"
-          : "linear-gradient(135deg, rgba(30,30,35,0.7), rgba(15,15,20,0.5))"
-        : scrolled
-        ? "linear-gradient(135deg, rgba(255,255,255,0.95), rgba(240,240,245,0.85))"
-        : "linear-gradient(135deg, rgba(255,255,255,0.8), rgba(240,240,245,0.6))",
+    background: theme === "night"
+      ? scrolled ? "linear-gradient(135deg, rgba(30,30,35,0.95), rgba(15,15,20,0.85))" : "linear-gradient(135deg, rgba(30,30,35,0.7), rgba(15,15,20,0.5))"
+      : scrolled ? "linear-gradient(135deg, rgba(255,255,255,0.95), rgba(240,240,245,0.85))" : "linear-gradient(135deg, rgba(255,255,255,0.8), rgba(240,240,245,0.6))",
     boxShadow: scrolled
-      ? theme === "night"
-        ? "0 10px 30px rgba(0,0,0,0.8), 0 0 50px hsla(var(--p)/0.4)"
-        : "0 10px 30px rgba(0,0,0,0.1), 0 0 50px hsla(var(--p)/0.25)"
-      : theme === "night"
-      ? "0 5px 20px rgba(0,0,0,0.5)"
-      : "0 5px 15px rgba(0,0,0,0.1)",
+      ? theme === "night" ? "0 10px 30px rgba(0,0,0,0.8), 0 0 50px hsla(var(--p)/0.4)" : "0 10px 30px rgba(0,0,0,0.1), 0 0 50px hsla(var(--p)/0.25)"
+      : theme === "night" ? "0 5px 20px rgba(0,0,0,0.5)" : "0 5px 15px rgba(0,0,0,0.1)",
     backdropFilter: "blur(28px)",
-    border: `1px solid ${
-      theme === "night" ? "hsla(var(--p)/0.35)" : "hsla(var(--p)/0.2)"
-    }`,
+    border: `1px solid ${theme === "night" ? "hsla(var(--p)/0.35)" : "hsla(var(--p)/0.2)"}`, // FIX here
   };
-
 
   return (
     <>
-      <AnimatePresence>
-        {activeDropdown && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/70 backdrop-blur-[8px] z-[900] hidden lg:block"
-            onClick={() => setActiveDropdown(null)}
-          />
-        )}
-      </AnimatePresence>
+      {activeDropdown && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-black/70 backdrop-blur-[8px] z-[900] hidden lg:block"
+          onClick={() => setActiveDropdown(null)}
+        />
+      )}
 
       <motion.nav {...navMotion} className={navClass} style={navStyle}>
         <div className="relative z-20 flex justify-between items-center">
@@ -221,6 +164,9 @@ const Navigation = ({ theme, toggleTheme }) => {
                 onMouseEnter={() => item.hasDropdown && setActiveDropdown(item.label)}
                 onMouseLeave={() => item.hasDropdown && setActiveDropdown(null)}
               >
+                {/* For non-dropdown items, the Link directly navigates.
+                    For dropdown items, the Link is mainly for the parent item's visual state.
+                    The actual navigation happens in the MegaMenu. */}
                 <Link to={item.href} className="no-underline">
                   <motion.div
                     className={`relative cursor-pointer px-5 py-2.5 rounded-xl transition-colors duration-300 ${activeIndex === index ? 'bg-base-content/10' : 'hover:bg-base-content/5'}`}
@@ -412,31 +358,34 @@ const MegaMenu = ({ type, content }) => {
 
   // Helper function to render grouped menu items
   const renderGroupedItems = (groupName, items) => (
-    <div key={groupName}>
-      <h4 className="text-sm font-bold uppercase mb-4 tracking-wider text-base-content/50 border-b border-base-content/10 pb-2">{groupName}</h4>
-      <div className="space-y-3">
-        {items.map((item, i) => {
+    <div key={groupName} className="flex flex-col gap-2"> {/* Added key for group */}
+      <h3 className="text-sm font-extrabold text-base-content/60 uppercase tracking-wider mb-2">
+        {groupName}
+      </h3>
+      <div className="flex flex-col gap-2"> {/* Container for actual links */}
+        {items.map((item) => {
           const ItemIcon = item.icon;
           return (
-            <Link key={i} to={item.href} className="no-underline group block">
+            // FIX: Wrap each item in a Link component to make it navigable
+            <Link key={item.title} to={item.href} className="no-underline">
               <motion.div
                 whileHover={{ scale: 1.03, x: 4, background: `hsla(var(--b2))` }}
-                className="rounded-lg p-3 transition-all duration-300 transform flex items-start gap-3"
+                className="rounded-lg p-3 transition-all duration-300 transform flex items-start gap-3 group" // Added 'group' class for hover effect
               >
-                <div className="p-2 rounded-md" style={{ background: `${item.color}20`}}>
-                    <ItemIcon size={20} style={{ color: item.color }}/>
+                <div className="p-2 rounded-md flex-shrink-0" style={{ background: `${item.color}20`}}>
+                  <ItemIcon size={20} style={{ color: item.color }}/>
                 </div>
                 <div>
-                  <div className="text-base font-bold mb-0.5 group-hover:text-primary transition-colors" style={{ color: item.color }}>
+                  <h4 className="text-base font-bold mb-0.5 group-hover:text-primary transition-colors" style={{ color: item.color }}> {/* FIX: Changed to h4, added group-hover */}
                     {item.title}
-                  </div>
-                  <p className="text-xs text-base-content/60 leading-tight">
+                  </h4>
+                  <p className="text-xs text-base-content/70 leading-tight">
                     {item.subtitle}
                   </p>
                 </div>
               </motion.div>
             </Link>
-          )
+          );
         })}
       </div>
     </div>
@@ -444,10 +393,10 @@ const MegaMenu = ({ type, content }) => {
 
   const getGroups = (items) => {
     return items.reduce((acc, item) => {
-        (acc[item.group] = acc[item.group] || []).push(item);
-        return acc;
+      (acc[item.group] = acc[item.group] || []).push(item);
+      return acc;
     }, {});
-  }
+  };
 
   return (
     <motion.div
@@ -455,16 +404,17 @@ const MegaMenu = ({ type, content }) => {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 15 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
+      // FIX: Corrected className interpolation using backticks
       className={`absolute top-[65px] bg-base-100/95 backdrop-blur-2xl border border-primary/30 rounded-2xl p-8 shadow-2xl shadow-black/40 z-50 transform origin-top ${
-        type === "company" ? "left-1/2 -translate-x-1/2 min-w-[320px]" : "left-1/2 -translate-x-1/2 min-w-[1100px]" 
+        type === "company" ? "left-1/2 -translate-x-1/2 min-w-[320px]" : "left-1/2 -translate-x-1/2 min-w-[1100px]"
       }`}
     >
       {(type === "products" || type === "services") && (
-        <div className="grid grid-cols-[2fr_1fr] gap-x-10 min-h-[450px]">
-          <div className={`grid ${type === "products" ? "grid-cols-2" : "grid-cols-3"} gap-x-8`}>
+        // FIX: Adjusted grid layout to have grouped items on the left and sidebar on the right
+        <div className="grid grid-cols-[1fr_minmax(250px,300px)] gap-x-8"> {/* Outer grid: main content (grouped items) + sidebar */}
+          <div className={`grid ${type === "products" ? "grid-cols-2" : "grid-cols-3"} gap-x-8 gap-y-6`}> {/* Inner grid for the actual grouped items */}
             {Object.entries(getGroups(data)).map(([groupName, items]) => renderGroupedItems(groupName, items))}
           </div>
-          
           {/* Right Sidebar: Media & CTA */}
           <div className="flex flex-col justify-between border-l border-primary/20 pl-10">
             <div>
@@ -499,7 +449,7 @@ const MegaMenu = ({ type, content }) => {
                   whileHover={{ scale: 1.02, x: 5, background: `hsla(var(--b2))` }}
                   className="rounded-xl px-6 py-4 transition-all duration-300 transform flex items-center gap-4 border border-transparent hover:border-primary/50"
                 >
-                  <div className="p-2.5 rounded-lg" style={{ background: `${c.color}20` }}>
+                  <div className="p-2.5 rounded-lg flex-shrink-0" style={{ background: `${c.color}20` }}> {/* Added flex-shrink-0 */}
                     <CompanyIcon size={20} style={{ color: c.color }}/>
                   </div>
                   <div className="text-base font-semibold" style={{ color: c.color }}>

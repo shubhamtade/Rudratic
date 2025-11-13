@@ -174,12 +174,12 @@ const ProductsSection = () => {
                 className="group relative bg-white/70 dark:bg-base-200/80 backdrop-blur-2xl rounded-3xl border border-base-300 shadow-xl hover:shadow-2xl hover:border-primary/60 transition-all duration-300 p-6 sm:p-8 flex flex-col items-stretch"
               >
                 {/* Group badge */}
-                <span className="absolute top-6 right-6 bg-gradient-to-r from-primary/20 to-accent/20 text-primary px-3 py-1.5 rounded-full text-xs font-semibold tracking-wide z-20 shadow backdrop-blur border border-primary/10">
+                <span className="absolute -top-2 -right-2 bg-gradient-to-r from-primary/20 to-accent/20 text-primary px-3 py-1.5 rounded-full text-xs font-semibold tracking-wide z-20 shadow backdrop-blur border border-primary/10">
                   {product.group}
                 </span>
 
                 {/* New Prominent Icon Area */}
-                <div
+                {/* <div
                   className={`relative w-20 h-20 sm:w-24 sm:h-24 mx-auto rounded-3xl mb-6 sm:mb-8 flex items-center justify-center overflow-hidden transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl`}
                   style={{
                     background:
@@ -205,7 +205,7 @@ const ProductsSection = () => {
                       style={{ color: "white" }} // Ensure icon color is white for contrast with gradient background
                     />
                   )}
-                </div>
+                </div> */}
 
                 {/* Title & description */}
                 <h3
