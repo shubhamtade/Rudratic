@@ -110,13 +110,13 @@ const WhyChooseUs = () => {
           viewport={{ once: true }}
           className="text-center max-w-3xl mx-auto mb-20"
         >
-          <div className="inline-block mb-4 px-6 py-2 bg-accent/10 backdrop-blur-sm rounded-full">
-            <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent font-semibold">
+          <div className="inline-block mb-4 px-6 py-2 bg-primary backdrop-blur-sm rounded-full">
+            <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-white font-semibold">
               OUR EDGE IN INDUSTRY
             </span>
           </div>
 
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-base-content via-base-content/80 to-base-content bg-clip-text text-transparent">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6  bg-gradient-to-r from-primary  to-accent bg-clip-text text-transparent">
             Why Global Enterprises Choose Rudratic
           </h2>
 

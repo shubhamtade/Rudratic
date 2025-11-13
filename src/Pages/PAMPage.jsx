@@ -1,3 +1,4 @@
+// src/pages/PAMPage.jsx
 import React from "react";
 import { motion } from "framer-motion";
 import Footer from "../layouts/Footer";
@@ -9,435 +10,582 @@ import {
   Users,
   CheckCircle2,
   ArrowRight,
+  Gem,
+  LockKeyhole,
+  Speech,
+  Eye,
+  ShieldCheck,
+  Clock,
+  FileText,
+  DollarSign,
 } from "lucide-react";
 
-// Helper component for custom CSS to keep the main component clean
-// The CSS here is for effects that are difficult or verbose to do with Tailwind alone.
+/**
+ * PAMPage - Enhanced, animated, Tailwind-themed version.
+ *
+ * Drop this file in place of your existing PAMPage component.
+ * Requires: tailwindcss, framer-motion, lucide-react
+ */
+
+// Global helper styles for effects difficult with Tailwind alone
 const CustomStyles = () => (
   <style jsx global>{`
-    /* --- Animated Gradient Background --- */
-    body {
-      position: relative; /* Needed for the pseudo-element */
+    /* Subtle particle layer (SVG) */
+    .particle-wrap {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+      opacity: 0.12;
+      mix-blend-mode: screen;
     }
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+
+    /* Animated glowing gradient under hero */
+    .hero-glow {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 120%;
+      height: 120%;
       z-index: -1;
-      background: radial-gradient(
-          circle at 10% 20%,
-          hsl(var(--a) / 0.08),
-          transparent 40%
-        ),
-        radial-gradient(
-          circle at 90% 80%,
-          hsl(var(--p) / 0.08),
-          transparent 40%
-        );
-      animation: moveGlow 20s infinite alternate ease-in-out;
+      filter: blur(80px);
+      opacity: 0.55;
+      background: radial-gradient(circle at 20% 30%, rgba(99, 102, 241, 0.9), transparent 18%),
+                  radial-gradient(circle at 80% 70%, rgba(16, 185, 129, 0.85), transparent 18%);
+      transition: opacity 0.5s ease;
     }
 
-    @keyframes moveGlow {
-      0% {
-        transform: scale(1) translate(0, 0);
-        opacity: 0.8;
-      }
-      100% {
-        transform: scale(1.2) translate(10vw, -10vh);
-        opacity: 1;
-      }
-    }
-
-    /* --- Animated Gradient Border on Cards --- */
-    .pillar-card {
+    /* Soft glass card border gradient */
+    .glass-border {
       position: relative;
       overflow: hidden;
-      border: 1px solid hsl(var(--bc) / 0.1);
-      background-color: hsl(var(--b2) / 0.5);
-      backdrop-filter: blur(10px);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-radius: 0.75rem;
     }
-    .pillar-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 30px -10px hsl(var(--p) / 0.2);
-    }
-    .pillar-card::before {
+    .glass-border::before {
       content: "";
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      border-radius: inherit;
-      padding: 1px;
-      background: linear-gradient(
-        135deg,
-        hsl(var(--a) / 0.5),
-        hsl(var(--p) / 0.5)
-      );
-      -webkit-mask: linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      opacity: 0;
-      transition: opacity 0.3s ease;
+      inset: -1px;
+      background: linear-gradient(135deg, rgba(96,165,250,0.12), rgba(234,88,12,0.10));
+      z-index: -1;
+      filter: blur(8px);
+      transform: translateZ(0);
     }
-    .pillar-card:hover::before {
-      opacity: 1;
+
+    /* tilt effect fallback (smooth) */
+    .tilt-3d {
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
+      will-change: transform;
+    }
+
+    /* small device adjustments */
+    @media (max-width: 640px) {
+      .hero-glow {
+        filter: blur(56px);
+        opacity: 0.4;
+      }
     }
   `}</style>
 );
 
-const PAMPage = () => {
-  const fadeInUp = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
-    },
-  };
+// Motion variants
+const staggerContainer = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.08 } },
+};
 
-  const staggerContainer = {
-    hidden: {},
-    visible: { transition: { staggerChildren: 0.1 } },
-  };
+const fadeInUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } },
+};
+
+const floatUp = {
+  hidden: { y: 6 },
+  visible: {
+    y: -6,
+    transition: { repeat: Infinity, repeatType: "reverse", duration: 3, ease: "easeInOut" },
+  },
+};
+
+const cardHover = {
+  whileHover: { scale: 1.025, y: -6, transition: { duration: 0.18 } },
+  whileTap: { scale: 0.995 },
+};
+
+const IconCircle = ({ children }) => (
+  <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-accent/10 text-accent shadow-sm">
+    {children}
+  </div>
+);
+
+const Pill = ({ children, className = "" }) => (
+  <span className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold ${className}`}>
+    {children}
+  </span>
+);
+
+const PAMPage = () => {
+  // Data arrays kept similar to your original but slightly reorganized for animation
+  const stats = [
+    { number: "1st", description: "AI-Native PAM Platform" },
+    { number: "2-4", description: "Weeks to Deploy" },
+    { number: "70%", description: "Lower Total Cost of Ownership" },
+    { number: "50+", description: "Pre-Built Integrations" },
+  ];
+
+  const pillars = [
+    {
+      icon: Shield,
+      title: "Proactive Threat Defense",
+      desc: "AI detects and prevents malicious behavior in real-time by analyzing context, intent, and user behavior.",
+      metric: "Threats neutralized in <15 minutes",
+    },
+    {
+      icon: Zap,
+      title: "Automated Intent-Aware Approvals",
+      desc: "VLP automates access requests by understanding the reason, reducing approval times from hours to seconds.",
+      metric: "Approval time: Hours → Seconds",
+    },
+    {
+      icon: Target,
+      title: "Reduced Attack Surface",
+      desc: "Just-in-Time privilege removes standing privileges, reducing exposure by up to 70%.",
+      metric: "70% reduction in attack surface",
+    },
+  ];
+
+  const features = [
+    {
+      badge: "Exclusive Technology",
+      badgeStyle: "bg-[#FBE8CA] text-[#A66F00]",
+      icon: Speech,
+      title: "Vision Language Processing (VLP)",
+      desc: "Multimodal AI combining vision + NLP to understand context, intent and detect sophisticated attacks.",
+      highlight: "90%+ accuracy in intent detection",
+    },
+    {
+      badge: "Exclusive Technology",
+      badgeStyle: "bg-[#FBE8CA] text-[#A66F00]",
+      icon: LockKeyhole,
+      title: "Offline Large Language Model",
+      desc: "Proprietary LLM runs on-prem without cloud dependencies — full data privacy and real-time threat analysis.",
+      highlight: "100% data control - nothing leaves your infrastructure",
+    },
+    {
+      badge: "Core Feature",
+      badgeStyle: "bg-[#DFE5F5] text-[#264082]",
+      icon: Eye,
+      title: "User Behavior Analytics (UBA)",
+      desc: "Real-time anomaly detection with adaptive baselines to detect insider threats and privilege abuse.",
+      highlight: "Real-time anomaly detection",
+    },
+    {
+      badge: "Zero Trust",
+      badgeStyle: "bg-[#DFE5F5] text-[#264082]",
+      icon: ShieldCheck,
+      title: "Conditional Access Policies",
+      desc: "Dynamic risk-based access control evaluating device health, location, behavior and network.",
+      highlight: "Risk-based decisions",
+    },
+    {
+      badge: "Core Feature",
+      badgeStyle: "bg-[#DFE5F5] text-[#264082]",
+      icon: Clock,
+      title: "Just-in-Time (JIT) Access",
+      desc: "Grant access only when needed with automatic revocation — complete audit trail.",
+      highlight: "Zero standing privileges",
+    },
+    {
+      badge: "Enterprise",
+      badgeStyle: "bg-[#DFE5F5] text-[#264082]",
+      icon: LockKeyhole,
+      title: "Bring Your Own Key (BYOK)",
+      desc: "Full encryption key control to meet residency and compliance requirements.",
+      highlight: "100% encryption control",
+    },
+  ];
+
+  // Simple inline particle SVG (decorative)
+  const ParticleSVG = () => (
+    <svg
+      className="w-full h-full"
+      preserveAspectRatio="none"
+      viewBox="0 0 800 600"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden
+      focusable="false"
+    >
+      <g fill="none" stroke="currentColor" strokeOpacity="0.07">
+        <circle cx="50" cy="80" r="2" />
+        <circle cx="120" cy="140" r="3" />
+        <circle cx="220" cy="30" r="2.5" />
+        <circle cx="320" cy="200" r="2" />
+        <circle cx="420" cy="90" r="3" />
+        <circle cx="620" cy="140" r="2.2" />
+        <circle cx="720" cy="40" r="2" />
+        <circle cx="760" cy="300" r="2" />
+        <circle cx="180" cy="420" r="2.4" />
+        <circle cx="540" cy="480" r="2.2" />
+      </g>
+    </svg>
+  );
 
   return (
-    <div className="bg-base-100 text-base-content overflow-x-hidden">
+    <div className="relative bg-base-100 text-base-content overflow-x-hidden">
       <CustomStyles />
 
-      {/* Hero Section */}
-      <div className="relative text-center container mx-auto px-4 pt-36 pb-24">
+      {/* Particle / background layer */}
+      <div className="particle-wrap" aria-hidden>
+        <ParticleSVG />
+      </div>
+
+      {/* HERO */}
+      <header className="relative container mx-auto px-6 pt-36  pb-20 z-10">
+        <div className="hero-glow" aria-hidden />
         <motion.div
           initial="hidden"
           animate="visible"
           variants={staggerContainer}
-          className="flex flex-col items-center"
+          className="max-w-5xl mx-auto text-center relative z-10"
         >
-          <motion.div
-            variants={fadeInUp}
-            className="badge badge-lg border-accent/50 bg-accent/10 text-accent p-4 mb-6 font-semibold"
-          >
-            🚀 World's First AI-Native PAM
+          <motion.div variants={fadeInUp}>
+            <div className=" badge badge-lg border-accent/40 bg-accent/10 text-accent rounded-xl p-3 mb-6 font-semibold">
+              🚀 World's First AI-Native PAM
+            </div>
+            <motion.h1
+              variants={fadeInUp}
+              className="text-4xl md:text-6xl font-extrabold leading-tight max-w-3xl mx-auto"
+              aria-label="The Future of Privileged Access is Here"
+            >
+              The Future of{" "}
+              <motion.span
+                variants={floatUp}
+                className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent"
+                style={{ display: "inline-block" }}
+              >
+                Privileged Access
+              </motion.span>{" "}
+              is Here
+            </motion.h1>
+            <motion.p variants={fadeInUp} className="text-lg text-base-content/70 mt-6 max-w-2xl mx-auto">
+              SWOT PAM is the world's first AI-native Privileged Access Management platform — built to tackle modern threats with vision-aware AI, offline LLMs, and enterprise-grade controls.
+            </motion.p>
           </motion.div>
-          <motion.h1
-            variants={fadeInUp}
-            className="text-4xl md:text-6xl font-bold mb-6 max-w-4xl"
-          >
-            The Future of{" "}
-            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              Privileged Access
-            </span>{" "}
-            is Here
-          </motion.h1>
-          <motion.p
-            variants={fadeInUp}
-            className="max-w-3xl mx-auto text-lg text-base-content/70 leading-relaxed mb-8"
-          >
-            SWOT PAM is the world's first AI-native Privileged Access Management
-            platform, built from the ground up to address the new and evolving
-            cyber threat landscape.
-          </motion.p>
-          <motion.div
-            variants={fadeInUp}
-            className="max-w-3xl w-full mx-auto card bg-base-200/50 p-6 border-l-4 border-accent shadow-lg backdrop-blur-sm"
-          >
-            <h3 className="text-xl font-bold text-accent mb-2 flex items-center gap-2">
-              <Brain size={24} /> Core Innovation: VLP + Offline LLM
-            </h3>
-            <p className="text-base-content/80">
-              Our unique combination enables us to understand context, intent,
-              and behavior patterns with unprecedented accuracy all while
-              maintaining complete data privacy and security. This is not an
-              add-on; it's the foundation of everything we build.
-            </p>
-          </motion.div>
-          <motion.div
-            variants={fadeInUp}
-            className="mt-12 flex flex-col sm:flex-row gap-4 justify-center"
-          >
+
+          <motion.div variants={fadeInUp} className="mt-8 flex flex-col sm:flex-row gap-4 justify-center items-center">
             <motion.button
-              whileHover={{
-                scale: 1.05,
-                boxShadow: "0px 10px 20px -5px hsl(var(--p)/0.4)",
-              }}
-              whileTap={{ scale: 0.95 }}
-              className="btn btn-primary btn-lg shadow-lg"
+              {...cardHover}
+              className="btn btn-primary btn-lg shadow-lg flex items-center gap-3 px-6"
+              aria-label="Schedule a demo"
             >
               Schedule a Demo
+              <ArrowRight size={16} />
             </motion.button>
+
             <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="btn btn-ghost btn-lg"
+              {...cardHover}
+              className="btn btn-ghost btn-lg px-6"
+              aria-label="Explore Innovation"
             >
               Explore Innovation
             </motion.button>
           </motion.div>
-        </motion.div>
-      </div>
 
-      <div className="container mx-auto px-4 pb-24 space-y-28">
-        {/* Pillars Section */}
+          <motion.div
+            variants={fadeInUp}
+            className="mt-10 mx-auto max-w-3xl card bg-base-200/50 p-6 border-l-4 border-accent shadow-lg backdrop-blur-md glass-border"
+            role="region"
+            aria-label="Core Innovation"
+          >
+            <div className="flex items-start gap-3">
+              <div className="flex-shrink-0 inline-flex items-center justify-center w-12 h-12 rounded-lg bg-accent/10">
+                <Brain size={22} className="text-accent" />
+              </div>
+              <div>
+                <h3 className="text-lg font-bold text-accent">Core Innovation: VLP + Offline LLM</h3>
+                <p className="text-base-content/70 mt-1">
+                  Our multimodal approach (vision + NLP) and on-prem LLM deliver contextual, private, and lightning-fast decisions — not an add-on, but the platform foundation.
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+      </header>
+
+      {/* WHY */}
+      <motion.section
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.35 }}
+        variants={staggerContainer}
+        className="container mx-auto px-6 py-12 relative z-10"
+      >
+        <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-bold mb-8 text-center" style={{ color: "#264082" }}>
+          Why Organizations Choose SWOT PAM
+        </motion.h2>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {stats.map((s, idx) => (
+            <motion.div
+              key={idx}
+              variants={fadeInUp}
+              whileHover={{ translateY: -6, boxShadow: "0 18px 32px -18px rgba(38,64,130,0.22)" }}
+              className="relative p-6 rounded-xl tilt-3d text-white shadow-xl"
+              style={{ background: "linear-gradient(180deg,#264082,#1F3B6D)" }}
+            >
+              <div className="text-4xl md:text-5xl font-extrabold mb-2" style={{ color: "#F7CB32" }}>
+                {s.number}
+              </div>
+              <div className="text-sm opacity-90">{s.description}</div>
+            </motion.div>
+          ))}
+        </div>
+      </motion.section>
+
+      <main className="container mx-auto px-6 pb-28 space-y-24 relative z-10">
+        {/* PILLARS */}
         <motion.section
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
           variants={staggerContainer}
         >
-          <motion.h2
-            variants={fadeInUp}
-            className="text-3xl md:text-4xl font-bold mb-12 text-center"
-          >
+          <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-bold mb-8 text-center">
             Three Pillars of SWOT PAM
           </motion.h2>
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: Shield,
-                title: "Proactive Threat Defense",
-                desc: "Our AI detects and prevents malicious behavior in real-time by analyzing context, intent, and user behavior.",
-                metric: "Threats neutralized in <15 minutes",
-              },
-              {
-                icon: Zap,
-                title: "Automated Intent-Aware Approvals",
-                desc: "Our VLP technology automates access requests by understanding the reason, reducing approval times from hours to seconds.",
-                metric: "Approval time: Hours → Seconds",
-              },
-              {
-                icon: Target,
-                title: "Reduced Attack Surface",
-                desc: "Our 'Just-in-Time' privilege removes standing privileges, reducing your exposure to threats by up to 70%.",
-                metric: "70% reduction in attack surface",
-              },
-            ].map((item, index) => (
-              <motion.div
-                key={index}
-                variants={fadeInUp}
-                className="pillar-card card p-8 text-center flex flex-col"
-              >
-                <motion.div
-                  whileHover={{ rotate: 15, scale: 1.1 }}
-                  className="inline-block p-4 bg-accent/10 rounded-full mb-6 mx-auto"
+            {pillars.map((p, i) => {
+              const Icon = p.icon;
+              return (
+                <motion.article
+                  key={i}
+                  variants={fadeInUp}
+                  {...cardHover}
+                  className="pillar-card card p-8 text-center flex flex-col glass-border tilt-3d"
                 >
-                  <item.icon size={40} className="text-accent" />
-                </motion.div>
-                <h3 className="font-bold text-xl mb-3">{item.title}</h3>
-                <p className="text-base-content/70 mb-6 flex-grow">
-                  {item.desc}
-                </p>
-                <div className="mt-auto badge badge-lg bg-success/10 text-success font-semibold p-4">
-                  {item.metric}
-                </div>
-              </motion.div>
-            ))}
+                  <motion.div variants={floatUp} className="mx-auto mb-6 inline-block p-4 rounded-full bg-accent/10">
+                    <Icon size={36} className="text-accent" />
+                  </motion.div>
+
+                  <h3 className="font-bold text-xl mb-3">{p.title}</h3>
+                  <p className="text-base-content/70 mb-6 flex-grow">{p.desc}</p>
+
+                  <div className="mt-auto badge badge-lg bg-success/10 text-success font-semibold p-3 rounded-md">{p.metric}</div>
+                </motion.article>
+              );
+            })}
           </div>
         </motion.section>
 
-        {/* The AI Difference Section */}
+        {/* FEATURES */}
         <motion.section
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
           variants={staggerContainer}
         >
-          <motion.h2
-            variants={fadeInUp}
-            className="text-3xl md:text-4xl font-bold mb-4 text-center"
-          >
-            The AI-Native Difference
+          <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-bold mb-4 text-center" style={{ color: "#264082" }}>
+            Exclusive SWOT PAM Capabilities
           </motion.h2>
-          <motion.p
-            variants={fadeInUp}
-            className="text-center text-base-content/70 mb-12 max-w-2xl mx-auto"
-          >
-            See how our VLP + Offline LLM core transforms privileged access from
-            a manual chore into an intelligent, automated defense system.
+          <motion.p variants={fadeInUp} className="text-center text-base-content/70 mb-10 max-w-2xl mx-auto">
+            Advanced AI features not found in legacy PAM solutions — purpose-built for enterprise privacy, performance and control.
           </motion.p>
-          <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-0">
-            {[
-              {
-                icon: Users,
-                title: "1. Access Request",
-                desc: "A user requests privileged access with a stated reason (intent).",
-              },
-              {
-                icon: Brain,
-                title: "2. AI Analysis",
-                desc: "SWOT's VLP and LLM analyze intent, context, and user behavior against security policies.",
-              },
-              {
-                icon: CheckCircle2,
-                title: "3. Smart Decision",
-                desc: "Access is automatically approved or denied in seconds with 'Just-in-Time' privileges.",
-              },
-            ].map((step, index) => (
-              <React.Fragment key={index}>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {features.map((f, idx) => {
+              const Icon = f.icon;
+              // parse badge color strings to inline styles (we kept the original approach)
+              const [bg, fg] = f.badgeStyle.split(" ");
+              const bgColor = f.badgeStyle.includes("bg-[") ? f.badgeStyle.match(/bg-\[(#[A-Fa-f0-9]+)\]/)?.[1] : "#E6EEF8";
+              const fgColor = f.badgeStyle.includes("text-[") ? f.badgeStyle.match(/text-\[(#[A-Fa-f0-9]+)\]/)?.[1] : "#264082";
+              return (
                 <motion.div
+                  key={idx}
                   variants={fadeInUp}
-                  className="card bg-base-200/50 p-6 w-full md:w-1/4 text-center border border-base-content/10"
+                  className="card bg-base-100 p-6 border border-base-content/10 flex flex-col glass-border"
                 >
-                  <div className="inline-block p-3 bg-primary/10 rounded-full mb-4 mx-auto">
-                    <step.icon size={32} className="text-primary" />
+                  <div className="mb-3">
+                    <span className="text-xs font-semibold px-3 py-1.5 rounded-full" style={{ background: bgColor, color: fgColor }}>
+                      {f.badge}
+                    </span>
                   </div>
-                  <h4 className="font-bold">{step.title}</h4>
-                  <p className="text-sm text-base-content/70 mt-1">
-                    {step.desc}
-                  </p>
+
+                  <div className="flex items-center gap-3 mb-4">
+                    <Icon size={22} className={`${f.iconColor ?? "text-[#5872A5]"}`} />
+                    <h3 className="font-bold text-lg" style={{ color: "#1F3B6D" }}>{f.title}</h3>
+                  </div>
+
+                  <p className="text-sm text-base-content/70 mb-4 flex-grow">{f.desc}</p>
+
+                  <div className="w-full">
+                    <div className="flex items-center gap-2 text-sm font-medium p-2 rounded-lg" style={{ backgroundColor: "#E8F5E9", color: "#388E3C" }}>
+                      <div className="w-1 h-5 rounded-sm" style={{ backgroundColor: "#388E3C" }} />
+                      {f.highlight}
+                    </div>
+                  </div>
                 </motion.div>
-                {index < 2 && (
-                  <motion.div
-                    variants={fadeInUp}
-                    className="hidden md:block text-primary/50 mx-6"
-                  >
-                    <ArrowRight size={40} />
-                  </motion.div>
-                )}
-              </React.Fragment>
-            ))}
+              );
+            })}
           </div>
         </motion.section>
 
-        {/* Business Benefits Section */}
+        {/* BUSINESS BENEFITS (TIERS) */}
         <motion.section
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={staggerContainer}
         >
-          <motion.h2
-            variants={fadeInUp}
-            className="text-3xl md:text-4xl font-bold mb-12 text-center"
-          >
+          <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-bold mb-8 text-center">
             Strategic Business Outcomes
           </motion.h2>
-          <div className="space-y-12">
-            {/* Tiers Data */}
+
+          {/* Tier cards simplified and animated */}
+          <div className="space-y-10">
             {[
               {
                 tier: "TIER 1",
                 title: "Risk Reduction & Breach Prevention",
-                color: "text-success",
+                titleColor: "#388E3C",
+                icon: Shield,
                 benefits: [
                   {
                     title: "Enhanced Cyber Resilience",
-                    desc: "Detect and respond to threats in minutes, reducing breach impact by 95%.",
+                    shortDesc: "Detect and respond to threats in minutes instead of months, reducing breach impact window by 95%.",
+                    highlights: ["80% of breaches involve privileged accounts", "94% reduction in privilege abuse", "MTTR: 206+ days → <15 minutes"],
                   },
                   {
                     title: "Insider Threat Prevention",
-                    desc: "Behavior analytics identify insider risks before data loss occurs.",
+                    shortDesc: "Real-time behavior analytics detects malicious activities before data loss.",
+                    highlights: ["68% of breaches involve human element", "100% session recording", "Immediate revocation"],
                   },
                   {
                     title: "Reduced Attack Surface",
-                    desc: "Zero standing privileges eliminate vectors for both internal and external attacks.",
+                    shortDesc: "Zero standing privileges and least-privilege enforcement eliminate vectors.",
+                    highlights: ["50% reduction in cyberattacks", "87% reduction in lateral movement", "Zero standing privileges"],
                   },
                 ],
               },
               {
                 tier: "TIER 2",
                 title: "Compliance & Operational Efficiency",
-                color: "text-info",
+                titleColor: "#5872A5",
+                icon: FileText,
                 benefits: [
                   {
-                    title: "Automated Compliance",
-                    desc: "Meet NIST, HIPAA, GDPR, SOX, and PCI-DSS standards with one-click audit trails.",
+                    title: "Regulatory Compliance & Governance",
+                    shortDesc: "Automated compliance with NIST, HIPAA, GDPR, SOX, and PCI-DSS.",
+                    highlights: ["80% faster audits: 3 weeks → 2 days", "$1.9M annual penalties avoided", "Board-level visibility"],
                   },
                   {
-                    title: "Operational Efficiency",
-                    desc: "AI automation reduces manual IT effort by up to 70%, saving weeks of admin time.",
+                    title: "Improved Operational Efficiency",
+                    shortDesc: "Automation reduces IT manual effort by 60-70%.",
+                    highlights: ["5 weeks/year saved per admin", "60% reduction in errors", "8 FTE → 2 FTE staffing"],
                   },
                   {
                     title: "Business Continuity",
-                    desc: "Ensure uninterrupted operations with real-time monitoring and auto-containment.",
+                    shortDesc: "Zero standing privileges ensure uninterrupted operations.",
+                    highlights: ["99.99% uptime SLA", "Automatic containment", "Disaster recovery ready"],
                   },
                 ],
               },
               {
                 tier: "TIER 3",
                 title: "Cost Savings & Strategic Advantage",
-                color: "text-warning",
+                titleColor: "#E65239",
+                icon: DollarSign,
                 benefits: [
                   {
-                    title: "Lower TCO",
-                    desc: "Achieve 70% lower Total Cost of Ownership with rapid 2-4 week deployment and 6-12 month ROI.",
+                    title: "Cost Savings & Efficiency",
+                    shortDesc: "70% lower TCO with rapid deployment.",
+                    highlights: ["$650K-950K vs $2.0M-2.4M over 3 years", "$480K annual labor savings", "ROI in 6-12 months"],
                   },
                   {
-                    title: "Reduced Insurance Premiums",
-                    desc: "Enhanced resilience lowers risk ratings, reducing premiums by 20-30%.",
+                    title: "Insurance Premium Reduction",
+                    shortDesc: "Robust security lowers cyber insurance costs.",
+                    highlights: ["20-30% reduction in premiums", "$50K-200K annual savings", "Better risk rating"],
                   },
                   {
                     title: "Competitive Advantage",
-                    desc: "Accelerate operations by 80% with AI-native architecture and 95% user adoption.",
+                    shortDesc: "Move 80% faster with cloud-native AI architecture.",
+                    highlights: ["2-4 week deployment", "95% user adoption", "DevOps-friendly"],
                   },
                 ],
               },
-            ].map((tier, i) => (
-              <motion.div key={i} variants={fadeInUp}>
-                <div
-                  className={`border-l-4 pl-4 mb-6 border-current ${tier.color}`}
-                >
-                  <h3 className={`text-2xl font-semibold`}>
-                    <span className="font-light text-base-content/50 mr-2">
-                      {tier.tier}:
-                    </span>
-                    {tier.title}
-                  </h3>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  {tier.benefits.map((benefit, j) => (
-                    <motion.div
-                      key={j}
-                      variants={fadeInUp}
-                      whileHover={{ y: -5, transition: { duration: 0.2 } }}
-                      className="card bg-base-200/50 p-6 border border-transparent hover:border-base-content/20 transition-colors"
-                    >
-                      <h4 className="font-bold mb-1">{benefit.title}</h4>
-                      <p className="text-sm text-base-content/70">
-                        {benefit.desc}
-                      </p>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
+            ].map((tier, ti) => {
+              const Icon = tier.icon;
+              return (
+                <motion.div key={ti} variants={fadeInUp}>
+                  <div className="flex items-center border-b pb-4 mb-6 border-base-content/20">
+                    <div className="inline-block p-2 rounded-full mr-3" style={{ backgroundColor: `${tier.titleColor}1A` }}>
+                      <Icon size={22} style={{ color: tier.titleColor }} />
+                    </div>
+                    <h3 className="text-2xl font-bold flex items-center" style={{ color: tier.titleColor }}>
+                      <span className="font-light text-base-content/50 mr-3 text-lg">{tier.tier}</span>
+                      {tier.title}
+                    </h3>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {tier.benefits.map((b, bi) => (
+                      <motion.div
+                        key={bi}
+                        variants={fadeInUp}
+                        whileHover={{ y: -6, boxShadow: "0 18px 30px -18px rgba(16,185,129,0.10)" }}
+                        className="card bg-base-100 p-6 border border-base-content/10 flex flex-col glass-border"
+                      >
+                        <h4 className="font-bold mb-2 text-lg" style={{ color: "#264082" }}>
+                          {b.title}
+                        </h4>
+                        <p className="text-sm text-base-content/70 mb-4 flex-grow">{b.shortDesc}</p>
+
+                        <div className="mt-auto space-y-3">
+                          {b.highlights.map((h, hi) => (
+                            <div key={hi} className="flex items-center gap-2 text-sm font-medium p-2 rounded-lg" style={{ backgroundColor: "#E8F5E9", color: "#388E3C" }}>
+                              <div className="w-1 h-5 rounded-sm" style={{ backgroundColor: "#388E3C" }} />
+                              {h}
+                            </div>
+                          ))}
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
         </motion.section>
 
-        {/* Final CTA Section */}
-        <motion.section
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.5 }}
-          variants={fadeInUp}
-          className="mt-28"
-        >
+        {/* FINAL CTA */}
+        <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.5 }} variants={fadeInUp} className="mt-12">
           <div className="relative rounded-2xl p-10 md:p-16 text-center overflow-hidden bg-gradient-to-r from-primary to-accent text-primary-content shadow-2xl shadow-primary/30">
-            <h2 className="text-3xl font-bold mb-4">
-              Ready to See the Future of PAM?
-            </h2>
-            <p className="max-w-2xl mx-auto mb-8 text-primary-content/80">
-              Stop chasing threats and start preventing them. Schedule a
-              personalized demo to see how SWOT's AI-native PAM can secure your
-              organization, streamline operations, and drive business growth.
-            </p>
-            <motion.button
-              whileHover={{
-                scale: 1.05,
-                boxShadow: "0px 0px 30px -5px hsl(var(--pc))",
-              }}
-              whileTap={{ scale: 0.95 }}
-              className="btn btn-neutral btn-lg"
-            >
-              Request Your Free Demo
-            </motion.button>
+            <h2 className="text-3xl font-bold mb-4">Ready to See the Future of PAM?</h2>
+            <p className="max-w-2xl mx-auto mb-8 text-primary-content/85">Stop chasing threats and start preventing them. Schedule a personalized demo to see how SWOT's AI-native PAM can secure your organization.</p>
+
+            <div className="flex justify-center gap-4">
+              <motion.button
+                {...cardHover}
+                className="btn btn-neutral btn-lg px-6"
+                aria-label="Request your free demo"
+              >
+                Request Your Free Demo
+              </motion.button>
+
+              <motion.a
+                href="#contact"
+                className="btn btn-ghost btn-lg px-6"
+                {...cardHover}
+                aria-label="Contact sales"
+              >
+                Contact Sales
+              </motion.a>
+            </div>
           </div>
         </motion.section>
-      </div>
+      </main>
 
       <Footer />
     </div>

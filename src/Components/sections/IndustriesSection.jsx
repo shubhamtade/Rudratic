@@ -60,10 +60,10 @@ const IndustriesSection = () => {
       <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[80vw] h-96 bg-linear-to-r from-primary/10 via-accent/10 to-secondary/10 blur-2xl opacity-40 pointer-events-none" />
       <div className="container mx-auto px-4 relative z-10">
         <div className="flex flex-col items-center mb-10">
-          <span className="inline-block mb-4 px-6 py-2 bg-primary/10 text-primary font-semibold rounded-full tracking-wider text-xs md:text-sm shadow-sm backdrop-blur">
+          <span className="inline-block mb-4 px-6 py-2 bg-primary text-white font-semibold rounded-full tracking-wider text-xs md:text-sm shadow-sm backdrop-blur">
             INDUSTRY EXPERTISE
           </span>
-          <h2 className="text-4xl md:text-5xl font-extrabold mb-3 text-center bg-linear-to-r from-primary via-secondary to-accent bg-clip-text text-transparent drop-shadow-lg">
+          <h2 className="text-4xl md:text-5xl font-extrabold mb-3 text-center  bg-gradient-to-r from-primary  to-accent bg-clip-text text-transparent drop-shadow-lg">
             Trusted Across Industries
           </h2>
           <p className="text-lg text-center max-w-2xl mx-auto text-base-content/80">
