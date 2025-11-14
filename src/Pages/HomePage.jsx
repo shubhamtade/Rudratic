@@ -29,9 +29,12 @@ const HomePage = () => {
     <>
       <HeroSection />
       {/* <StatsBar /> */}
-      <ProductsSection />
+      <div id="products">
+        <ProductsSection />
+      </div>
 
       <motion.section
+        id="services"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
@@ -39,8 +42,6 @@ const HomePage = () => {
       >
         <ServicesSection />
       </motion.section>
-
-    
 
       <motion.section
         initial="hidden"
@@ -60,9 +61,6 @@ const HomePage = () => {
         <IndustriesSection />
       </motion.section>
 
-      
-
-      
       <motion.section
         initial="hidden"
         whileInView="visible"
