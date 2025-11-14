@@ -43,22 +43,14 @@ const products = [
 ];
 
 const services = [
-  {
-    title: "Software Development",
-    href: "#",
-    icon: Code2,
-  },
-  {
-    title: "Mobile App Development",
-    href: "#",
-    icon: Smartphone,
-  },
-  { title: "AI & Automation", href: "#", icon: Bot },
-  { title: "Cybersecurity", href: "#", icon: ShieldCheck },
-  { title: "Cloud Infrastructure", href: "#", icon: Cloud },
-  { title: "Private Cloud Consulting", href: "#", icon: LockIcon },
-  { title: "Database Services", href: "#", icon: Database },
-  { title: "IoT & Edge Computing", href: "#", icon: Settings2 },
+{ title: "Software Development", href: "/services/software-development", icon: Code2 },
+{ title: "Mobile App Development", href: "/services/mobile-app-development", icon: Smartphone },
+{ title: "AI & Automation", href: "/services/ai-automation", icon: Bot },
+{ title: "Cybersecurity", href: "/services/cybersecurity", icon: ShieldCheck },
+{ title: "Cloud Infrastructure", href: "/services/cloud-infrastructure", icon: Cloud },
+{ title: "Private Cloud Consulting", href: "/services/private-cloud", icon: LockIcon },
+{ title: "Database Services", href: "/services/database-services", icon: Database },
+{ title: "IoT & Edge Computing", href: "/services/iot-edge-computing", icon: Settings2 },
 ];
 
 const company = [
