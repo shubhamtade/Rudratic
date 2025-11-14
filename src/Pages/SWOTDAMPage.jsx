@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Footer from "../layouts/Footer";
+import Footer from "../layouts/Footer"; // Assuming Footer path is correct
 import {
   Search,
   Shield,
@@ -150,6 +150,57 @@ const useCases = [
   {
     title: "DBA & Privileged Access Monitoring",
     desc: "DBAs can modify their own logs → SWOT DAM 3.0 monitors independently with tamper-proof trails → SOX, HIPAA, PCI DSS compliance proven",
+  },
+];
+
+const realWorldImpacts = [
+  {
+    title: "Sales Intelligence & Churn Prevention",
+    before: "Sales manager waits 3+ days while analyst writes queries to identify at-risk accounts",
+    after: "Sales manager asks 'Which accounts are at churn risk and why?' → AI returns answer in 30 minutes with risk scores and mitigation strategies",
+    impact: "Sales team prevents $1M+ in churn; identifies expansion opportunities",
+  },
+  {
+    title: "Finance Month-End Close",
+    before: "Finance team spends 10 days pulling, validating, consolidating data from multiple systems",
+    after: "Finance asks 'Generate our month-end dashboard' → AI auto-pulls data, validates accuracy, consolidates, flags variances → Reports ready in 1 day",
+    impact: "Finance saves 20+ hours/month; decisions made 9 days faster; near-zero errors",
+  },
+  {
+    title: "Compliance Data Discovery",
+    before: "Compliance team spends 2-3 weeks searching for all instances of PII, PHI, credit card data across dozens of databases",
+    after: "Compliance asks 'Find all customer PII and PHI' → AI scans all databases instantly, identifies all sensitive data locations, shows access patterns → Complete inventory in 2 hours",
+    impact: "Shadow data discovered; unauthorized access prevented; compliance audit prep automated",
+  },
+  {
+    title: "Fraud Detection & Prevention",
+    before: "Fraud analysts discover fraudulent patterns days or weeks after transactions occur",
+    after: "Fraud team asks 'Show unusual transaction patterns in last 24 hours' → AI identifies impossible geographic patterns, new beneficiary accounts, collusion indicators → Real-time fraud alerts",
+    impact: "Fraud prevented before money moves; organized fraud rings detected",
+  },
+  {
+    title: "Supply Chain Optimization",
+    before: "Operations team lacks visibility into supplier performance—takes 6+ weeks to manually analyze data",
+    after: "Ops director asks 'Which suppliers have quality issues and what's the cost impact?' → AI correlates supplier, quality, shipment, and cost data → Complete analysis in 4 hours",
+    impact: "$2M+ in annual cost savings identified; supplier optimization plan created",
+  },
+  {
+    title: "Customer Success Account Health",
+    before: "CS team manually tracks usage, tickets, and billing across spreadsheets—incomplete picture",
+    after: "VP Success asks 'Score all accounts for health and growth potential' → AI correlates usage, support tickets, billing, feedback → All accounts scored with risk/opportunity",
+    impact: "Proactive upsell to 25 high-growth accounts; churn prevention for 15 at-risk accounts",
+  },
+  {
+    title: "HR Workforce Analytics",
+    before: "HR data scattered across systems—analysis takes weeks and multiple analysts",
+    after: "HR director asks 'Which departments have turnover issues and at-risk employees?' → AI correlates employee, payroll, performance, and retention data → Strategic HR dashboard",
+    impact: "High-turnover departments identified; at-risk employees flagged; targeted retention strategies deployed",
+  },
+  {
+    title: "Insider Threat Prevention",
+    before: "Insider threats detected after data is stolen or deleted (90+ days)",
+    after: "Security asks 'Flag unusual data access patterns' → AI identifies employees accessing data outside job scope, bulk downloads before resignations, credential sharing → Insider threats caught within days",
+    impact: "Insider threats prevented before exfiltration; data loss prevented",
   },
 ];
 
@@ -317,7 +368,7 @@ const AfterComponent = () => (
 
 const ROITable = () => (
   <div className="roi-section bg-blue-50/50 dark:bg-base-200/50 rounded-xl p-8 my-12 shadow-lg backdrop-blur-sm border border-base-content/10">
-    <h3 className="text-2xl font-bold text-blue-800 dark:text-blue-300 mb-6">
+    <h3 className="text-3xl font-bold text-blue-800 dark:text-blue-300 mb-6">
       The Numbers That Matter
     </h3>
     <div className="overflow-x-auto">
@@ -657,6 +708,293 @@ const FinalCTA = () => (
   </section>
 );
 
+// New component for SWOT DAM Capabilities
+const SWOTDAMCapabilities = ({ fadeInUp }) => (
+  <section className="my-20">
+    <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center text-primary">
+      The SWOT DAM 3.0 Difference
+    </h2>
+    <p className="text-center text-base-content/70 mb-12 max-w-3xl mx-auto">
+      SWOT DAM 3.0 isn't just a monitoring tool—it's a complete database
+      operations platform combining three breakthrough capabilities:
+    </p>
+
+    {/* Capability 1 */}
+    <motion.div
+      variants={fadeInUp}
+      className="capability-card bg-blue-50 dark:bg-base-200 rounded-2xl shadow-lg p-8 mb-10 border-l-4 border-primary"
+    >
+      <h3 className="text-2xl font-bold text-primary mb-4">
+        Capability 1: Advanced AI-Powered Threat Detection
+      </h3>
+      <p className="mb-4 text-base-content/80">
+        <strong className="text-blue-700 dark:text-blue-300">
+          How It Works:
+        </strong>{" "}
+        Our AI learns what "normal" database activity looks like in YOUR
+        environment—query patterns, access times, data volumes—creating a
+        personalized baseline. The moment activity deviates, you're alerted
+        instantly.
+      </p>
+      <p className="font-semibold text-blue-700 dark:text-blue-300 mb-2">
+        What You Get:
+      </p>
+      <ul className="list-disc ml-6 space-y-2 text-base-content/80">
+        <li>
+          ✓ Insider threats detected in {"<"}7 days (vs. 90+ days industry
+          average)
+        </li>
+        <li>
+          ✓ 80% fewer false positives than traditional rule-based tools
+        </li>
+        <li>
+          ✓ DBA monitoring that doesn't rely on their logs (tamper-proof)
+        </li>
+        <li>
+          ✓ Automated incident response integration with your SIEM/SOAR
+        </li>
+        <li>✓ 28% faster threat detection than legacy systems</li>
+        <li>✓ 22% faster recovery from incidents</li>
+      </ul>
+      <p className="mt-4 text-base-content/70 italic">
+        <strong className="text-blue-700 dark:text-blue-300">
+          Why This Matters:
+        </strong>{" "}
+        Traditional rule-based monitoring catches threats AFTER damage occurs.
+        SWOT DAM 3.0's AI catches them BEFORE.
+      </p>
+    </motion.div>
+
+    {/* Capability 2 */}
+    <motion.div
+      variants={fadeInUp}
+      className="capability-card bg-blue-50 dark:bg-base-200 rounded-2xl shadow-lg p-8 mb-10 border-l-4 border-secondary"
+    >
+      <h3 className="text-2xl font-bold text-secondary mb-4">
+        Capability 2: Semantic Data Intelligence (The Game-Changer)
+      </h3>
+      <p className="mb-4 text-base-content/80">
+        <strong className="text-blue-700 dark:text-blue-300">
+          How It Works:
+        </strong>{" "}
+        When you configure SWOT DAM 3.0, our AI immediately analyzes your entire
+        database—tables, columns, relationships, business meaning. Then it
+        enables non-technical users to query data using plain English instead of
+        SQL.
+      </p>
+      <p className="font-semibold text-blue-700 dark:text-blue-300 mb-2">
+        What You Get:
+      </p>
+      <ul className="list-disc ml-6 space-y-2 text-base-content/80">
+        <li>
+          ✓ Natural language querying - "Show me customers at churn risk in
+          California"
+        </li>
+        <li>✓ Reports created in minutes instead of weeks (90%+ faster)</li>
+        <li>
+          ✓ 95% of queries self-served by business users (no analyst bottleneck)
+        </li>
+        <li>
+          ✓ Sensitive data automatically classified (PII, PHI, financial, IP) -
+          99%+ accuracy
+        </li>
+        <li>✓ Compliance audit prep: 2 hours instead of 10 days</li>
+        <li>
+          ✓ AI automatically generates insights, dashboards, and recommendations
+        </li>
+      </ul>
+      <p className="mt-4 text-base-content/70 italic">
+        <strong className="text-blue-700 dark:text-blue-300">
+          Why This Matters:
+        </strong>{" "}
+        90% of business intelligence work is searching for and cleaning data.
+        SWOT DAM 3.0's AI does this automatically.
+      </p>
+    </motion.div>
+
+    {/* Capability 3 */}
+    <motion.div
+      variants={fadeInUp}
+      className="capability-card bg-blue-50 dark:bg-base-200 rounded-2xl shadow-lg p-8 border-l-4 border-accent"
+    >
+      <h3 className="text-2xl font-bold text-accent mb-4">
+        Capability 3: Automated Compliance Intelligence
+      </h3>
+      <p className="mb-4 text-base-content/80">
+        <strong className="text-blue-700 dark:text-blue-300">
+          How It Works:
+        </strong>{" "}
+        SWOT DAM 3.0 automatically collects evidence for compliance
+        requirements, generates audit-ready reports, and maintains continuous
+        compliance (not just at audit time).
+      </p>
+      <p className="font-semibold text-blue-700 dark:text-blue-300 mb-2">
+        What You Get:
+      </p>
+      <ul className="list-disc ml-6 space-y-2 text-base-content/80">
+        <li>
+          ✓ One-click compliance reports for GDPR, HIPAA, PCI DSS, SOX, CCPA
+        </li>
+        <li>✓ 95% reduction in compliance report generation time</li>
+        <li>✓ Real-time compliance dashboard showing your posture</li>
+        <li>✓ Automatic evidence collection (no manual documentation)</li>
+        <li>
+          ✓ Zero audit findings related to database controls (vs. 3-4 per year)
+        </li>
+        <li>✓ $250K+ annually in avoided compliance fines</li>
+      </ul>
+      <p className="mt-4 text-base-content/70 italic">
+        <strong className="text-blue-700 dark:text-blue-300">
+          Why This Matters:
+        </strong>{" "}
+        Compliance isn't about passing audits anymore—it's about avoiding $50M+
+        fines.
+      </p>
+    </motion.div>
+  </section>
+);
+
+// New component for Semantic Data Intelligence: Real-World Impact
+const SemanticDataIntelligenceImpact = () => (
+  <section className="my-20">
+    <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center text-primary">
+      Semantic Data Intelligence: Real-World Impact
+    </h2>
+    <p className="text-center text-base-content/70 mb-12 max-w-3xl mx-auto">
+      When SWOT DAM 3.0's AI learns your database, it transforms how your
+      organization operates. Here's what becomes possible:
+    </p>
+
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {realWorldImpacts.map((item, idx) => (
+        <motion.div
+          key={idx}
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: idx * 0.1 }}
+          className="bg-white dark:bg-base-200 rounded-2xl shadow-lg p-6 border-t-4 border-blue-400 flex flex-col justify-between"
+        >
+          <div>
+            <h3 className="text-xl font-bold text-blue-700 dark:text-blue-300 mb-3">
+              {item.title}
+            </h3>
+            <div className="mb-4 text-sm">
+              <p className="text-base-content/80">
+                <strong className="text-orange-500">Before:</strong>{" "}
+                {item.before}
+              </p>
+              <p className="text-base-content/80 mt-2">
+                <strong className="text-green-500">After:</strong>{" "}
+                {item.after}
+              </p>
+            </div>
+          </div>
+          <p className="font-semibold mt-4 text-sm">
+            <span className="font-bold text-blue-700 dark:text-blue-300">
+              Impact:
+            </span>{" "}
+            {item.impact}
+          </p>
+        </motion.div>
+      ))}
+    </div>
+  </section>
+);
+
+// New component for Pricing & Investment
+const PricingAndInvestment = () => (
+  <section className="my-20 bg-gradient-to-br from-base-200 to-base-100 dark:from-base-300 dark:to-base-200 rounded-3xl p-8 md:p-12 shadow-2xl border border-base-content/10">
+    <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center text-primary">
+      Pricing & Investment
+    </h2>
+    <p className="text-center text-base-content/80 mb-12 text-lg max-w-2xl mx-auto">
+      Flexible Models for Your Situation
+    </p>
+
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-12">
+      <motion.div
+        initial={{ opacity: 0, x: -50 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.7, delay: 0.1 }}
+        className="price-card bg-white dark:bg-base-100 rounded-2xl shadow-xl p-8 border-t-8 border-primary flex flex-col"
+      >
+        <h3 className="text-2xl font-bold text-primary mb-4">
+          Base Platform{" "}
+          <span className="text-sm font-normal text-base-content/70">
+            (All Plans Include)
+          </span>
+        </h3>
+        <ul className="list-disc ml-6 space-y-3 text-base-content/80 flex-grow">
+          <li>✓ Unlimited database monitoring (AI threat detection)</li>
+          <li>✓ Insider threat prevention & DBA monitoring</li>
+          <li>✓ Automated compliance (GDPR, HIPAA, PCI DSS, SOX, CCPA)</li>
+          <li>✓ Cloud-native, multi-cloud support</li>
+          <li>✓ 24/7/365 support with SLAs</li>
+        </ul>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, x: 50 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.7, delay: 0.2 }}
+        className="price-card bg-white dark:bg-base-100 rounded-2xl shadow-xl p-8 border-t-8 border-secondary flex flex-col"
+      >
+        <h3 className="text-2xl font-bold text-secondary mb-4">
+          Semantic Data Intelligence{" "}
+          <span className="text-sm font-normal text-base-content/70">
+            (Add-On)
+          </span>
+        </h3>
+        <ul className="list-disc ml-6 space-y-3 text-base-content/80 flex-grow">
+          <li>✓ Natural language querying</li>
+          <li>✓ Automatic database understanding</li>
+          <li>✓ Interactive report generation</li>
+          <li>✓ AI-powered data discovery</li>
+        </ul>
+      </motion.div>
+    </div>
+
+    <p className="text-center text-base-content/70 mb-10 text-lg max-w-3xl mx-auto">
+      For custom pricing tailored to your specific environment and needs,
+      contact our sales team.
+    </p>
+
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.7, delay: 0.3 }}
+      className="expected-benefits-card bg-primary/10 rounded-2xl p-8 md:p-10 text-center shadow-inner"
+    >
+      <h3 className="text-2xl font-bold text-primary mb-4">Expected Benefits</h3>
+      <ul className="list-none space-y-3 text-base-content/80 font-medium max-w-md mx-auto">
+        <li>
+          <CheckCircle2 size={20} className="inline-block mr-2 text-green-600" />{" "}
+          750-2,400% annual ROI
+        </li>
+        <li>
+          <CheckCircle2 size={20} className="inline-block mr-2 text-green-600" />{" "}
+          Payback period: 1-2 months
+        </li>
+        <li>
+          <CheckCircle2 size={20} className="inline-block mr-2 text-green-600" />{" "}
+          $6.7M+ annual benefit from breach prevention, compliance, operations,
+          and analytics
+        </li>
+      </ul>
+      <p className="mt-8 text-lg font-semibold text-primary">
+        Ready to understand your specific ROI and investment?
+      </p>
+      <button className="btn btn-primary btn-lg mt-6 px-10 shadow-lg">
+        Contact Our Sales Team
+      </button>
+    </motion.div>
+  </section>
+);
+
 // ==================================================================
 // ========================= MAIN PAGE ==============================
 // ==================================================================
@@ -715,8 +1053,16 @@ const SWOTDAMPage = () => {
             className="max-w-3xl mx-auto text-xl text-base-content/80 leading-relaxed mb-10 font-medium"
           >
             <span className="inline-block bg-gradient-to-r from-primary/10 to-cyan-400/10 px-4 py-2 rounded-xl shadow-sm">
-              AI-driven database monitoring + semantic intelligence   built to
-              predict, protect, and empower your entire organization.
+              SWOT DAM 3.0 is an AI-driven, cloud-native database platform that
+              combines advanced threat detection with intelligent data
+              discovery. Unlike legacy monitoring solutions, SWOT DAM 3.0 uses
+              machine learning to automatically understand your database, detect
+              insider threats before they happen, and enable any user to
+              discover and analyze data using natural language no SQL required.
+            </span>
+            <span className="py-3 text-base-content/50 block">
+              Stop reacting to breaches. Start preventing them. Stop waiting for
+              reports. Start making decisions instantly.
             </span>
           </motion.p>
           <motion.div
@@ -774,15 +1120,19 @@ const SWOTDAMPage = () => {
                 </li>
                 <li>
                   Average cost of a database breach:{" "}
-                  <strong>$4.45 million</strong>.
+                  <strong>$4.45 million</strong> (yet detection takes 90+ days)
                 </li>
                 <li>
                   <strong>70% of enterprises</strong> report alert fatigue from
                   false positives.
                 </li>
                 <li>
-                  DBAs have unlimited access and can control their own audit
-                  logs.
+                  <strong>Compliance violations</strong> can result in fines
+                  exceeding <strong>$50</strong> million per incident
+                </li>
+                <li>
+                  <strong>Your DBAs have unlimited access</strong> and control
+                  their own audit logs
                 </li>
               </ul>
             </motion.div>
@@ -796,8 +1146,8 @@ const SWOTDAMPage = () => {
               </h3>
               <ul className="space-y-4 list-disc list-inside text-base-content/80">
                 <li>
-                  Analysts spend <strong>40% of their time</strong> just
-                  searching for the right data.
+                  <strong>Business analysts spend 40% of time</strong>{" "}
+                  searching for the right data instead of analyzing it
                 </li>
                 <li>
                   Only <strong>5-10% of employees</strong> can write SQL,
@@ -807,6 +1157,7 @@ const SWOTDAMPage = () => {
                   Compliance audit prep takes <strong>10+ days</strong> of
                   manual, error-prone work.
                 </li>
+                <li>Reports that take weeks should take hours.</li>
                 <li>
                   Sensitive data is scattered, and you don't know where it is.
                 </li>
@@ -815,121 +1166,17 @@ const SWOTDAMPage = () => {
           </div>
         </motion.section>
 
+        {/* Replaced 'The SWOT DAM 3.0 Difference' section with the new detailed component */}
         <motion.section
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
           variants={staggerContainer}
         >
-          <motion.h2
-            variants={fadeInUp}
-            className="text-3xl md:text-4xl font-bold mb-12 text-center"
-          >
-            The SWOT DAM 3.0 Difference
-          </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: Shield,
-                title: "AI-Powered Threat Detection",
-                desc: "Our AI learns normal behavior to detect insider threats in 7 days and reduces false positives by 80%.",
-              },
-              {
-                icon: Search,
-                title: "Semantic Data Intelligence",
-                desc: "Ask questions in plain English, not SQL. Our AI understands business context, creating reports in minutes.",
-              },
-              {
-                icon: FileText,
-                title: "Automated Compliance",
-                desc: "Get one-click, audit-ready reports for GDPR, HIPAA, PCI DSS & SOX. Reduce prep time from 10 days to 2 hours.",
-              },
-            ].map((item, index) => (
-              <motion.div
-                key={index}
-                variants={fadeInUp}
-                className="feature-card card p-8 text-center flex flex-col"
-              >
-                <motion.div
-                  whileHover={{ scale: 1.1, rotate: 10 }}
-                  className="inline-block p-4 bg-primary/10 rounded-full mb-6 mx-auto"
-                >
-                  <item.icon size={40} className="text-primary" />
-                </motion.div>
-                <h3 className="font-bold text-xl mb-3">{item.title}</h3>
-                <p className="text-base-content/70 flex-grow">{item.desc}</p>
-              </motion.div>
-            ))}
-          </div>
+          <SWOTDAMCapabilities fadeInUp={fadeInUp} />
         </motion.section>
 
-        <motion.section
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={staggerContainer}
-        >
-          <motion.h2
-            variants={fadeInUp}
-            className="text-3xl md:text-4xl font-bold mb-4 text-center"
-          >
-            From SQL to English: The AI Revolution
-          </motion.h2>
-          <motion.p
-            variants={fadeInUp}
-            className="text-center text-base-content/70 mb-12 max-w-2xl mx-auto"
-          >
-            Stop waiting on analysts. Empower your entire team to get instant
-            insights from your most valuable asset: your data.
-          </motion.p>
-          <motion.div
-            variants={fadeInUp}
-            className="card bg-base-100 border border-base-content/10 shadow-xl overflow-hidden"
-          >
-            <div className="lg:hidden">
-              <div className="p-4 border-b border-base-content/10 flex justify-center gap-2">
-                <button
-                  onClick={() => setActiveTab("sql")}
-                  className={`btn btn-sm rounded-full gap-2 transition-all ${
-                    activeTab === "sql" ? "bg-base-300" : "btn-ghost"
-                  }`}
-                >
-                  <Code size={16} /> Before
-                </button>
-                <button
-                  onClick={() => setActiveTab("ai")}
-                  className={`btn btn-sm rounded-full gap-2 transition-all ${
-                    activeTab === "ai"
-                      ? "bg-teal-400/20 text-teal-600"
-                      : "btn-ghost"
-                  }`}
-                >
-                  <MessageSquare size={16} /> After
-                </button>
-              </div>
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeTab}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  {activeTab === "sql" ? (
-                    <BeforeComponent />
-                  ) : (
-                    <AfterComponent />
-                  )}
-                </motion.div>
-              </AnimatePresence>
-            </div>
-
-            <div className="hidden lg:grid lg:grid-cols-2 lg:divide-x lg:divide-base-content/10">
-              <BeforeComponent />
-              <AfterComponent />
-            </div>
-          </motion.div>
-        </motion.section>
+        
 
         <motion.section
           initial="hidden"
@@ -947,6 +1194,16 @@ const SWOTDAMPage = () => {
           variants={fadeInUp}
         >
           <ComparisonTable />
+        </motion.section>
+
+        {/* New section for Semantic Data Intelligence: Real-World Impact */}
+        <motion.section
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={fadeInUp}
+        >
+          <SemanticDataIntelligenceImpact />
         </motion.section>
 
         <motion.section
@@ -974,6 +1231,16 @@ const SWOTDAMPage = () => {
           variants={fadeInUp}
         >
           <NextSteps />
+        </motion.section>
+
+        {/* New section for Pricing & Investment */}
+        <motion.section
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={fadeInUp}
+        >
+          <PricingAndInvestment />
         </motion.section>
 
         <motion.section

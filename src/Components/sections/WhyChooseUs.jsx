@@ -112,16 +112,16 @@ const WhyChooseUs = () => {
         >
           <div className="inline-block mb-4 px-6 py-2 bg-primary backdrop-blur-sm rounded-full">
             <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-white font-semibold">
-              OUR EDGE IN INDUSTRY
+              INDUSTRY EXPERTISE
             </span>
           </div>
 
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6  bg-gradient-to-r from-primary  to-accent bg-clip-text text-transparent">
-            Why Global Enterprises Choose Rudratic
+            TRUSTED ACROSS INDUSTRIES
           </h2>
 
           <p className="text-lg sm:text-xl text-base-content/70">
-            Enterprise expertise meets startup agility. Former Big Four consultants delivering boutique-level service.
+            Enterprise-grade security solutions built for the unique demands of every sector.
           </p>
         </motion.div>
 

@@ -378,8 +378,6 @@ const SWOTCloudPAMPage = () => {
         <ParticleSVG />
       </div>
 
-     
-
       {/* Header Hero Section */}
       <motion.header
         initial="hidden"
@@ -420,16 +418,17 @@ const SWOTCloudPAMPage = () => {
             variants={fadeInUp}
             className="text-lg md:text-xl text-base-content/90 max-w-5xl mx-auto mb-12 leading-relaxed italic"
           >
-            Stop reacting to threats —{" "}
-            <span className="font-semibold text-primary">
-              predict, prevent, and respond
+            Stop reacting to security threats.{" "}
+            <span className="font-semibold text-primary">SWOT Cloud PAM</span>
+            predicts, prevents, and automatically responds to privilege abuse in
+            real-time. From detecting insider threats to securing{" "}
+            <span className="text-info">multi-cloud infrastructure</span>,{" "}
+            <span className="text-primary">
+              SWOT combines zero standing privileges
             </span>
-            with SWOT Cloud PAM. From detecting insider threats to securing
-            multi-cloud environments, SWOT unifies{" "}
-            <span className="text-info">zero standing privileges</span>,{" "}
-            <span className="text-primary">behavioral intelligence</span>, and{" "}
-            <span className="text-accent">autonomous defense</span> into a
-            single adaptive platform.
+            , and <span className="text-accent">behavioral intelligence,</span>{" "}
+            and autonomous response in one platform that learns and adapts to
+            your organization's unique security landscape.
           </motion.p>
 
           {/* Call-to-Action Buttons */}
@@ -1096,7 +1095,7 @@ const SWOTCloudPAMPage = () => {
                 className="metric-item bg-base-100 p-5 rounded-lg text-center shadow-sm glass-border" // Added glass-border
               >
                 <span className="metric-value text-4xl font-extrabold text-info block mb-2">
-                  <AnimatedNumber value="$3.1M" />
+                   $3.1M
                 </span>
                 <span className="metric-label text-base-content font-medium text-sm">
                   Average annual benefit per organization
@@ -1132,7 +1131,7 @@ const SWOTCloudPAMPage = () => {
                 className="metric-item bg-base-100 p-5 rounded-lg text-center shadow-sm glass-border" // Added glass-border
               >
                 <span className="metric-value text-4xl font-extrabold text-info block mb-2">
-                  <AnimatedNumber value="$623K" />
+                  $623K
                 </span>
                 <span className="metric-label text-base-content font-medium text-sm">
                   Annual savings in incident response
@@ -1331,10 +1330,6 @@ const SWOTCloudPAMPage = () => {
               </tr>
             </tbody>
           </motion.table>
-          <motion.p variants={fadeInUp} className="text-base-content">
-            <strong>SWOT Cloud PAM Typical Cost:</strong> $150K-250K annually |{" "}
-            <strong>Payback Period:</strong> 3-6 months
-          </motion.p>
         </motion.section>
 
         {/* Comparison Section */}
@@ -1626,7 +1621,7 @@ const SWOTCloudPAMPage = () => {
             variants={fadeInUp}
             className="text-3xl md:text-4xl font-bold mb-4 text-center text-base-content border-b-4 border-info pb-4 tracking-tight"
           >
-            Integrates With Your Entire Stack
+            SWOT Integrates with Your Entire Infrastructure
           </motion.h2>
           <motion.p
             variants={fadeInUp}

@@ -139,19 +139,19 @@ const PAMPage = () => {
     {
       icon: Shield,
       title: "Proactive Threat Defense",
-      desc: "AI detects and prevents malicious behavior in real-time by analyzing context, intent, and user behavior.",
-      metric: "Threats neutralized in <15 minutes",
+      desc: "Unlike legacy tools that react to threats, our AI detects and prevents malicious behavior in real-time by analyzing context, intent, and user behavior.",
+      metric: "Real-time threat detection in <15 minutes",
     },
     {
       icon: Zap,
       title: "Automated Intent-Aware Approvals",
-      desc: "VLP automates access requests by understanding the reason, reducing approval times from hours to seconds.",
+      desc: "Our VLP technology automates access requests by understanding the reason for the request, reducing approval times from hours to seconds while maintaining Zero Trust security.",
       metric: "Approval time: Hours → Seconds",
     },
     {
       icon: Target,
       title: "Reduced Attack Surface",
-      desc: "Just-in-Time privilege removes standing privileges, reducing exposure by up to 70%.",
+      desc: "Our Just-in-Time privilege and continuous session monitoring remove standing privileges, reducing your exposure to insider threats and external attacks by up to 70%.",
       metric: "70% reduction in attack surface",
     },
   ];
@@ -162,7 +162,7 @@ const PAMPage = () => {
       badgeStyle: "bg-[#FBE8CA] text-[#A66F00]",
       icon: Speech,
       title: "Vision Language Processing (VLP)",
-      desc: "Multimodal AI combining vision + NLP to understand context, intent and detect sophisticated attacks.",
+      desc: "Multimodal AI combining vision + NLP. Understands context, intent, and meaning of access patterns. Detects zero-day threats and sophisticated attacks.",
       highlight: "90%+ accuracy in intent detection",
     },
     {
@@ -170,7 +170,7 @@ const PAMPage = () => {
       badgeStyle: "bg-[#FBE8CA] text-[#A66F00]",
       icon: LockKeyhole,
       title: "Offline Large Language Model",
-      desc: "Proprietary LLM runs on-prem without cloud dependencies — full data privacy and real-time threat analysis.",
+      desc: "Proprietary LLM runs on-premise without cloud dependencies. Complete data privacy. Real-time threat analysis without data exfiltration concerns. Enterprise-grade security built-in.",
       highlight: "100% data control - nothing leaves your infrastructure",
     },
     {
@@ -178,7 +178,7 @@ const PAMPage = () => {
       badgeStyle: "bg-[#DFE5F5] text-[#264082]",
       icon: Eye,
       title: "User Behavior Analytics (UBA)",
-      desc: "Real-time anomaly detection with adaptive baselines to detect insider threats and privilege abuse.",
+      desc: "Real-time anomaly detection with peer-group comparisons. Adaptive baselines detect insider threats, compromised accounts, and privilege abuse.",
       highlight: "Real-time anomaly detection",
     },
     {
@@ -186,7 +186,7 @@ const PAMPage = () => {
       badgeStyle: "bg-[#DFE5F5] text-[#264082]",
       icon: ShieldCheck,
       title: "Conditional Access Policies",
-      desc: "Dynamic risk-based access control evaluating device health, location, behavior and network.",
+      desc: "Dynamic risk-based access control. Evaluates device health, location, behavior, network. Impossible travel detection, device compliance enforcement.",
       highlight: "Risk-based decisions",
     },
     {
@@ -194,7 +194,7 @@ const PAMPage = () => {
       badgeStyle: "bg-[#DFE5F5] text-[#264082]",
       icon: Clock,
       title: "Just-in-Time (JIT) Access",
-      desc: "Grant access only when needed with automatic revocation — complete audit trail.",
+      desc: "Grant access exactly when needed with automatic revocation. Time-limited credentials eliminate standing privileges. Complete audit trail.",
       highlight: "Zero standing privileges",
     },
     {
@@ -202,7 +202,7 @@ const PAMPage = () => {
       badgeStyle: "bg-[#DFE5F5] text-[#264082]",
       icon: LockKeyhole,
       title: "Bring Your Own Key (BYOK)",
-      desc: "Full encryption key control to meet residency and compliance requirements.",
+      desc: "Full encryption key control. Comply with data residency. Private keys never reach SWOT infrastructure. Zero-trust encryption model.",
       highlight: "100% encryption control",
     },
   ];
@@ -270,7 +270,7 @@ const PAMPage = () => {
               is Here
             </motion.h1>
             <motion.p variants={fadeInUp} className="text-lg text-base-content/70 mt-6 max-w-2xl mx-auto">
-              SWOT PAM is the world's first AI-native Privileged Access Management platform — built to tackle modern threats with vision-aware AI, offline LLMs, and enterprise-grade controls.
+              SWOT PAM is the world's first AI-native Privileged Access Management platform, built from the ground up to address the new and evolving cyber threat landscape. Our core innovation combines Vision Language Processing (VLP) and Offline LLM to understand, predict, and proactively secure privileged access like no other solution on the market.
             </motion.p>
           </motion.div>
 
@@ -306,7 +306,7 @@ const PAMPage = () => {
               <div>
                 <h3 className="text-lg font-bold text-accent">Core Innovation: VLP + Offline LLM</h3>
                 <p className="text-base-content/70 mt-1">
-                  Our multimodal approach (vision + NLP) and on-prem LLM deliver contextual, private, and lightning-fast decisions — not an add-on, but the platform foundation.
+                  Our unique combination enables us to understand context, intent, and behavior patterns with unprecedented accuracy all while maintaining complete data privacy and security. This is not an add-on; it's the foundation of everything we build.
                 </p>
               </div>
             </div>
