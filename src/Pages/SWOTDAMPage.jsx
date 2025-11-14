@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+// src/pages/SWOTDAMPage.jsx
+import React, { useState, useEffect, useRef } from "react"; // Added useEffect, useRef
 import { motion, AnimatePresence } from "framer-motion";
 import Footer from "../layouts/Footer"; // Assuming Footer path is correct
 import {
@@ -9,6 +10,8 @@ import {
   Code,
   MessageSquare,
   ArrowRight,
+  Menu, // Added Menu for mobile nav
+  X, // Added X for mobile nav close
 } from "lucide-react";
 
 // ==================================================================
@@ -558,7 +561,7 @@ const CustomerStories = () => (
               </ul>
             </div>
           </div>
-        
+
         </motion.div>
       ))}
     </div>
@@ -991,11 +994,123 @@ const PricingAndInvestment = () => (
 );
 
 // ==================================================================
+// ==================== NEW NAVIGATION COMPONENTS ===================
+// ==================================================================
+
+// Mobile-specific navigation (button + overlay menu)
+const MobileSectionNav = ({ sections, activeSection, scrollToSection }) => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  return (
+    <>
+      <button
+        className="lg:hidden fixed top-4 left-4 z-50 p-3 rounded-full bg-base-100 shadow-lg text-base-content"
+        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        aria-label="Toggle navigation"
+      >
+        {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+      </button>
+
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-base-300/95 backdrop-blur-sm z-40 lg:hidden"
+            onClick={() => setIsMobileMenuOpen(false)} // Close when clicking overlay
+          >
+            <motion.nav
+              initial={{ x: -100 }}
+              animate={{ x: 0 }}
+              exit={{ x: -100 }}
+              transition={{ duration: 0.3 }}
+              className="absolute left-0 top-0 h-full w-64 bg-base-100 p-6 shadow-xl" // Slide-in from left
+              onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside nav
+            >
+              <h3 className="text-xl font-bold mb-6 text-primary">Sections</h3>
+              <ul className="space-y-3">
+                {sections.map((section) => (
+                  <li key={section.id}>
+                    <button
+                      onClick={() => {
+                        scrollToSection(section.id);
+                        setIsMobileMenuOpen(false); // Close menu after navigating
+                      }}
+                      className={`w-full text-left py-2 px-4 rounded-lg transition-all duration-200 ease-in-out flex items-center gap-2
+                        ${activeSection === section.id
+                          ? "bg-primary/10 text-primary font-semibold shadow-sm"
+                          : "text-base-content/70 hover:bg-base-200 hover:text-base-content"
+                        }`
+                      }
+                    >
+                      <span className="w-1.5 h-1.5 rounded-full bg-current" />
+                      {section.title}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </motion.nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+};
+
+// Desktop-specific navigation (floating dots with always-visible names)
+const DotsNavigation = ({ sections, activeSection, scrollToSection }) => {
+  return (
+    <motion.nav
+      className="fixed left-4 top-1/2 -translate-y-1/2 z-40 hidden lg:block" // Only show dots on large screens
+      initial={{ x: -50, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ delay: 0.5, duration: 0.5, ease: "easeOut" }}
+    >
+      <ul className="space-y-4">
+        {sections.map((section, index) => (
+          <motion.li
+            key={section.id}
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.6 + index * 0.05 }}
+          >
+            <button
+              onClick={() => scrollToSection(section.id)}
+              className="flex items-center gap-3 py-2 px-3 rounded-md transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary/50 group"
+              aria-label={`Jump to ${section.title} section`}
+            >
+              <span
+                className={`w-3 h-3 rounded-full transition-all duration-300 ease-in-out ${
+                  activeSection === section.id
+                    ? "bg-primary scale-125 shadow-md shadow-primary/30"
+                    : "bg-base-content/40 group-hover:bg-primary/80 group-hover:scale-110"
+                }`}
+              />
+              <span
+                className={`whitespace-nowrap text-sm transition-colors duration-200 ease-in-out
+                  ${activeSection === section.id
+                    ? "text-primary font-semibold"
+                    : "text-base-content/70 group-hover:text-base-content"
+                  }`}
+              >
+                {section.title}
+              </span>
+            </button>
+          </motion.li>
+        ))}
+      </ul>
+    </motion.nav>
+  );
+};
+
+
+// ==================================================================
 // ========================= MAIN PAGE ==============================
 // ==================================================================
 
 const SWOTDAMPage = () => {
-  const [activeTab, setActiveTab] = useState("ai");
+  const [activeTab, setActiveTab] = useState("ai"); // Kept from original code
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 30 },
@@ -1010,6 +1125,73 @@ const SWOTDAMPage = () => {
     visible: { transition: { staggerChildren: 0.1 } },
   };
 
+  // Define sections for navigation
+  const sections = [
+    { id: "hero", title: "Overview" },
+    { id: "modern-crisis", title: "Modern Crisis" },
+    { id: "dam-difference", title: "DAM Difference" },
+    { id: "roi-table", title: "ROI & Benefits" },
+    { id: "comparison", title: "Comparison" },
+    { id: "real-world-impact", title: "Real-World Impact" },
+    { id: "customer-stories", title: "Customer Stories" },
+    { id: "use-cases", title: "Core Use Cases" },
+    { id: "next-steps", title: "Next Steps" },
+    { id: "pricing", title: "Pricing" },
+    { id: "about", title: "About SWOT DAM" },
+  ];
+
+  // Create refs for each section
+  const sectionRefs = useRef(
+    sections.reduce((acc, section) => {
+      acc[section.id] = React.createRef();
+      return acc;
+    }, {})
+  );
+
+  const [activeSection, setActiveSection] = useState(null);
+
+  const handleScroll = () => {
+    let currentActive = null;
+    const scrollBuffer = 150; // Pixels from top of viewport to consider a section active
+
+    // Iterate backwards to prioritize sections higher up that are currently in view
+    for (let i = sections.length - 1; i >= 0; i--) {
+      const section = sections[i];
+      // Access .current of sectionRefs first to get the object of refs,
+      // then .current again to get the DOM element from the individual ref.
+      const element = sectionRefs.current[section.id]?.current;
+      if (element) {
+        const rect = element.getBoundingClientRect();
+        // A section is active if its top edge is above the scrollBuffer
+        // and its bottom edge is still visible in the viewport.
+        if (rect.top <= scrollBuffer && rect.bottom > 0) {
+          currentActive = section.id;
+          break; // Found the highest active section
+        }
+      }
+    }
+    setActiveSection(currentActive);
+  };
+
+  const scrollToSection = (id) => {
+    // Access .current of sectionRefs first
+    const element = sectionRefs.current[id]?.current;
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    const initialCheckTimeout = setTimeout(handleScroll, 100); // Give DOM a moment to render and populate refs
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      clearTimeout(initialCheckTimeout);
+    };
+  }, [sections]); // Depend on sections to re-run if sections array changes (unlikely here)
+
+
   return (
     <div className="bg-base-100 text-base-content overflow-x-hidden relative">
       <CustomStyles />
@@ -1017,6 +1199,21 @@ const SWOTDAMPage = () => {
         <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[120vw] h-[60vh] bg-gradient-to-tr from-blue-400/30 via-cyan-300/20 to-transparent rounded-full blur-3xl animate-pulse-slow" />
         <div className="absolute bottom-[-10%] right-1/2 translate-x-1/2 w-[100vw] h-[40vh] bg-gradient-to-tl from-primary/20 via-blue-300/10 to-transparent rounded-full blur-3xl animate-pulse-slower" />
       </div>
+
+      {/* Mobile Navigation (button + overlay menu) */}
+      <MobileSectionNav
+        sections={sections}
+        activeSection={activeSection}
+        scrollToSection={scrollToSection}
+      />
+
+      {/* Desktop Dots Navigation */}
+      <DotsNavigation
+        sections={sections}
+        activeSection={activeSection}
+        scrollToSection={scrollToSection}
+      />
+
 
       <div className="relative text-center container mx-auto px-4 pt-36 pb-24 z-10">
         <motion.div
@@ -1088,6 +1285,8 @@ const SWOTDAMPage = () => {
 
       <div className="container mx-auto px-4 pb-24 space-y-28 z-10 relative">
         <motion.section
+          id="modern-crisis" // Added ID
+          ref={sectionRefs.current["modern-crisis"]} // Added Ref
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
@@ -1163,6 +1362,8 @@ const SWOTDAMPage = () => {
 
         {/* Replaced 'The SWOT DAM 3.0 Difference' section with the new detailed component */}
         <motion.section
+          id="dam-difference" // Added ID
+          ref={sectionRefs.current["dam-difference"]} // Added Ref
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
@@ -1171,9 +1372,10 @@ const SWOTDAMPage = () => {
           <SWOTDAMCapabilities fadeInUp={fadeInUp} />
         </motion.section>
 
-        
 
         <motion.section
+          id="roi-table" // Added ID
+          ref={sectionRefs.current["roi-table"]} // Added Ref
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
@@ -1183,6 +1385,8 @@ const SWOTDAMPage = () => {
         </motion.section>
 
         <motion.section
+          id="comparison" // Added ID
+          ref={sectionRefs.current.comparison} // Added Ref
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
@@ -1193,6 +1397,8 @@ const SWOTDAMPage = () => {
 
         {/* New section for Semantic Data Intelligence: Real-World Impact */}
         <motion.section
+          id="real-world-impact" // Added ID
+          ref={sectionRefs.current["real-world-impact"]} // Added Ref
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
@@ -1202,6 +1408,8 @@ const SWOTDAMPage = () => {
         </motion.section>
 
         <motion.section
+          id="customer-stories" // Added ID
+          ref={sectionRefs.current["customer-stories"]} // Added Ref
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
@@ -1211,6 +1419,8 @@ const SWOTDAMPage = () => {
         </motion.section>
 
         <motion.section
+          id="use-cases" // Added ID
+          ref={sectionRefs.current["use-cases"]} // Added Ref
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
@@ -1220,6 +1430,8 @@ const SWOTDAMPage = () => {
         </motion.section>
 
         <motion.section
+          id="next-steps" // Added ID
+          ref={sectionRefs.current["next-steps"]} // Added Ref
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
@@ -1230,6 +1442,8 @@ const SWOTDAMPage = () => {
 
         {/* New section for Pricing & Investment */}
         <motion.section
+          id="pricing" // Added ID
+          ref={sectionRefs.current.pricing} // Added Ref
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
@@ -1239,6 +1453,8 @@ const SWOTDAMPage = () => {
         </motion.section>
 
         <motion.section
+          id="about" // Added ID
+          ref={sectionRefs.current.about} // Added Ref
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}

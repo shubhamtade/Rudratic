@@ -1,24 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react"; // Added useRef, useEffect
+import { motion, AnimatePresence } from "framer-motion"; // Added AnimatePresence for mobile nav
 import Footer from "../layouts/Footer";
-// Removed Framer Motion and Lucide imports as they are no longer used in the new content
-
-// It's good practice to import the Footer component if it exists in your layouts,
-// even if this specific page's footer is custom HTML.
-// import Footer from "../layouts/Footer"; // Re-add if your project uses a shared Footer component
+import { // Added Menu and X icons for mobile nav
+  Menu,
+  X,
+  Search,
+  Shield,
+  FileText,
+  CheckCircle2,
+  Code,
+  MessageSquare,
+  ArrowRight,
+} from "lucide-react";
 
 // Custom CSS for scroll behavior and specific pseudo-elements.
-// We'll try to use Tailwind's theme() function for colors within the style tag,
-// but for gradients in pseudo-elements, direct hex might be more reliable
-// or require PostCSS setup. For simplicity, I'll keep hex for gradients inside <style> for now.
 const CustomStyles = () => (
   <style jsx global>{`
     html {
       scroll-behavior: smooth;
-      /* Ensure our custom theme is applied, adjust this based on your global layout setup */
-      /* For example, if you set data-theme="aiquinoxTheme" on the <html> tag, you don't need this */
-      /* But if not, this acts as a fallback or explicit declaration for this page */
-      /* Note: this isn't the ideal way to apply DaisyUI themes,
-         it's usually done via data-theme on HTML/body or a parent div. */
     }
     body {
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -62,13 +61,125 @@ const CustomStyles = () => (
             /* Adjusted gradient for vertical */
             background: linear-gradient(180deg, #003366 0%, #7B2CBF 100%);
         }
-        /* Mobile menu hidden */
-        .nav-desktop-only {
-            display: none;
-        }
     }
   `}</style>
 );
+
+
+// ==================================================================
+// ==================== NEW NAVIGATION COMPONENTS ===================
+// ==================================================================
+
+// Mobile-specific navigation (button + overlay menu)
+const MobileSectionNav = ({ sections, activeSection, scrollToSection }) => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  return (
+    <>
+      <button
+        className="lg:hidden fixed top-4 left-4 z-50 p-3 rounded-full bg-base-100 shadow-lg text-base-content"
+        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        aria-label="Toggle navigation"
+      >
+        {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+      </button>
+
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-base-300/95 backdrop-blur-sm z-40 lg:hidden"
+            onClick={() => setIsMobileMenuOpen(false)} // Close when clicking overlay
+          >
+            <motion.nav
+              initial={{ x: -100 }}
+              animate={{ x: 0 }}
+              exit={{ x: -100 }}
+              transition={{ duration: 0.3 }}
+              className="absolute left-0 top-0 h-full w-64 bg-base-100 p-6 shadow-xl" // Slide-in from left
+              onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside nav
+            >
+              <h3 className="text-xl font-bold mb-6 text-primary">Sections</h3>
+              <ul className="space-y-3">
+                {sections.map((section) => (
+                  <li key={section.id}>
+                    <button
+                      onClick={() => {
+                        scrollToSection(section.id);
+                        setIsMobileMenuOpen(false); // Close menu after navigating
+                      }}
+                      className={`w-full text-left py-2 px-4 rounded-lg transition-all duration-200 ease-in-out flex items-center gap-2
+                        ${activeSection === section.id
+                          ? "bg-primary/10 text-primary font-semibold shadow-sm"
+                          : "text-base-content/70 hover:bg-base-200 hover:text-base-content"
+                        }`
+                      }
+                    >
+                      <span className="w-1.5 h-1.5 rounded-full bg-current" />
+                      {section.title}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </motion.nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+};
+
+// Desktop-specific navigation (floating dots with always-visible names)
+const DotsNavigation = ({ sections, activeSection, scrollToSection }) => {
+  return (
+    <motion.nav
+      className="fixed left-4 top-1/2 -translate-y-1/2 z-40 hidden lg:block" // Only show dots on large screens
+      initial={{ x: -50, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ delay: 0.5, duration: 0.5, ease: "easeOut" }}
+    >
+      <ul className="space-y-4">
+        {sections.map((section, index) => (
+          <motion.li
+            key={section.id}
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.6 + index * 0.05 }}
+          >
+            <button
+              onClick={() => scrollToSection(section.id)}
+              className="flex items-center gap-3 py-2 px-3 rounded-md transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary/50 group"
+              aria-label={`Jump to ${section.title} section`}
+            >
+              <span
+                className={`w-3 h-3 rounded-full transition-all duration-300 ease-in-out ${
+                  activeSection === section.id
+                    ? "bg-primary scale-125 shadow-md shadow-primary/30"
+                    : "bg-base-content/40 group-hover:bg-primary/80 group-hover:scale-110"
+                }`}
+              />
+              <span
+                className={`whitespace-nowrap text-sm transition-colors duration-200 ease-in-out
+                  ${activeSection === section.id
+                    ? "text-primary font-semibold"
+                    : "text-base-content/70 group-hover:text-base-content"
+                  }`}
+              >
+                {section.title}
+              </span>
+            </button>
+          </motion.li>
+        ))}
+      </ul>
+    </motion.nav>
+  );
+};
+
+// ==================================================================
+// ========================= MAIN PAGE ==============================
+// ==================================================================
 
 const AiquinoxPage = () => {
   const [activeTabIndex, setActiveTabIndex] = useState(0);
@@ -77,52 +188,94 @@ const AiquinoxPage = () => {
     setActiveTabIndex(index);
   };
 
+  // Define sections for navigation
+  const sections = [
+    { id: "hero", title: "Overview" },
+    { id: "how-it-works", title: "How It Works" },
+    { id: "screen-intelligence", title: "Screen Intelligence" },
+    { id: "uniqueness", title: "Why AIQuinox" },
+    { id: "use-cases", title: "Use Cases" },
+    { id: "stats", title: "Key Metrics" },
+    { id: "contact", title: "Get Started" },
+  ];
+
+  // Create refs for each section
+  const sectionRefs = useRef(
+    sections.reduce((acc, section) => {
+      acc[section.id] = React.createRef();
+      return acc;
+    }, {})
+  );
+
+  const [activeSection, setActiveSection] = useState(null);
+
+  const handleScroll = () => {
+    let currentActive = null;
+    const scrollBuffer = 150; // Pixels from top of viewport to consider a section active
+
+    // Iterate backwards to prioritize sections higher up that are currently in view
+    for (let i = sections.length - 1; i >= 0; i--) {
+      const section = sections[i];
+      const element = sectionRefs.current[section.id]?.current; // Correctly access the DOM element
+      if (element) {
+        const rect = element.getBoundingClientRect();
+        if (rect.top <= scrollBuffer && rect.bottom > 0) {
+          currentActive = section.id;
+          break; // Found the highest active section
+        }
+      }
+    }
+    setActiveSection(currentActive);
+  };
+
+  const scrollToSection = (id) => {
+    const element = sectionRefs.current[id]?.current; // Correctly access the DOM element
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    const initialCheckTimeout = setTimeout(handleScroll, 100); // Give DOM a moment to render and populate refs
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      clearTimeout(initialCheckTimeout);
+    };
+  }, [sections]); // Depend on sections to re-run if sections array changes (unlikely here)
+
+
   return (
-    // Apply the custom theme to this component's root for demonstration.
-    // Ideally, this is set higher up in your application (e.g., _app.js or layout.js).
     <div className="font-inter text-base-content bg-base-100" data-theme="aiquinoxTheme">
       <CustomStyles />
 
-      {/* Header */}
+      {/* Mobile Navigation (button + overlay menu) */}
+      <MobileSectionNav
+        sections={sections}
+        activeSection={activeSection}
+        scrollToSection={scrollToSection}
+      />
+
+      {/* Desktop Dots Navigation */}
+      <DotsNavigation
+        sections={sections}
+        activeSection={activeSection}
+        scrollToSection={scrollToSection}
+      />
+
+      {/* Header - Fixed header is now just branding, navigation is handled by components */}
       <header className="fixed top-0 w-full bg-base-100 shadow-md z-50 py-4">
         <div className="max-w-screen-xl mx-auto flex justify-between items-center px-5">
           <a href="#" className="text-2xl font-bold text-primary">
             AIQuinox <span className="text-secondary">.</span>
           </a>
-          <nav className="nav-desktop-only">
-            <ul className="flex items-center space-x-7">
-              <li>
-                <a href="#how-it-works" className="text-base-content font-medium hover:text-secondary transition-colors duration-300">
-                  How It Works
-                </a>
-              </li>
-              <li>
-                <a href="#screen-intelligence" className="text-base-content font-medium hover:text-secondary transition-colors duration-300">
-                  Screen Intelligence
-                </a>
-              </li>
-              <li>
-                <a href="#uniqueness" className="text-base-content font-medium hover:text-secondary transition-colors duration-300">
-                  Why AIQuinox
-                </a>
-              </li>
-              <li>
-                <a href="#use-cases" className="text-base-content font-medium hover:text-secondary transition-colors duration-300">
-                  Use Cases
-                </a>
-              </li>
-              <li>
-                <a href="#contact" className="px-6 py-2 rounded-md bg-primary text-white font-semibold hover:bg-primary/90 transition-all duration-300 shadow-md">
-                  Get Started
-                </a>
-              </li>
-            </ul>
-          </nav>
+          {/* Desktop nav removed - replaced by DotsNavigation */}
         </div>
       </header>
 
       {/* Hero */}
-      <section className="mt-[70px] bg-gradient-to-br from-primary to-secondary text-white py-24 px-5 text-center">
+      <section id="hero" ref={sectionRefs.current.hero} className="mt-[70px] bg-gradient-to-br from-primary/10 to-secondary/50 text-white py-24 px-5 text-center">
         <div className="max-w-3xl mx-auto">
           <h1 className="text-5xl md:text-6xl font-bold leading-tight mb-5">
             Screen Intelligence Engine
@@ -142,7 +295,10 @@ const AiquinoxPage = () => {
             <button className="px-8 py-4 rounded-md bg-white text-primary font-semibold text-lg shadow-lg hover:bg-base-200 transition-all duration-300">
               🆓 Start Free Trial
             </button>
-            <button className="px-8 py-4 rounded-md bg-primary text-white font-semibold text-lg shadow-lg hover:bg-primary/90 transition-all duration-300 border-2 border-white">
+            <button
+              onClick={() => scrollToSection("contact")} // Updated to use scrollToSection
+              className="px-8 py-4 rounded-md bg-primary text-white font-semibold text-lg shadow-lg hover:bg-primary/90 transition-all duration-300 border-2 border-white"
+            >
               📅 Schedule Demo
             </button>
           </div>
@@ -150,7 +306,7 @@ const AiquinoxPage = () => {
       </section>
 
       {/* HOW IT WORKS - INTERACTIVE SECTION */}
-      <section className="bg-base-200 py-20 px-5" id="how-it-works">
+      <section id="how-it-works" ref={sectionRefs.current["how-it-works"]} className="bg-base-200 py-20 px-5">
         <div className="max-w-screen-xl mx-auto">
           <h2 className="text-4xl font-bold text-primary text-center mb-12">
             How It Works
@@ -398,7 +554,7 @@ const AiquinoxPage = () => {
       </section>
 
       {/* Screen Intelligence Showcase */}
-      <section className="bg-base-100 py-20 px-5" id="screen-intelligence">
+      <section id="screen-intelligence" ref={sectionRefs.current["screen-intelligence"]} className="bg-base-100 py-20 px-5">
         <div className="max-w-screen-xl mx-auto">
           <h2 className="text-4xl font-bold text-primary text-center mb-12">
             Screen Intelligence Engine in Action
@@ -615,7 +771,7 @@ const AiquinoxPage = () => {
       </section>
 
       {/* Why AIQuinox is Different */}
-      <section className="bg-base-200 py-20 px-5" id="uniqueness">
+      <section id="uniqueness" ref={sectionRefs.current.uniqueness} className="bg-base-200 py-20 px-5">
         <div className="max-w-screen-xl mx-auto">
           <h2 className="text-4xl font-bold text-primary text-center mb-12">
             Why AIQuinox is Fundamentally Different
@@ -701,7 +857,7 @@ const AiquinoxPage = () => {
       </section>
 
       {/* Use Cases Section */}
-      <section className="bg-base-100 py-20 px-5" id="use-cases">
+      <section id="use-cases" ref={sectionRefs.current["use-cases"]} className="bg-base-100 py-20 px-5">
         <div className="max-w-screen-xl mx-auto">
           <h2 className="text-4xl font-bold text-primary text-center mb-12">
             What AIQuinox Can Do For Your Industry
@@ -1073,7 +1229,7 @@ const AiquinoxPage = () => {
       </section>
 
       {/* Stats */}
-      <section className="bg-base-200 py-20 px-5">
+      <section id="stats" ref={sectionRefs.current.stats} className="bg-base-200 py-20 px-5">
         <div className="max-w-screen-xl mx-auto">
           <h2 className="text-4xl font-bold text-primary text-center mb-12">
             Why Screen Intelligence Matters
@@ -1101,8 +1257,9 @@ const AiquinoxPage = () => {
 
       {/* CTA */}
       <section
-        className="bg-gradient-to-br from-primary to-secondary text-white py-20 px-5 text-center"
         id="contact"
+        ref={sectionRefs.current.contact}
+        className="bg-gradient-to-br from-primary to-secondary text-white py-20 px-5 text-center"
       >
         <div className="max-w-screen-xl mx-auto">
           <h2 className="text-4xl font-bold mb-5">

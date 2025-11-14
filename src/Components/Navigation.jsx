@@ -37,7 +37,7 @@ import {
 const getProductsContent = () => [
   { title: "SWOT-PAM", subtitle: "Privileged Access Management", color: "hsl(var(--p))", href: "/products/pam", icon: Shield, group: "Security & Access" },
   { title: "SWOTCloudPAM", subtitle: "Cloud PAM Solution", color: "hsl(var(--p))", href: "/products/SWOTCloudPAMPage", icon: Cloud, group: "Security & Access" },
-  { title: "RBVM", subtitle: "Risk-Based Vulnerability Management", color: "hsl(var(--s))", href: "/products/rbvm", icon: AlertTriangle, group: "Security & Access" },
+  { title: "RBVM", subtitle: "Risk-Based Vulnerability Management", color: "hsl(var(--s))", href: "https://cyberassuranze.com/", icon: AlertTriangle, group: "Security & Access" },
   { title: "SWOTDAM", subtitle: "Digital Asset Management", color: "hsl(var(--s))", href: "/products/SWOTDAMPage", icon: Box, group: "Enterprise Platforms" },
   { title: "BPMAutomation", subtitle: "Business Process Management", color: "hsl(var(--p))", href: "/products/BPMAutomationPage", icon: Zap, group: "Enterprise Platforms" },
   { title: "AIquinox", subtitle: "Performance Monitoring Platform", color: "hsl(var(--s))", href: "/products/AiquinoxPage", icon: TrendingUp, group: "Platforms & Analytics" },

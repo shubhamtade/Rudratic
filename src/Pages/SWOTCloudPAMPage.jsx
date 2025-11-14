@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from "react";
-import { motion, useAnimation, useInView } from "framer-motion";
+import React, { useState, useEffect, useRef } from "react";
+import { motion, useAnimation, useInView, AnimatePresence } from "framer-motion"; // Added AnimatePresence
 import Footer from "../layouts/Footer"; // Keeping Footer import as it's from ../layouts/Footer now
 import {
   Shield,
@@ -43,6 +43,8 @@ import {
   Target, // For Reduced Attack Surface (from PAMPage ref)
   Users,
   ArrowDownIcon, // Just for variety if needed
+  Menu, // Added Menu for mobile nav
+  X, // Added X for mobile nav close
 } from "lucide-react";
 
 // Helper for animated number count-up
@@ -365,9 +367,190 @@ const cardHover = {
   whileTap: { scale: 0.995 },
 };
 
+
+// ==================================================================
+// ==================== NEW NAVIGATION COMPONENTS ===================
+// ==================================================================
+
+// Mobile-specific navigation (button + overlay menu)
+const MobileSectionNav = ({ sections, activeSection, scrollToSection }) => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  return (
+    <>
+      <button
+        className="lg:hidden fixed top-4 left-4 z-50 p-3 rounded-full bg-base-100 shadow-lg text-base-content"
+        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        aria-label="Toggle navigation"
+      >
+        {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+      </button>
+
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-base-300/95 backdrop-blur-sm z-40 lg:hidden"
+            onClick={() => setIsMobileMenuOpen(false)} // Close when clicking overlay
+          >
+            <motion.nav
+              initial={{ x: -100 }}
+              animate={{ x: 0 }}
+              exit={{ x: -100 }}
+              transition={{ duration: 0.3 }}
+              className="absolute left-0 top-0 h-full w-64 bg-base-100 p-6 shadow-xl" // Slide-in from left
+              onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside nav
+            >
+              <h3 className="text-xl font-bold mb-6 text-primary">Sections</h3>
+              <ul className="space-y-3">
+                {sections.map((section) => (
+                  <li key={section.id}>
+                    <button
+                      onClick={() => {
+                        scrollToSection(section.id);
+                        setIsMobileMenuOpen(false); // Close menu after navigating
+                      }}
+                      className={`w-full text-left py-2 px-4 rounded-lg transition-all duration-200 ease-in-out flex items-center gap-2
+                        ${activeSection === section.id
+                          ? "bg-primary/10 text-primary font-semibold shadow-sm"
+                          : "text-base-content/70 hover:bg-base-200 hover:text-base-content"
+                        }`
+                      }
+                    >
+                      <span className="w-1.5 h-1.5 rounded-full bg-current" />
+                      {section.title}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </motion.nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+};
+
+// Desktop-specific navigation (floating dots with always-visible names)
+const DotsNavigation = ({ sections, activeSection, scrollToSection }) => {
+  return (
+    <motion.nav
+      className="fixed left-4 top-1/2 -translate-y-1/2 z-40 hidden lg:block" // Only show dots on large screens
+      initial={{ x: -50, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ delay: 0.5, duration: 0.5, ease: "easeOut" }}
+    >
+      <ul className="space-y-4">
+        {sections.map((section, index) => (
+          <motion.li
+            key={section.id}
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.6 + index * 0.05 }}
+          >
+            <button
+              onClick={() => scrollToSection(section.id)}
+              className="flex items-center gap-3 py-2 px-3 rounded-md transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary/50 group"
+              aria-label={`Jump to ${section.title} section`}
+            >
+              <span
+                className={`w-3 h-3 rounded-full transition-all duration-300 ease-in-out ${
+                  activeSection === section.id
+                    ? "bg-primary scale-125 shadow-md shadow-primary/30"
+                    : "bg-base-content/40 group-hover:bg-primary/80 group-hover:scale-110"
+                }`}
+              />
+              <span
+                className={`whitespace-nowrap text-sm transition-colors duration-200 ease-in-out
+                  ${activeSection === section.id
+                    ? "text-primary font-semibold"
+                    : "text-base-content/70 group-hover:text-base-content"
+                  }`}
+              >
+                {section.title}
+              </span>
+            </button>
+          </motion.li>
+        ))}
+      </ul>
+    </motion.nav>
+  );
+};
+
+// ==================================================================
+// ========================= MAIN PAGE ==============================
+// ==================================================================
+
 const SWOTCloudPAMPage = () => {
   const navRef = useRef(null);
   const isInView = useInView(navRef, { margin: "-100px 0px 0px 0px" }); // Make nav sticky after scrolling past it
+
+  // Define sections for navigation
+  const sections = [
+    { id: "hero", title: "Overview" },
+    { id: "why-swot", title: "Why SWOT Cloud PAM?" },
+    { id: "capabilities", title: "Core Capabilities" },
+    { id: "use-cases", title: "Real-World Use Cases" },
+    { id: "roi-metrics", title: "ROI & Metrics" },
+    { id: "comparison", title: "Comparison" },
+    { id: "integrations", title: "Integrations" },
+    { id: "cta-section", title: "Transform PAM" },
+    { id: "contact", title: "Contact Us" },
+  ];
+
+  // Create refs for each section
+  const sectionRefs = useRef(
+    sections.reduce((acc, section) => {
+      acc[section.id] = React.createRef();
+      return acc;
+    }, {})
+  );
+
+  const [activeSection, setActiveSection] = useState(null);
+
+  const handleScroll = () => {
+    let currentActive = null;
+    const scrollBuffer = 150; // Pixels from top of viewport to consider a section active
+
+    // Iterate backwards to prioritize sections higher up that are currently in view
+    for (let i = sections.length - 1; i >= 0; i--) {
+      const section = sections[i];
+      // Access .current of sectionRefs first to get the object of refs,
+      // then .current again to get the DOM element from the individual ref.
+      const element = sectionRefs.current[section.id]?.current;
+      if (element) {
+        const rect = element.getBoundingClientRect();
+        // A section is active if its top edge is above the scrollBuffer
+        // and its bottom edge is still visible in the viewport.
+        if (rect.top <= scrollBuffer && rect.bottom > 0) {
+          currentActive = section.id;
+          break; // Found the highest active section
+        }
+      }
+    }
+    setActiveSection(currentActive);
+  };
+
+  const scrollToSection = (id) => {
+    // Access .current of sectionRefs first
+    const element = sectionRefs.current[id]?.current;
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    const initialCheckTimeout = setTimeout(handleScroll, 100); // Give DOM a moment to render and populate refs
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      clearTimeout(initialCheckTimeout);
+    };
+  }, [sections]); // Depend on sections to re-run if sections array changes (unlikely here)
+
 
   return (
     <div className="relative bg-base-100 text-base-content overflow-x-hidden min-h-screen ">
@@ -378,8 +561,24 @@ const SWOTCloudPAMPage = () => {
         <ParticleSVG />
       </div>
 
+      {/* Mobile Navigation (button + overlay menu) */}
+      <MobileSectionNav
+        sections={sections}
+        activeSection={activeSection}
+        scrollToSection={scrollToSection}
+      />
+
+      {/* Desktop Dots Navigation */}
+      <DotsNavigation
+        sections={sections}
+        activeSection={activeSection}
+        scrollToSection={scrollToSection}
+      />
+
       {/* Header Hero Section */}
       <motion.header
+        id="hero" // Added ID
+        ref={sectionRefs.current.hero} // Added Ref
         initial="hidden"
         animate="visible"
         variants={staggerContainer}
@@ -439,9 +638,7 @@ const SWOTCloudPAMPage = () => {
             <motion.button
               {...cardHover}
               onClick={() =>
-                document
-                  .getElementById("contact")
-                  .scrollIntoView({ behavior: "smooth" })
+                scrollToSection("contact") // Updated to use scrollToSection
               }
               className="btn btn-info btn-lg shadow-xl hover:shadow-info/50 hover:scale-105 transition-transform duration-300"
             >
@@ -471,6 +668,8 @@ const SWOTCloudPAMPage = () => {
       <div className="container mx-auto px-4">
         {/* Introduction / Why SWOT Cloud PAM? */}
         <motion.section
+          id="why-swot" // Added ID
+          ref={sectionRefs.current["why-swot"]} // Added Ref
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
@@ -628,7 +827,8 @@ const SWOTCloudPAMPage = () => {
 
         {/* Core Capabilities Section */}
         <motion.section
-          id="features"
+          id="capabilities" // Added ID
+          ref={sectionRefs.current.capabilities} // Added Ref
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
@@ -672,7 +872,7 @@ const SWOTCloudPAMPage = () => {
               <h4 className="text-info text-xl font-semibold mb-2">
                 AI Behavioral Anomaly Detection
               </h4>
-              <p className="text-base-content/70 text-sm leading-relaxed">
+              <p className className="text-base-content/70 text-sm leading-relaxed">
                 Deep learning models baseline user behavior, detect deviations
                 in real-time, and flag insider threats before damage occurs.
               </p>
@@ -803,7 +1003,8 @@ const SWOTCloudPAMPage = () => {
 
         {/* Use Cases Section */}
         <motion.section
-          id="usecases"
+          id="use-cases" // Added ID
+          ref={sectionRefs.current["use-cases"]} // Added Ref
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
@@ -1067,7 +1268,8 @@ const SWOTCloudPAMPage = () => {
 
         {/* ROI & Metrics Section */}
         <motion.section
-          id="roi"
+          id="roi-metrics" // Added ID
+          ref={sectionRefs.current["roi-metrics"]} // Added Ref
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
@@ -1334,7 +1536,8 @@ const SWOTCloudPAMPage = () => {
 
         {/* Comparison Section */}
         <motion.section
-          id="comparison"
+          id="comparison" // Added ID
+          ref={sectionRefs.current.comparison} // Added Ref
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
@@ -1610,7 +1813,8 @@ const SWOTCloudPAMPage = () => {
 
         {/* Integrations Section -- ENHANCED */}
         <motion.section
-          id="integrations"
+          id="integrations" // Added ID
+          ref={sectionRefs.current.integrations} // Added Ref
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.15 }}
@@ -1688,8 +1892,8 @@ const SWOTCloudPAMPage = () => {
       key={index}
       variants={fadeInUp}
       whileHover={{ scale: 1.01 }}
-      className="p-5 rounded-xl border border-base-content/20 
-                 bg-base-200/40 backdrop-blur-md shadow-sm 
+      className="p-5 rounded-xl border border-base-content/20
+                 bg-base-200/40 backdrop-blur-md shadow-sm
                  hover:border-info hover:shadow-lg transition-all "
     >
       {/* Header */}
@@ -1708,7 +1912,7 @@ const SWOTCloudPAMPage = () => {
             key={i}
             variants={fadeInUp}
             whileHover={{ scale: 1.05, x: 3 }}
-            className="px-3 py-2 text-xs rounded-md text-base-content 
+            className="px-3 py-2 text-xs rounded-md text-base-content
                        bg-base-300/40 border border-base-content/10
                        hover:bg-info/10 hover:border-info transition-all"
           >
@@ -1721,7 +1925,6 @@ const SWOTCloudPAMPage = () => {
 </div>
 
 
-
           <motion.p
             variants={fadeInUp}
             className="text-center mt-16 font-semibold text-lg text-info"
@@ -1732,6 +1935,8 @@ const SWOTCloudPAMPage = () => {
 
         {/* Call to Action Section */}
         <motion.div
+          id="cta-section" // Added ID
+          ref={sectionRefs.current["cta-section"]} // Added Ref
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.5 }}
@@ -1754,9 +1959,7 @@ const SWOTCloudPAMPage = () => {
             <motion.button
               {...cardHover} // Apply cardHover animation
               onClick={() =>
-                document
-                  .getElementById("contact")
-                  .scrollIntoView({ behavior: "smooth" })
+                scrollToSection("contact") // Updated to use scrollToSection
               }
               className="btn btn-warning btn-lg shadow-lg"
             >
@@ -1774,7 +1977,8 @@ const SWOTCloudPAMPage = () => {
 
         {/* Contact Section */}
         <motion.section
-          id="contact"
+          id="contact" // Added ID
+          ref={sectionRefs.current.contact} // Added Ref
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
