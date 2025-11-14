@@ -558,12 +558,7 @@ const CustomerStories = () => (
               </ul>
             </div>
           </div>
-          <div className="mt-4 italic text-blue-700 dark:text-blue-400 border-l-4 border-blue-300 pl-4">
-            "{story.quote}"<br />
-            <span className="block mt-2 font-semibold text-blue-900 dark:text-blue-200">
-              - {story.author}
-            </span>
-          </div>
+        
         </motion.div>
       ))}
     </div>
