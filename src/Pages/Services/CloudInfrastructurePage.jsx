@@ -46,7 +46,7 @@ const AnimatedTitle = ({ text }) => {
       className="text-4xl sm:text-5xl lg:text-7xl font-bold mb-6 tracking-tight gradient-text"
     >
       {words.map((word, index) => (
-        <motion.span variants={child} style={{ marginRight: '0.5rem' }} key={index}>
+        <motion.span variants={child} style={{ marginRight: '0.5rem' }} key={index} className="inline-block mr-2">
           {word}
         </motion.span>
       ))}
@@ -77,7 +77,7 @@ const PageHero = ({ badge, title, subtitle, buttonText }) => (
 
 const Section = ({ title, subtitle, children, isAlternateBg = false }) => (
   <section className={` ${isAlternateBg ? 'bg-base-200/50' : ''}`}>
-    <div className="container mx-auto px-4">
+    <div className="container mx-auto px-4  py-10">
       <motion.div
         initial="hidden"
         whileInView="visible"

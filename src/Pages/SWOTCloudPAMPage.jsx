@@ -1632,147 +1632,95 @@ const SWOTCloudPAMPage = () => {
             friction.
           </motion.p>
 
-          <div className="space-y-16">
-            {/* Category: Cloud Platforms */}
-            <motion.div variants={fadeInUp}>
-              <h3 className="flex items-center gap-3 text-2xl font-semibold text-info mb-6">
-                <Cloud size={28} className="text-primary" />
-                Cloud Platforms & Vendors
-              </h3>
-              <motion.div
-                variants={staggerContainer}
-                className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"
-              >
-                {[
-                  { icon: Cloud, label: "AWS" },
-                  { icon: Cloud, label: "Microsoft Azure" },
-                  { icon: Cloud, label: "Google Cloud" },
-                  { icon: Wrench, label: "On-Premises" },
-                  { icon: Globe2, label: "Private Cloud" },
-                  { icon: Cloud, label: "Hybrid Environments" },
-                ].map((item, index) => (
-                  <motion.div
-                    key={index}
-                    variants={fadeInUp}
-                    className="integration-card flex flex-col items-center justify-center text-center p-6 rounded-lg border border-base-content/20 bg-base-200/50 backdrop-blur-sm transition-all duration-300 group glass-border hover:border-info hover:bg-info/10 hover:shadow-lg hover:shadow-info/20 hover:-translate-y-1"
-                  >
-                    <item.icon
-                      size={36}
-                      className="mb-3 text-info transition-transform duration-300 group-hover:scale-110"
-                    />
-                    <p className="text-base-content font-medium text-sm">
-                      {item.label}
-                    </p>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </motion.div>
+        <div className="flex flex-col lg:flex-row gap-5 justify-center">
+  {/* Card Component */}
+  {[
+    {
+      title: "Cloud Platforms & Vendors",
+      icon: Cloud,
+      items: [
+        "AWS",
+        "Microsoft Azure",
+        "Google Cloud",
+        "On-Premises",
+        "Private Cloud",
+        "Hybrid Environments",
+      ],
+    },
+    {
+      title: "SIEM & Security Tools",
+      icon: Search,
+      items: [
+        "Splunk",
+        "Elastic SIEM",
+        "Sumo Logic",
+        "IBM QRadar",
+        "Microsoft Sentinel",
+        "ArcSight",
+      ],
+    },
+    {
+      title: "ITSM & Ticketing Platforms",
+      icon: Ticket,
+      items: [
+        "ServiceNow",
+        "Jira",
+        "Atlassian",
+        "BMC Remedy",
+        "Freshservice",
+        "Zendesk",
+      ],
+    },
+    {
+      title: "Identity & Access Management",
+      icon: User,
+      items: [
+        "Active Directory",
+        "Azure AD",
+        "Okta",
+        "Ping Identity",
+        "OneLogin",
+        "LDAP / Kerberos",
+      ],
+    },
+  ].map((category, index) => (
+    <motion.div
+      key={index}
+      variants={fadeInUp}
+      whileHover={{ scale: 1.01 }}
+      className="p-5 rounded-xl border border-base-content/20 
+                 bg-base-200/40 backdrop-blur-md shadow-sm 
+                 hover:border-info hover:shadow-lg transition-all "
+    >
+      {/* Header */}
+      <div className="flex items-center gap-3 mb-4">
+        <category.icon size={24} className="text-primary" />
+        <h3 className="text-lg font-semibold text-info">{category.title}</h3>
+      </div>
 
-            {/* Category: SIEM & Security */}
-            <motion.div variants={fadeInUp}>
-              <h3 className="flex items-center gap-3 text-2xl font-semibold text-info mb-6">
-                <Search size={28} className="text-primary" />
-                SIEM & Security Tools
-              </h3>
-              <motion.div
-                variants={staggerContainer}
-                className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"
-              >
-                {[
-                  { icon: Search, label: "Splunk" },
-                  { icon: Search, label: "Elastic SIEM" },
-                  { icon: Search, label: "Sumo Logic" },
-                  { icon: Search, label: "IBM QRadar" },
-                  { icon: Search, label: "Microsoft Sentinel" },
-                  { icon: Search, label: "ArcSight" },
-                ].map((item, index) => (
-                  <motion.div
-                    key={index}
-                    variants={fadeInUp}
-                    className="integration-card flex flex-col items-center justify-center text-center p-6 rounded-lg border border-base-content/20 bg-base-200/50 backdrop-blur-sm transition-all duration-300 group glass-border hover:border-info hover:bg-info/10 hover:shadow-lg hover:shadow-info/20 hover:-translate-y-1"
-                  >
-                    <item.icon
-                      size={36}
-                      className="mb-3 text-info transition-transform duration-300 group-hover:scale-110"
-                    />
-                    <p className="text-base-content font-medium text-sm">
-                      {item.label}
-                    </p>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </motion.div>
+      {/* Items */}
+      <motion.div
+        variants={staggerContainer}
+        className="flex flex-col  gap-2"
+      >
+        {category.items.map((item, i) => (
+          <motion.div
+            key={i}
+            variants={fadeInUp}
+            whileHover={{ scale: 1.05, x: 3 }}
+            className="px-3 py-2 text-xs rounded-md text-base-content 
+                       bg-base-300/40 border border-base-content/10
+                       hover:bg-info/10 hover:border-info transition-all"
+          >
+            {item}
+          </motion.div>
+        ))}
+      </motion.div>
+    </motion.div>
+  ))}
+</div>
 
-            {/* Category: ITSM */}
-            <motion.div variants={fadeInUp}>
-              <h3 className="flex items-center gap-3 text-2xl font-semibold text-info mb-6">
-                <Ticket size={28} className="text-primary" />
-                ITSM & Ticketing Platforms
-              </h3>
-              <motion.div
-                variants={staggerContainer}
-                className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"
-              >
-                {[
-                  { icon: Ticket, label: "ServiceNow" },
-                  { icon: Ticket, label: "Jira" },
-                  { icon: Ticket, label: "Atlassian" },
-                  { icon: Ticket, label: "BMC Remedy" },
-                  { icon: Ticket, label: "Freshservice" },
-                  { icon: Ticket, label: "Zendesk" },
-                ].map((item, index) => (
-                  <motion.div
-                    key={index}
-                    variants={fadeInUp}
-                    className="integration-card flex flex-col items-center justify-center text-center p-6 rounded-lg border border-base-content/20 bg-base-200/50 backdrop-blur-sm transition-all duration-300 group glass-border hover:border-info hover:bg-info/10 hover:shadow-lg hover:shadow-info/20 hover:-translate-y-1"
-                  >
-                    <item.icon
-                      size={36}
-                      className="mb-3 text-info transition-transform duration-300 group-hover:scale-110"
-                    />
-                    <p className="text-base-content font-medium text-sm">
-                      {item.label}
-                    </p>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </motion.div>
 
-            {/* Category: IAM */}
-            <motion.div variants={fadeInUp}>
-              <h3 className="flex items-center gap-3 text-2xl font-semibold text-info mb-6">
-                <User size={28} className="text-primary" />
-                Identity & Access Management
-              </h3>
-              <motion.div
-                variants={staggerContainer}
-                className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"
-              >
-                {[
-                  { icon: User, label: "Active Directory" },
-                  { icon: User, label: "Azure AD" },
-                  { icon: User, label: "Okta" },
-                  { icon: User, label: "Ping Identity" },
-                  { icon: User, label: "OneLogin" },
-                  { icon: User, label: "LDAP/Kerberos" },
-                ].map((item, index) => (
-                  <motion.div
-                    key={index}
-                    variants={fadeInUp}
-                    className="integration-card flex flex-col items-center justify-center text-center p-6 rounded-lg border border-base-content/20 bg-base-200/50 backdrop-blur-sm transition-all duration-300 group glass-border hover:border-info hover:bg-info/10 hover:shadow-lg hover:shadow-info/20 hover:-translate-y-1"
-                  >
-                    <item.icon
-                      size={36}
-                      className="mb-3 text-info transition-transform duration-300 group-hover:scale-110"
-                    />
-                    <p className="text-base-content font-medium text-sm">
-                      {item.label}
-                    </p>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </motion.div>
-          </div>
 
           <motion.p
             variants={fadeInUp}

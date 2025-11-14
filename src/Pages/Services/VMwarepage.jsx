@@ -55,7 +55,7 @@ const PageHero = ({ badge, title, subtitle, buttonText }) => (
 
 const Section = ({ title, subtitle, children, isAlternateBg = false }) => (
   <section className={` ${isAlternateBg ? 'bg-base-200/50' : ''}`}>
-    <div className="container mx-auto px-4">
+    <div className="container mx-auto px-4  py-10">
       <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={sectionTitleVariants} className="text-center mb-16">
         <h2 className="text-3xl sm:text-4xl font-extrabold">{title}</h2>
         {subtitle && <p className="text-lg text-base-content/70 mt-4 max-w-2xl mx-auto">{subtitle}</p>}

@@ -440,27 +440,59 @@ const MegaMenu = ({ type, content }) => {
       )}
 
       {type === "company" && (
-        <div className="flex flex-col gap-3 min-w-[320px]">
-          {data.map((c, i) => {
-            const CompanyIcon = c.icon;
-            return (
-              <Link key={i} to={c.href} className="no-underline">
-                <motion.div
-                  whileHover={{ scale: 1.02, x: 5, background: `hsla(var(--b2))` }}
-                  className="rounded-xl px-6 py-4 transition-all duration-300 transform flex items-center gap-4 border border-transparent hover:border-primary/50"
-                >
-                  <div className="p-2.5 rounded-lg flex-shrink-0" style={{ background: `${c.color}20` }}> {/* Added flex-shrink-0 */}
-                    <CompanyIcon size={20} style={{ color: c.color }}/>
-                  </div>
-                  <div className="text-base font-semibold" style={{ color: c.color }}>
-                    {c.title}
-                  </div>
-                </motion.div>
-              </Link>
-            );
-          })}
-        </div>
-      )}
+  <div className="grid grid-cols-1 gap-4 min-w-[360px]">
+    {data.map((c, i) => {
+      const CompanyIcon = c.icon;
+      return (
+        <Link key={i} to={c.href} className="no-underline group">
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            whileHover={{
+              scale: 1.04,
+              x: 6,
+              boxShadow: "0 8px 25px hsla(var(--p)/0.25)",
+              background:
+                "linear-gradient(135deg, hsla(var(--p)/0.15), hsla(var(--s)/0.15))",
+            }}
+            className="relative rounded-2xl px-6 py-5 transition-all duration-300 flex items-center gap-5 border border-base-content/10 overflow-hidden"
+          >
+            {/* Glow Orb */}
+            <div
+              className="absolute -left-10 top-1/2 -translate-y-1/2 w-32 h-32 rounded-full blur-3xl opacity-0 group-hover:opacity-30 transition-all duration-500"
+              style={{ background: c.color }}
+            ></div>
+
+            {/* Icon Block */}
+            <div
+              className="p-3 rounded-xl flex-shrink-0 shadow-inner transition-all duration-300 group-hover:shadow-lg group-hover:scale-110"
+              style={{
+                background: `${c.color}22`,
+                border: `1px solid ${c.color}40`,
+              }}
+            >
+              <CompanyIcon size={22} style={{ color: c.color }} />
+            </div>
+
+            {/* Texts */}
+            <div className="relative z-10">
+              <h4
+                className="text-lg font-bold tracking-wide group-hover:text-primary transition-colors"
+                style={{ color: c.color }}
+              >
+                {c.title}
+              </h4>
+              <p className="text-xs text-base-content/60 mt-1 group-hover:text-base-content/80 transition-colors">
+                Explore {c.title} →
+              </p>
+            </div>
+          </motion.div>
+        </Link>
+      );
+    })}
+  </div>
+)}
+
     </motion.div>
   );
 };

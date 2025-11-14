@@ -263,9 +263,9 @@ const PAMPage = () => {
               <motion.span
                 variants={floatUp}
                 className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent"
-                style={{ display: "inline-block" }}
+                
               >
-                Privileged Access
+                Privileged Access Management
               </motion.span>{" "}
               is Here
             </motion.h1>

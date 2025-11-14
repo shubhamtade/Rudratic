@@ -78,7 +78,7 @@ const PageHero = ({ badge, title, subtitle, buttonText }) => (
 
 const Section = ({ title, subtitle, children, isAlternateBg = false }) => (
   <section className={` ${isAlternateBg ? 'bg-base-200/50' : ''}`}>
-    <div className="container mx-auto px-4">
+    <div className="container mx-auto px-4 py-5">
       <motion.div
         initial="hidden"
         whileInView="visible"
