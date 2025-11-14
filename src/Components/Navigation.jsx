@@ -57,9 +57,9 @@ const getServicesContent = () => [
 ];
 
 const getCompanyContent = () => [
-  { title: "Solutions", color: "hsl(var(--p))", href: "/solutions", icon: BookOpen },
-  { title: "About us", color: "hsl(var(--s))", href: "/about-us", icon: Users },
-  { title: "Client Success", color: "hsl(var(--p))", href: "/client-success", icon: Briefcase },
+  // { title: "Solutions", color: "hsl(var(--p))", href: "/solutions", icon: BookOpen },
+  { title: "About us", color: "hsl(var(--p))", href: "/about-us", icon: Users },
+  // { title: "Client Success", color: "hsl(var(--p))", href: "/client-success", icon: Briefcase },
   { title: "Why Rudratic", color: "hsl(var(--s))", href: "/why-rudratic", icon: Target },
 ];
 

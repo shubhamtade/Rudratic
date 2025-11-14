@@ -219,7 +219,7 @@ const Footer = () => {
                 <Phone size={14} /> +44 7438618490 / +91 9962233803
               </span>
               <span className="flex items-center gap-2">
-                <MapPin size={14} /> London, UK & Chennai, IN
+                <MapPin size={14} /> London, UK  |  Chennai, IN
               </span>
             </div>
             {/* Copyright */}

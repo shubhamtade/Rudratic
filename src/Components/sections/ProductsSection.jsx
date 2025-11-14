@@ -171,7 +171,7 @@ const ProductsSection = () => {
                   stiffness: 100,
                 }}
                 whileHover={{ y: -10, scale: 1.03 }}
-                className="group relative bg-white/70 dark:bg-base-200/80 backdrop-blur-2xl rounded-3xl border border-base-300 shadow-xl hover:shadow-2xl hover:border-primary/60 transition-all duration-300 p-6 sm:p-8 flex flex-col items-stretch"
+                className="group relative bg-base-300 backdrop-blur-2xl rounded-3xl border border-base-300 shadow-xl hover:shadow-2xl hover:border-primary/60 transition-all duration-300 p-6 sm:p-8 flex flex-col items-stretch"
               >
                 {/* Group badge */}
                 <span className="absolute -top-2 -right-2 bg-gradient-to-r from-primary/20 to-accent/20 text-primary px-3 py-1.5 rounded-full text-xs font-semibold tracking-wide z-20 shadow backdrop-blur border border-primary/10">
