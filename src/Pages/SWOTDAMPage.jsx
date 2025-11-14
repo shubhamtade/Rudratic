@@ -183,19 +183,19 @@ const realWorldImpacts = [
   },
   {
     title: "Supply Chain Optimization",
-    before: "Operations team lacks visibility into supplier performance—takes 6+ weeks to manually analyze data",
+    before: "Operations team lacks visibility into supplier performance takes 6+ weeks to manually analyze data",
     after: "Ops director asks 'Which suppliers have quality issues and what's the cost impact?' → AI correlates supplier, quality, shipment, and cost data → Complete analysis in 4 hours",
     impact: "$2M+ in annual cost savings identified; supplier optimization plan created",
   },
   {
     title: "Customer Success Account Health",
-    before: "CS team manually tracks usage, tickets, and billing across spreadsheets—incomplete picture",
+    before: "CS team manually tracks usage, tickets, and billing across spreadsheets incomplete picture",
     after: "VP Success asks 'Score all accounts for health and growth potential' → AI correlates usage, support tickets, billing, feedback → All accounts scored with risk/opportunity",
     impact: "Proactive upsell to 25 high-growth accounts; churn prevention for 15 at-risk accounts",
   },
   {
     title: "HR Workforce Analytics",
-    before: "HR data scattered across systems—analysis takes weeks and multiple analysts",
+    before: "HR data scattered across systems analysis takes weeks and multiple analysts",
     after: "HR director asks 'Which departments have turnover issues and at-risk employees?' → AI correlates employee, payroll, performance, and retention data → Strategic HR dashboard",
     impact: "High-turnover departments identified; at-risk employees flagged; targeted retention strategies deployed",
   },
@@ -713,7 +713,7 @@ const SWOTDAMCapabilities = ({ fadeInUp }) => (
       The SWOT DAM 3.0 Difference
     </h2>
     <p className="text-center text-base-content/70 mb-12 max-w-3xl mx-auto">
-      SWOT DAM 3.0 isn't just a monitoring tool—it's a complete database
+      SWOT DAM 3.0 isn't just a monitoring tool it's a complete database
       operations platform combining three breakthrough capabilities:
     </p>
 
@@ -730,7 +730,7 @@ const SWOTDAMCapabilities = ({ fadeInUp }) => (
           How It Works:
         </strong>{" "}
         Our AI learns what "normal" database activity looks like in YOUR
-        environment—query patterns, access times, data volumes—creating a
+        environment query patterns, access times, data volumes creating a
         personalized baseline. The moment activity deviates, you're alerted
         instantly.
       </p>
@@ -776,7 +776,7 @@ const SWOTDAMCapabilities = ({ fadeInUp }) => (
           How It Works:
         </strong>{" "}
         When you configure SWOT DAM 3.0, our AI immediately analyzes your entire
-        database—tables, columns, relationships, business meaning. Then it
+        database tables, columns, relationships, business meaning. Then it
         enables non-technical users to query data using plain English instead of
         SQL.
       </p>
@@ -845,7 +845,7 @@ const SWOTDAMCapabilities = ({ fadeInUp }) => (
         <strong className="text-blue-700 dark:text-blue-300">
           Why This Matters:
         </strong>{" "}
-        Compliance isn't about passing audits anymore—it's about avoiding $50M+
+        Compliance isn't about passing audits anymore it's about avoiding $50M+
         fines.
       </p>
     </motion.div>
@@ -1136,7 +1136,7 @@ const SWOTDAMPage = () => {
     { id: "customer-stories", title: "Customer Stories" },
     { id: "use-cases", title: "Core Use Cases" },
     { id: "next-steps", title: "Next Steps" },
-    { id: "pricing", title: "Pricing" },
+    // { id: "pricing", title: "Pricing" },
     { id: "about", title: "About SWOT DAM" },
   ];
 
@@ -1441,7 +1441,7 @@ const SWOTDAMPage = () => {
         </motion.section>
 
         {/* New section for Pricing & Investment */}
-        <motion.section
+        {/* <motion.section
           id="pricing" // Added ID
           ref={sectionRefs.current.pricing} // Added Ref
           initial="hidden"
@@ -1450,7 +1450,7 @@ const SWOTDAMPage = () => {
           variants={fadeInUp}
         >
           <PricingAndInvestment />
-        </motion.section>
+        </motion.section> */}
 
         <motion.section
           id="about" // Added ID

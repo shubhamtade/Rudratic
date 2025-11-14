@@ -815,7 +815,7 @@ const SWOTCloudPAMPage = () => {
           >
             SWOT Cloud PAM was built for the modern security landscape. Unlike
             bolted-on AI additions to legacy platforms, SWOT's intelligence is
-            woven into every component—from credential management to threat
+            woven into every component from credential management to threat
             response. The result: a platform that{" "}
             <strong className="text-primary">
               understands your security environment, predicts emerging threats,
@@ -890,7 +890,7 @@ const SWOTCloudPAMPage = () => {
                 Autonomous Threat Response
               </h4>
               <p className="text-base-content/70 text-sm leading-relaxed">
-                When threats are detected, SWOT responds instantly—revoking
+                When threats are detected, SWOT responds instantly revoking
                 access, enforcing MFA, or terminating sessions without human
                 delay.
               </p>
@@ -1054,7 +1054,7 @@ const SWOTCloudPAMPage = () => {
                 Deployed SWOT's AI-powered UBA to establish behavior baselines
                 for all 2,000 privileged users. Automated compliance reporting
                 eliminated manual evidence collection. AI detected a junior
-                analyst attempting unusual data access patterns—flagging insider
+                analyst attempting unusual data access patterns flagging insider
                 threat weeks before they could exfiltrate data.
               </p>
             </div>
@@ -1209,7 +1209,7 @@ const SWOTCloudPAMPage = () => {
               <p className="text-base-content/80 leading-relaxed">
                 ✓ Centralized third-party access control across all 500 customer
                 environments
-                <br />✓ Support ticket automation—access auto-revoked when
+                <br />✓ Support ticket automation access auto-revoked when
                 tickets close
                 <br />✓ Customer confidence improved (verifiable access audit
                 trails)
@@ -1356,7 +1356,7 @@ const SWOTCloudPAMPage = () => {
             <ul className="ml-5 list-disc text-base-content leading-relaxed">
               <li className="my-2">
                 <strong>Automated Password Rotation:</strong> Eliminates manual
-                password resets—saves 20+ hours per week per admin
+                password resets saves 20+ hours per week per admin
               </li>
               <li className="my-2">
                 <strong>Self-Service Access Requests:</strong> JIT reduces IT
