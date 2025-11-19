@@ -45,7 +45,7 @@ import {
   DollarSignIcon,
   Search,
   Link, // For cost savings
-  Lock
+  Lock,
 } from "lucide-react";
 
 /**
@@ -80,8 +80,16 @@ const CustomStyles = () => (
       z-index: -1;
       filter: blur(80px);
       opacity: 0.55;
-      background: radial-gradient(circle at 20% 30%, rgba(99, 102, 241, 0.9), transparent 18%),
-                  radial-gradient(circle at 80% 70%, rgba(16, 185, 129, 0.85), transparent 18%);
+      background: radial-gradient(
+          circle at 20% 30%,
+          rgba(99, 102, 241, 0.9),
+          transparent 18%
+        ),
+        radial-gradient(
+          circle at 80% 70%,
+          rgba(16, 185, 129, 0.85),
+          transparent 18%
+        );
       transition: opacity 0.5s ease;
     }
 
@@ -95,7 +103,11 @@ const CustomStyles = () => (
       content: "";
       position: absolute;
       inset: -1px;
-      background: linear-gradient(135deg, rgba(96,165,250,0.12), rgba(234,88,12,0.10));
+      background: linear-gradient(
+        135deg,
+        rgba(96, 165, 250, 0.12),
+        rgba(234, 88, 12, 0.1)
+      );
       z-index: -1;
       filter: blur(8px);
       transform: translateZ(0);
@@ -126,14 +138,23 @@ const staggerContainer = {
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
+  },
 };
 
 const floatUp = {
   hidden: { y: 6 },
   visible: {
     y: -6,
-    transition: { repeat: Infinity, repeatType: "reverse", duration: 3, ease: "easeInOut" },
+    transition: {
+      repeat: Infinity,
+      repeatType: "reverse",
+      duration: 3,
+      ease: "easeInOut",
+    },
   },
 };
 
@@ -185,11 +206,11 @@ const MobileSectionNav = ({ sections, activeSection, scrollToSection }) => {
                         setIsMobileMenuOpen(false); // Close menu after navigating
                       }}
                       className={`w-full text-left py-2 px-4 rounded-lg transition-all duration-200 ease-in-out flex items-center gap-2
-                        ${activeSection === section.id
-                          ? "bg-primary/10 text-primary font-semibold shadow-sm"
-                          : "text-base-content/70 hover:bg-base-200 hover:text-base-content"
-                        }`
-                      }
+                        ${
+                          activeSection === section.id
+                            ? "bg-primary/10 text-primary font-semibold shadow-sm"
+                            : "text-base-content/70 hover:bg-base-200 hover:text-base-content"
+                        }`}
                     >
                       <span className="w-1.5 h-1.5 rounded-full bg-current" />
                       {section.title}
@@ -238,9 +259,10 @@ const DotsNavigation = ({ sections, activeSection, scrollToSection }) => {
               {/* Text is now a direct child in the flex layout and always visible */}
               <span
                 className={`whitespace-nowrap text-sm transition-colors duration-200 ease-in-out
-                  ${activeSection === section.id
-                    ? "text-primary font-semibold"
-                    : "text-base-content/70 group-hover:text-base-content"
+                  ${
+                    activeSection === section.id
+                      ? "text-primary font-semibold"
+                      : "text-base-content/70 group-hover:text-base-content"
                   }`}
               >
                 {section.title}
@@ -252,7 +274,6 @@ const DotsNavigation = ({ sections, activeSection, scrollToSection }) => {
     </motion.nav>
   );
 };
-
 
 const PAMPage = () => {
   // Data arrays kept similar to your original but slightly reorganized for animation
@@ -289,7 +310,8 @@ const PAMPage = () => {
     {
       category: "AI Vision Language Processing (VLP)",
       icon: Speech,
-      description: "Revolutionary technology built from the ground up for privileged access management",
+      description:
+        "Revolutionary technology built from the ground up for privileged access management",
       items: [
         {
           title: "Multimodal AI Understanding",
@@ -297,7 +319,7 @@ const PAMPage = () => {
         },
         {
           title: "Context-Aware Threat Detection",
-          desc: "Analyzes the full context of access: who is accessing, what they're accessing, when, from where, and critically—why they're accessing it. Legacy systems miss this context entirely, resulting in false negatives against insider threats.",
+          desc: "Analyzes the full context of access: who is accessing, what they're accessing, when, from where, and critically why they're accessing it. Legacy systems miss this context entirely, resulting in false negatives against insider threats.",
         },
         {
           title: "Zero-Day Attack Prevention",
@@ -345,7 +367,7 @@ const PAMPage = () => {
         },
         {
           title: "Continuous Security Monitoring",
-          desc: "Every access request flows through VLP + LLM analysis. Risk scores adjust in real-time. No more binary 'approve/deny'—access levels adapt to current risk. Always-on security that's always learning.",
+          desc: "Every access request flows through VLP + LLM analysis. Risk scores adjust in real-time. No more binary 'approve/deny' access levels adapt to current risk. Always-on security that's always learning.",
         },
         {
           title: "Predictive Threat Intelligence",
@@ -354,61 +376,124 @@ const PAMPage = () => {
       ],
     },
     {
-        category: "User Behavior Analytics (UBA)",
-        icon: UserCircle2,
-        items: [
-            { title: "Peer-Group Comparisons", desc: "Baseline behavior against similar users. Detects anomalies relative to peers, reducing false positives." },
-            { title: "Adaptive Learning Baselines", desc: "System learns and adapts to legitimate behavior changes. Continuous refinement as organization evolves." },
-            { title: "Real-Time Anomaly Detection", desc: "Immediate alerts when behavior deviates from baselines. Includes unusual file access, data downloads, off-hours activity." },
-            { title: "Insider Threat Investigation", desc: "Complete historical activity records for forensic analysis. Timeline reconstruction of all user actions." },
-        ]
+      category: "User Behavior Analytics (UBA)",
+      icon: UserCircle2,
+      items: [
+        {
+          title: "Peer-Group Comparisons",
+          desc: "Baseline behavior against similar users. Detects anomalies relative to peers, reducing false positives.",
+        },
+        {
+          title: "Adaptive Learning Baselines",
+          desc: "System learns and adapts to legitimate behavior changes. Continuous refinement as organization evolves.",
+        },
+        {
+          title: "Real-Time Anomaly Detection",
+          desc: "Immediate alerts when behavior deviates from baselines. Includes unusual file access, data downloads, off-hours activity.",
+        },
+        {
+          title: "Insider Threat Investigation",
+          desc: "Complete historical activity records for forensic analysis. Timeline reconstruction of all user actions.",
+        },
+      ],
     },
     {
-        category: "Conditional Access Policies",
-        icon: ShieldCheck,
-        items: [
-            { title: "Risk-Based Access Decisions", desc: "Real-time evaluation of multiple signals: user, device, location, network, behavior. Access adjusted based on risk." },
-            { title: "Impossible Travel Detection", desc: "Blocks geographic impossibilities (NYC 9am → Tokyo 10am). Prevents account takeover from distant locations." },
-            { title: "Device Compliance Enforcement", desc: "Access depends on device health: encryption, OS patches, malware. Non-compliant denied or require verification." },
-            { title: "Just-In-Time Access", desc: "Access granted exactly when needed, automatically revoked after. Time-limited credentials eliminate standing privileges." },
-            { title: "Adaptive Authentication", desc: "Authentication adapts to risk level. Low-risk: password. Medium-risk: MFA. High-risk: additional verification." },
-        ]
+      category: "Conditional Access Policies",
+      icon: ShieldCheck,
+      items: [
+        {
+          title: "Risk-Based Access Decisions",
+          desc: "Real-time evaluation of multiple signals: user, device, location, network, behavior. Access adjusted based on risk.",
+        },
+        {
+          title: "Impossible Travel Detection",
+          desc: "Blocks geographic impossibilities (NYC 9am → Tokyo 10am). Prevents account takeover from distant locations.",
+        },
+        {
+          title: "Device Compliance Enforcement",
+          desc: "Access depends on device health: encryption, OS patches, malware. Non-compliant denied or require verification.",
+        },
+        {
+          title: "Just-In-Time Access",
+          desc: "Access granted exactly when needed, automatically revoked after. Time-limited credentials eliminate standing privileges.",
+        },
+        {
+          title: "Adaptive Authentication",
+          desc: "Authentication adapts to risk level. Low-risk: password. Medium-risk: MFA. High-risk: additional verification.",
+        },
+      ],
     },
     {
-        category: "Governance & Access Control",
-        icon: Gem, // Generic governance icon
-        items: [
-            { title: "Privileged Access Governance", desc: "Centralized policies enforced across all privileged accounts. Role-based access with automatic recommendations." },
-            { title: "Zero Standing Privileges", desc: "Eliminate permanent privileged accounts. All access temporary and contextual. Reduces blast radius of compromise." },
-        ]
+      category: "Governance & Access Control",
+      icon: Gem, // Generic governance icon
+      items: [
+        {
+          title: "Privileged Access Governance",
+          desc: "Centralized policies enforced across all privileged accounts. Role-based access with automatic recommendations.",
+        },
+        {
+          title: "Zero Standing Privileges",
+          desc: "Eliminate permanent privileged accounts. All access temporary and contextual. Reduces blast radius of compromise.",
+        },
+      ],
     },
     {
-        category: "Security & Encryption",
-        icon: LockKeyhole, // Re-using for general security
-        items: [
-            { title: "Bring Your Own Key (BYOK)", desc: "Full encryption key control retained. Keys never leave infrastructure. Zero-trust encryption model." },
-            { title: "Session Recording & Monitoring", desc: "AI-powered recording understands actions and meaning. Real-time monitoring with ability to terminate suspicious sessions." },
-            { title: "Passwordless Authentication", desc: "Ephemeral certificates that expire after use. Biometric and hardware token support. Post-quantum cryptography ready." },
-            { title: "End-to-End Encryption", desc: "All connections encrypted with TLS 1.3+. Certificate pinning prevents MITM attacks. HSM support." },
-        ]
+      category: "Security & Encryption",
+      icon: LockKeyhole, // Re-using for general security
+      items: [
+        {
+          title: "Bring Your Own Key (BYOK)",
+          desc: "Full encryption key control retained. Keys never leave infrastructure. Zero-trust encryption model.",
+        },
+        {
+          title: "Session Recording & Monitoring",
+          desc: "AI-powered recording understands actions and meaning. Real-time monitoring with ability to terminate suspicious sessions.",
+        },
+        {
+          title: "Passwordless Authentication",
+          desc: "Ephemeral certificates that expire after use. Biometric and hardware token support. Post-quantum cryptography ready.",
+        },
+        {
+          title: "End-to-End Encryption",
+          desc: "All connections encrypted with TLS 1.3+. Certificate pinning prevents MITM attacks. HSM support.",
+        },
+      ],
     },
     {
-        category: "User & Access Management",
-        icon: Users,
-        items: [
-            { title: "Single Sign-On (SSO) & MFA", desc: "Seamless enterprise identity integration. Multi-factor authentication for all. SAML, OAuth, OIDC support." },
-            { title: "Role & Attribute-Based Access (RBAC/ABAC)", desc: "Flexible models with automatic recommendations. Dynamic role assignment. Fine-grained permissions." },
-            { title: "Privileged Account Discovery & Management", desc: "Automated discovery of all privileged accounts. Shadow IT identification. Continuous discovery." },
-        ]
+      category: "User & Access Management",
+      icon: Users,
+      items: [
+        {
+          title: "Single Sign-On (SSO) & MFA",
+          desc: "Seamless enterprise identity integration. Multi-factor authentication for all. SAML, OAuth, OIDC support.",
+        },
+        {
+          title: "Role & Attribute-Based Access (RBAC/ABAC)",
+          desc: "Flexible models with automatic recommendations. Dynamic role assignment. Fine-grained permissions.",
+        },
+        {
+          title: "Privileged Account Discovery & Management",
+          desc: "Automated discovery of all privileged accounts. Shadow IT identification. Continuous discovery.",
+        },
+      ],
     },
     {
-        category: "Password & Credential Management",
-        icon: KeyRound,
-        items: [
-            { title: "Password Vaulting", desc: "Secure vault with AES-256 encryption. Multi-layer security. Immutable audit logs." },
-            { title: "Automated Password Rotation", desc: "Automatic rotation on custom schedules. Service account management. SSH key lifecycle. API token rotation." },
-            { title: "Policy Enforcement", desc: "Automated enforcement of security policies. Compliance checking and remediation. Exception workflows." },
-        ]
+      category: "Password & Credential Management",
+      icon: KeyRound,
+      items: [
+        {
+          title: "Password Vaulting",
+          desc: "Secure vault with AES-256 encryption. Multi-layer security. Immutable audit logs.",
+        },
+        {
+          title: "Automated Password Rotation",
+          desc: "Automatic rotation on custom schedules. Service account management. SSH key lifecycle. API token rotation.",
+        },
+        {
+          title: "Policy Enforcement",
+          desc: "Automated enforcement of security policies. Compliance checking and remediation. Exception workflows.",
+        },
+      ],
     },
   ];
 
@@ -507,7 +592,8 @@ const PAMPage = () => {
     {
       title: "Vision Language Processing - Data Exfiltration Detection",
       icon: Speech,
-      scenario: "Employee with legitimate access systematically exfiltrates sensitive financial records via approved applications.",
+      scenario:
+        "Employee with legitimate access systematically exfiltrates sensitive financial records via approved applications.",
       challenge: [
         "Employee has legitimate access to financial records (job function)",
         "Using approved applications (file sharing, email)",
@@ -522,12 +608,14 @@ const PAMPage = () => {
         "AI semantic analysis: Flags as high-risk based on contextual understanding",
         "Threat detected in 12 minutes vs. 30+ days traditional",
       ],
-      impact: "Data breach prevented | $4.88M loss avoided | Zero customer impact",
+      impact:
+        "Data breach prevented | $4.88M loss avoided | Zero customer impact",
     },
     {
       title: "User Behavior Analytics - Healthcare Insider Threat",
       icon: UserCircle2,
-      scenario: "Medical records administrator accessing patient data outside normal patterns for identity theft ring.",
+      scenario:
+        "Medical records administrator accessing patient data outside normal patterns for identity theft ring.",
       challenge: [
         "Administrator has legitimate EHR access (job function)",
         "Access times vary: 2am, 3am, 4am (night shift coverage possible)",
@@ -542,12 +630,14 @@ const PAMPage = () => {
         "Pattern recognition: Specific patient targeting detected (not random)",
         "Threat detected in 8 hours, access immediately revoked",
       ],
-      impact: "495+ patient records protected | HIPAA violation prevented | $1.9M penalties avoided",
+      impact:
+        "495+ patient records protected | HIPAA violation prevented | $1.9M penalties avoided",
     },
     {
       title: "Conditional Access - Account Takeover Prevention",
       icon: ShieldCheck,
-      scenario: "Attacker with stolen credentials attempts impossible travel access from unusual location/device.",
+      scenario:
+        "Attacker with stolen credentials attempts impossible travel access from unusual location/device.",
       challenge: [
         "Attacker has valid username and password (leaked on dark web)",
         "One-factor authentication succeeds",
@@ -562,12 +652,14 @@ const PAMPage = () => {
         "Immediate Response: Account holder notified, legitimate access still works",
         "Attack stopped in 5 seconds, $0 fraud loss",
       ],
-      impact: "$4.88M+ fraud prevented | Customer trust maintained | Compliance verified",
+      impact:
+        "$4.88M+ fraud prevented | Customer trust maintained | Compliance verified",
     },
     {
       title: "Financial Services: Regulatory Compliance",
       icon: DollarSignIcon,
-      scenario: "Global bank managing SOX and PCI-DSS compliance, struggling with visibility and manual audits.",
+      scenario:
+        "Global bank managing SOX and PCI-DSS compliance, struggling with visibility and manual audits.",
       challenge: [
         "No centralized privileged account visibility across data centers and cloud",
         "Manual compliance audits taking 3+ weeks per quarter",
@@ -615,7 +707,8 @@ const PAMPage = () => {
     {
       title: "Healthcare: HIPAA Compliance",
       icon: FileText,
-      scenario: "Regional healthcare network facing HIPAA audit failures due to access visibility gaps and insider threats.",
+      scenario:
+        "Regional healthcare network facing HIPAA audit failures due to access visibility gaps and insider threats.",
       challenge: [
         "89% of healthcare organizations report data breaches (2024 statistic)",
         "No centralized audit trail for patient data access across EHR systems",
@@ -663,7 +756,8 @@ const PAMPage = () => {
     {
       title: "SaaS/DevOps: Cloud Security with Zero Deployment Friction",
       icon: Cloud,
-      scenario: "Fast-growing SaaS startup with CI/CD-first culture requiring rapid deployment without security bottlenecks.",
+      scenario:
+        "Fast-growing SaaS startup with CI/CD-first culture requiring rapid deployment without security bottlenecks.",
       challenge: [
         "Service accounts and API tokens scattered across infrastructure (no central management)",
         "DevOps team bypassing security controls to meet deployment deadlines",
@@ -711,45 +805,80 @@ const PAMPage = () => {
   ];
 
   const comparisonTableData = [
-    { capability: "Architecture", legacy: "Rules-based, reactive", swot: "AI-native, proactive" },
-    { capability: "Threat Detection", legacy: "Signature-based", swot: "VLP + LLM + Behavioral" },
-    { capability: "Intent Understanding", legacy: "No context analysis", swot: "Full intent via VLP" },
-    { capability: "Approval Times", legacy: "Hours to days", swot: "Seconds (automated)" },
-    { capability: "Data Privacy", legacy: "Cloud processing", swot: "Offline LLM (no data leaves)" },
-    { capability: "Detection Speed", legacy: "206+ days average", swot: "<15 minutes" },
+    {
+      capability: "Architecture",
+      legacy: "Rules-based, reactive",
+      swot: "AI-native, proactive",
+    },
+    {
+      capability: "Threat Detection",
+      legacy: "Signature-based",
+      swot: "VLP + LLM + Behavioral",
+    },
+    {
+      capability: "Intent Understanding",
+      legacy: "No context analysis",
+      swot: "Full intent via VLP",
+    },
+    {
+      capability: "Approval Times",
+      legacy: "Hours to days",
+      swot: "Seconds (automated)",
+    },
+    {
+      capability: "Data Privacy",
+      legacy: "Cloud processing",
+      swot: "Offline LLM (no data leaves)",
+    },
+    {
+      capability: "Detection Speed",
+      legacy: "206+ days average",
+      swot: "<15 minutes",
+    },
     { capability: "Deployment", legacy: "3–18 months", swot: "2–4 weeks" },
     { capability: "3-Year TCO", legacy: "$1.05M-2.4M", swot: "$650K-950K" },
-    { capability: "Attack Surface Reduction", legacy: "Manual controls", swot: "Automatic JIT (70%)" },
-    { capability: "Zero Trust Ready", legacy: "Manual implementation", swot: "Built-in by design" },
+    {
+      capability: "Attack Surface Reduction",
+      legacy: "Manual controls",
+      swot: "Automatic JIT (70%)",
+    },
+    {
+      capability: "Zero Trust Ready",
+      legacy: "Manual implementation",
+      swot: "Built-in by design",
+    },
   ];
 
   const whyAIBetter = [
     {
       title: "VLP vs. Video Recording",
-      legacy: "Manual video review—time-consuming and subjective, missing sophisticated threats.",
+      legacy:
+        "Manual video review time-consuming and subjective, missing sophisticated threats.",
       swot: "AI analyzes visual, textual, and contextual patterns simultaneously. Understands 'what,' 'why,' and 'intent.' Processes thousands of sessions in seconds.",
       impact: "300% faster threat response.",
     },
     {
       title: "UBA vs. Traditional Logging",
-      legacy: "Manual log review with volume-based alerts causing alert fatigue or missing attacks. No baseline comparison.",
+      legacy:
+        "Manual log review with volume-based alerts causing alert fatigue or missing attacks. No baseline comparison.",
       swot: "ML baselines adapted to users and peer groups. Real-time anomaly detection. Automatic learning reduces false positives.",
       impact: "94% abuse reduction, insider threats caught in hours.",
     },
     {
       title: "Conditional Access vs. RBAC",
-      legacy: "Static roles. Same access regardless of context. Stolen credentials = full access.",
+      legacy:
+        "Static roles. Same access regardless of context. Stolen credentials = full access.",
       swot: "Real-time risk evaluation. Access adjusts dynamically. Impossible travel blocked. Compliance enforced automatically.",
       impact: "87% lateral movement reduction, account takeover in 5 seconds.",
     },
     {
       title: "Intent-Based vs. Signatures",
-      legacy: "Rules-based detection requires known signatures. Zero-day threats bypass detection.",
+      legacy:
+        "Rules-based detection requires known signatures. Zero-day threats bypass detection.",
       swot: "ML detects behavioral deviations. Understands purpose (exfiltration, escalation, recon) regardless of technique. Future-proof.",
       impact: "94-98% detection accuracy with minimal false positives.",
     },
   ];
-
 
   // Simple inline particle SVG (decorative)
   const ParticleSVG = () => (
@@ -840,38 +969,40 @@ const PAMPage = () => {
   // Demo form submit handler
   const handleSubmit = (event) => {
     event.preventDefault();
-    alert('Thank you! Our team will contact you within 1 hour to schedule your demo.');
+    alert(
+      "Thank you! Our team will contact you within 1 hour to schedule your demo."
+    );
     event.target.reset();
   };
 
   return (
     <div className="relative bg-base-100 text-base-content overflow-x-hidden">
       <CustomStyles />
-
       {/* Mobile Navigation (button + overlay menu) */}
       <MobileSectionNav
         sections={sections}
         activeSection={activeSection}
         scrollToSection={scrollToSection}
       />
-
       {/* Desktop Dots Navigation */}
       <DotsNavigation
         sections={sections}
         activeSection={activeSection}
         scrollToSection={scrollToSection}
       />
-
       {/* Main Content Wrapper */}
       <div className="relative z-10">
-
         {/* Particle / background layer */}
         <div className="particle-wrap" aria-hidden>
           <ParticleSVG />
         </div>
 
         {/* HERO */}
-        <header id="hero" ref={sectionRefs.current.hero} className="relative container mx-auto px-6 pt-36 pb-20 z-10">
+        <header
+          id="hero"
+          ref={sectionRefs.current.hero}
+          className="relative container mx-auto px-6 pt-36 pb-20 z-10"
+        >
           <div className="hero-glow" aria-hidden />
           <motion.div
             initial="hidden"
@@ -892,23 +1023,33 @@ const PAMPage = () => {
                 <motion.span
                   variants={floatUp}
                   className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent"
-
                 >
                   Privileged Access Management
                 </motion.span>{" "}
                 is Here
               </motion.h1>
-              <motion.p variants={fadeInUp} className="text-lg text-base-content/70 mt-6 max-w-2xl mx-auto">
-                SWOT PAM is the world's first AI-native Privileged Access Management platform, built from the ground up to address the new and evolving cyber threat landscape. Our core innovation combines Vision Language Processing (VLP) and Offline LLM to understand, predict, and proactively secure privileged access like no other solution on the market.
+              <motion.p
+                variants={fadeInUp}
+                className="text-lg text-base-content/70 mt-6 max-w-2xl mx-auto"
+              >
+                SWOT PAM is the world's first AI-native Privileged Access
+                Management platform, built from the ground up to address the new
+                and evolving cyber threat landscape. Our core innovation
+                combines Vision Language Processing (VLP) and Offline LLM to
+                understand, predict, and proactively secure privileged access
+                like no other solution on the market.
               </motion.p>
             </motion.div>
 
-            <motion.div variants={fadeInUp} className="mt-8 flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <motion.div
+              variants={fadeInUp}
+              className="mt-8 flex flex-col sm:flex-row gap-4 justify-center items-center"
+            >
               <motion.button
                 {...cardHover}
                 className="btn btn-primary btn-lg shadow-lg flex items-center gap-3 px-6"
                 aria-label="Schedule a demo"
-                onClick={() => scrollToSection('cta')} // Link to CTA section
+                onClick={() => scrollToSection("cta")} // Link to CTA section
               >
                 Schedule a Demo
                 <ArrowRight size={16} />
@@ -918,7 +1059,7 @@ const PAMPage = () => {
                 {...cardHover}
                 className="btn btn-ghost btn-lg px-6"
                 aria-label="Explore Innovation"
-                onClick={() => scrollToSection('advanced-features')} // Link to detailed features
+                onClick={() => scrollToSection("advanced-features")} // Link to detailed features
               >
                 Explore Innovation
               </motion.button>
@@ -935,9 +1076,15 @@ const PAMPage = () => {
                   <Brain size={22} className="text-accent" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-accent">Core Innovation: VLP + Offline LLM</h3>
+                  <h3 className="text-lg font-bold text-accent">
+                    Core Innovation: VLP + Offline LLM
+                  </h3>
                   <p className="text-base-content/70 mt-1">
-                    Our unique combination enables us to understand context, intent, and behavior patterns with unprecedented accuracy all while maintaining complete data privacy and security. This is not an add-on; it's the foundation of everything we build.
+                    Our unique combination enables us to understand context,
+                    intent, and behavior patterns with unprecedented accuracy
+                    all while maintaining complete data privacy and security.
+                    This is not an add-on; it's the foundation of everything we
+                    build.
                   </p>
                 </div>
               </div>
@@ -955,7 +1102,11 @@ const PAMPage = () => {
           variants={staggerContainer}
           className="container mx-auto px-6 py-12 relative z-10"
         >
-          <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-bold mb-8 text-center" style={{ color: "#264082" }}>
+          <motion.h2
+            variants={fadeInUp}
+            className="text-3xl md:text-4xl font-bold mb-8 text-center"
+            style={{ color: "#264082" }}
+          >
             Why Organizations Choose SWOT PAM
           </motion.h2>
 
@@ -964,11 +1115,19 @@ const PAMPage = () => {
               <motion.div
                 key={idx}
                 variants={fadeInUp}
-                whileHover={{ translateY: -6, boxShadow: "0 18px 32px -18px rgba(38,64,130,0.22)" }}
+                whileHover={{
+                  translateY: -6,
+                  boxShadow: "0 18px 32px -18px rgba(38,64,130,0.22)",
+                }}
                 className="relative p-6 rounded-xl tilt-3d text-white shadow-xl"
-                style={{ background: "linear-gradient(180deg,#264082,#1F3B6D)" }}
+                style={{
+                  background: "linear-gradient(180deg,#264082,#1F3B6D)",
+                }}
               >
-                <div className="text-4xl md:text-5xl font-extrabold mb-2" style={{ color: "#F7CB32" }}>
+                <div
+                  className="text-4xl md:text-5xl font-extrabold mb-2"
+                  style={{ color: "#F7CB32" }}
+                >
                   {s.number}
                 </div>
                 <div className="text-sm opacity-90">{s.description}</div>
@@ -987,7 +1146,10 @@ const PAMPage = () => {
             viewport={{ once: true, amount: 0.3 }}
             variants={staggerContainer}
           >
-            <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-bold mb-8 text-center">
+            <motion.h2
+              variants={fadeInUp}
+              className="text-3xl md:text-4xl font-bold mb-8 text-center"
+            >
               Three Pillars of SWOT PAM
             </motion.h2>
 
@@ -1001,14 +1163,21 @@ const PAMPage = () => {
                     {...cardHover}
                     className="pillar-card card p-8 text-center flex flex-col glass-border tilt-3d"
                   >
-                    <motion.div variants={floatUp} className="mx-auto mb-6 inline-block p-4 rounded-full bg-accent/10">
+                    <motion.div
+                      variants={floatUp}
+                      className="mx-auto mb-6 inline-block p-4 rounded-full bg-accent/10"
+                    >
                       <Icon size={36} className="text-accent" />
                     </motion.div>
 
                     <h3 className="font-bold text-xl mb-3">{p.title}</h3>
-                    <p className="text-base-content/70 mb-6 flex-grow">{p.desc}</p>
+                    <p className="text-base-content/70 mb-6 flex-grow">
+                      {p.desc}
+                    </p>
 
-                    <div className="mt-auto badge badge-lg bg-success/10 text-success font-semibold p-3 rounded-md">{p.metric}</div>
+                    <div className="mt-auto badge badge-lg bg-success/10 text-success font-semibold p-3 rounded-md">
+                      {p.metric}
+                    </div>
                   </motion.article>
                 );
               })}
@@ -1024,11 +1193,19 @@ const PAMPage = () => {
             viewport={{ once: true, amount: 0.2 }}
             variants={staggerContainer}
           >
-            <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-bold mb-4 text-center" style={{ color: "#264082" }}>
+            <motion.h2
+              variants={fadeInUp}
+              className="text-3xl md:text-4xl font-bold mb-4 text-center"
+              style={{ color: "#264082" }}
+            >
               Advanced Features & Capabilities
             </motion.h2>
-            <motion.p variants={fadeInUp} className="text-center text-base-content/70 mb-10 max-w-2xl mx-auto">
-              Deep dive into the enterprise-grade features built for modern security challenges, powered by AI.
+            <motion.p
+              variants={fadeInUp}
+              className="text-center text-base-content/70 mb-10 max-w-2xl mx-auto"
+            >
+              Deep dive into the enterprise-grade features built for modern
+              security challenges, powered by AI.
             </motion.p>
 
             <div className="space-y-12">
@@ -1037,10 +1214,19 @@ const PAMPage = () => {
                 return (
                   <motion.div key={catIdx} variants={fadeInUp}>
                     <div className="flex items-center gap-3 mb-6 pb-4 border-b border-base-content/10">
-                        <CategoryIcon size={28} className="text-primary" />
-                        <h3 className="text-2xl font-bold text-primary">{category.category}</h3>
+                      <CategoryIcon size={28} className="text-primary" />
+                      <h3 className="text-2xl font-bold text-primary">
+                        {category.category}
+                      </h3>
                     </div>
-                    {category.description && <motion.p variants={fadeInUp} className="text-base-content/70 mb-6">{category.description}</motion.p>}
+                    {category.description && (
+                      <motion.p
+                        variants={fadeInUp}
+                        className="text-base-content/70 mb-6"
+                      >
+                        {category.description}
+                      </motion.p>
+                    )}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                       {category.items.map((feature, featIdx) => (
                         <motion.div
@@ -1048,8 +1234,12 @@ const PAMPage = () => {
                           variants={fadeInUp}
                           className="card bg-base-100 p-6 border border-base-content/10 flex flex-col glass-border"
                         >
-                          <h4 className="font-bold text-lg mb-2 text-base-content">{feature.title}</h4>
-                          <p className="text-sm text-base-content/70 flex-grow">{feature.desc}</p>
+                          <h4 className="font-bold text-lg mb-2 text-base-content">
+                            {feature.title}
+                          </h4>
+                          <p className="text-sm text-base-content/70 flex-grow">
+                            {feature.desc}
+                          </p>
                         </motion.div>
                       ))}
                     </div>
@@ -1068,17 +1258,26 @@ const PAMPage = () => {
             viewport={{ once: true, amount: 0.2 }}
             variants={staggerContainer}
           >
-            <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-bold mb-4 text-center" style={{ color: "#264082" }}>
+            <motion.h2
+              variants={fadeInUp}
+              className="text-3xl md:text-4xl font-bold mb-4 text-center"
+              style={{ color: "#264082" }}
+            >
               Enterprise Integration Ecosystem
             </motion.h2>
-            <motion.p variants={fadeInUp} className="text-center text-base-content/70 mb-10 max-w-2xl mx-auto">
+            <motion.p
+              variants={fadeInUp}
+              className="text-center text-base-content/70 mb-10 max-w-2xl mx-auto"
+            >
               50+ pre-built integrations with your enterprise security stack.
             </motion.p>
 
             <div className="space-y-10">
               {integrationCategories.map((category, catIdx) => (
                 <motion.div key={catIdx} variants={fadeInUp}>
-                  <h3 className="text-xl font-bold text-primary mb-6">{category.title}</h3>
+                  <h3 className="text-xl font-bold text-primary mb-6">
+                    {category.title}
+                  </h3>
                   <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
                     {category.integrations.map((integration, intIdx) => {
                       const IntegrationIcon = integration.icon;
@@ -1086,11 +1285,19 @@ const PAMPage = () => {
                         <motion.div
                           key={intIdx}
                           variants={fadeInUp}
-                          whileHover={{ y: -4, boxShadow: "0 8px 16px -8px rgba(38,64,130,0.15)" }}
+                          whileHover={{
+                            y: -4,
+                            boxShadow: "0 8px 16px -8px rgba(38,64,130,0.15)",
+                          }}
                           className="card bg-base-100 p-4 rounded-lg border border-base-content/10 text-center flex flex-col items-center justify-center glass-border"
                         >
-                          <IntegrationIcon size={32} className="text-accent mb-2" />
-                          <p className="text-sm font-semibold text-base-content">{integration.name}</p>
+                          <IntegrationIcon
+                            size={32}
+                            className="text-accent mb-2"
+                          />
+                          <p className="text-sm font-semibold text-base-content">
+                            {integration.name}
+                          </p>
                         </motion.div>
                       );
                     })}
@@ -1109,10 +1316,17 @@ const PAMPage = () => {
             viewport={{ once: true, amount: 0.1 }}
             variants={staggerContainer}
           >
-            <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-bold mb-4 text-center" style={{ color: "#264082" }}>
+            <motion.h2
+              variants={fadeInUp}
+              className="text-3xl md:text-4xl font-bold mb-4 text-center"
+              style={{ color: "#264082" }}
+            >
               Real-World Use Cases with AI Capabilities
             </motion.h2>
-            <motion.p variants={fadeInUp} className="text-center text-base-content/70 mb-10 max-w-2xl mx-auto">
+            <motion.p
+              variants={fadeInUp}
+              className="text-center text-base-content/70 mb-10 max-w-2xl mx-auto"
+            >
               VLP, UBA, and Conditional Access solving real security challenges.
             </motion.p>
 
@@ -1120,27 +1334,43 @@ const PAMPage = () => {
               {useCases.map((useCase, ucIdx) => {
                 const UseCaseIcon = useCase.icon;
                 return (
-                  <motion.div key={ucIdx} variants={fadeInUp} className="usecase-detail bg-base-100 p-8 rounded-xl shadow-lg border-l-4 border-primary">
+                  <motion.div
+                    key={ucIdx}
+                    variants={fadeInUp}
+                    className="usecase-detail bg-base-100 p-8 rounded-xl shadow-lg border-l-4 border-primary"
+                  >
                     <div className="flex items-center gap-3 mb-4">
-                        <UseCaseIcon size={28} className="text-primary" />
-                        <h3 className="text-2xl font-bold text-base-content">{useCase.title}</h3>
+                      <UseCaseIcon size={28} className="text-primary" />
+                      <h3 className="text-2xl font-bold text-base-content">
+                        {useCase.title}
+                      </h3>
                     </div>
-                    <p className="text-base-content/70 mb-6">{useCase.scenario}</p>
+                    <p className="text-base-content/70 mb-6">
+                      {useCase.scenario}
+                    </p>
 
                     {useCase.challenge && (
                       <div className="bg-base-200 p-6 rounded-lg mb-6 border-l-4 border-warning">
-                        <h4 className="font-bold text-warning mb-3">Challenge (Legacy PAM Misses)</h4>
+                        <h4 className="font-bold text-warning mb-3">
+                          Challenge (Legacy PAM Misses)
+                        </h4>
                         <ul className="list-disc list-inside text-base-content/70 space-y-2">
-                          {useCase.challenge.map((item, i) => <li key={i}>{item}</li>)}
+                          {useCase.challenge.map((item, i) => (
+                            <li key={i}>{item}</li>
+                          ))}
                         </ul>
                       </div>
                     )}
 
                     {useCase.solution && (
                       <div className="bg-base-200 p-6 rounded-lg mb-6 border-l-4 border-success">
-                        <h4 className="font-bold text-success mb-3">SWOT PAM Solution</h4>
+                        <h4 className="font-bold text-success mb-3">
+                          SWOT PAM Solution
+                        </h4>
                         <ul className="list-disc list-inside text-base-content/70 space-y-2">
-                          {useCase.solution.map((item, i) => <li key={i}>{item}</li>)}
+                          {useCase.solution.map((item, i) => (
+                            <li key={i}>{item}</li>
+                          ))}
                         </ul>
                       </div>
                     )}
@@ -1153,13 +1383,22 @@ const PAMPage = () => {
 
                     {useCase.quantifiedResults && (
                       <div className="mt-8 bg-success/10 p-6 rounded-lg border-l-4 border-success">
-                        <h4 className="font-bold text-success mb-4">Quantified Results (Year 1)</h4>
+                        <h4 className="font-bold text-success mb-4">
+                          Quantified Results (Year 1)
+                        </h4>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                           {useCase.quantifiedResults.map((result, resIdx) => (
-                            <div key={resIdx} className="bg-base-100 p-4 rounded-md border border-success/30">
-                              <h5 className="font-bold text-success mb-2">{result.category}</h5>
+                            <div
+                              key={resIdx}
+                              className="bg-base-100 p-4 rounded-md border border-success/30"
+                            >
+                              <h5 className="font-bold text-success mb-2">
+                                {result.category}
+                              </h5>
                               <ul className="list-disc list-inside text-base-content/70 text-sm space-y-1">
-                                {result.items.map((item, itemIdx) => <li key={itemIdx}>{item}</li>)}
+                                {result.items.map((item, itemIdx) => (
+                                  <li key={itemIdx}>{item}</li>
+                                ))}
                               </ul>
                             </div>
                           ))}
@@ -1172,7 +1411,6 @@ const PAMPage = () => {
             </div>
           </motion.section>
 
-
           {/* COMPARISON */}
           <motion.section
             id="comparison"
@@ -1182,15 +1420,27 @@ const PAMPage = () => {
             viewport={{ once: true, amount: 0.2 }}
             variants={staggerContainer}
           >
-            <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-bold mb-4 text-center" style={{ color: "#264082" }}>
+            <motion.h2
+              variants={fadeInUp}
+              className="text-3xl md:text-4xl font-bold mb-4 text-center"
+              style={{ color: "#264082" }}
+            >
               SWOT PAM vs. Legacy PAM Solutions
             </motion.h2>
-            <motion.p variants={fadeInUp} className="text-center text-base-content/70 mb-10 max-w-2xl mx-auto">
+            <motion.p
+              variants={fadeInUp}
+              className="text-center text-base-content/70 mb-10 max-w-2xl mx-auto"
+            >
               AI-native architecture delivers revolutionary results.
             </motion.p>
 
-            <h3 className="text-xl font-bold text-primary mb-6">📊 Capability Comparison</h3>
-            <motion.div variants={fadeInUp} className="overflow-x-auto mb-12 shadow-lg rounded-lg border border-base-content/10">
+            <h3 className="text-xl font-bold text-primary mb-6">
+              📊 Capability Comparison
+            </h3>
+            <motion.div
+              variants={fadeInUp}
+              className="overflow-x-auto mb-12 shadow-lg rounded-lg border border-base-content/10"
+            >
               <table className="table w-full text-base-content">
                 <thead>
                   <tr className="bg-primary text-primary-content">
@@ -1217,7 +1467,9 @@ const PAMPage = () => {
               </table>
             </motion.div>
 
-            <h3 className="text-xl font-bold text-primary mb-6">💡 Why AI-Native is Better</h3>
+            <h3 className="text-xl font-bold text-primary mb-6">
+              💡 Why AI-Native is Better
+            </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {whyAIBetter.map((item, idx) => (
                 <motion.div
@@ -1227,10 +1479,12 @@ const PAMPage = () => {
                 >
                   <h4 className="font-bold text-info mb-3">{item.title}</h4>
                   <p className="text-sm text-base-content/70 mb-2">
-                    <span className="font-bold text-warning">Legacy:</span> {item.legacy}
+                    <span className="font-bold text-warning">Legacy:</span>{" "}
+                    {item.legacy}
                   </p>
                   <p className="text-sm text-base-content/70 mb-4">
-                    <span className="font-bold text-success">SWOT:</span> {item.swot}
+                    <span className="font-bold text-success">SWOT:</span>{" "}
+                    {item.swot}
                   </p>
                   <div className="flex items-center gap-2 text-sm font-medium p-2 rounded-lg bg-success/10 text-success">
                     <div className="w-1 h-5 rounded-sm bg-success" />
@@ -1250,7 +1504,10 @@ const PAMPage = () => {
             viewport={{ once: true, amount: 0.2 }}
             variants={staggerContainer}
           >
-            <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-bold mb-8 text-center">
+            <motion.h2
+              variants={fadeInUp}
+              className="text-3xl md:text-4xl font-bold mb-8 text-center"
+            >
               Strategic Business Outcomes
             </motion.h2>
 
@@ -1265,18 +1522,33 @@ const PAMPage = () => {
                   benefits: [
                     {
                       title: "Enhanced Cyber Resilience",
-                      shortDesc: "Detect and respond to threats in minutes instead of months, reducing breach impact window by 95%.",
-                      highlights: ["80% of breaches involve privileged accounts", "94% reduction in privilege abuse", "MTTR: 206+ days → <15 minutes"],
+                      shortDesc:
+                        "Detect and respond to threats in minutes instead of months, reducing breach impact window by 95%.",
+                      highlights: [
+                        "80% of breaches involve privileged accounts",
+                        "94% reduction in privilege abuse",
+                        "MTTR: 206+ days → <15 minutes",
+                      ],
                     },
                     {
                       title: "Insider Threat Prevention",
-                      shortDesc: "Real-time behavior analytics detects malicious activities before data loss.",
-                      highlights: ["68% of breaches involve human element", "100% session recording", "Immediate revocation"],
+                      shortDesc:
+                        "Real-time behavior analytics detects malicious activities before data loss.",
+                      highlights: [
+                        "68% of breaches involve human element",
+                        "100% session recording",
+                        "Immediate revocation",
+                      ],
                     },
                     {
                       title: "Reduced Attack Surface",
-                      shortDesc: "Zero standing privileges and least-privilege enforcement eliminate vectors.",
-                      highlights: ["50% reduction in cyberattacks", "87% reduction in lateral movement", "Zero standing privileges"],
+                      shortDesc:
+                        "Zero standing privileges and least-privilege enforcement eliminate vectors.",
+                      highlights: [
+                        "50% reduction in cyberattacks",
+                        "87% reduction in lateral movement",
+                        "Zero standing privileges",
+                      ],
                     },
                   ],
                 },
@@ -1288,18 +1560,33 @@ const PAMPage = () => {
                   benefits: [
                     {
                       title: "Regulatory Compliance & Governance",
-                      shortDesc: "Automated compliance with NIST, HIPAA, GDPR, SOX, and PCI-DSS.",
-                      highlights: ["80% faster audits: 3 weeks → 2 days", "$1.9M annual penalties avoided", "Board-level visibility"],
+                      shortDesc:
+                        "Automated compliance with NIST, HIPAA, GDPR, SOX, and PCI-DSS.",
+                      highlights: [
+                        "80% faster audits: 3 weeks → 2 days",
+                        "$1.9M annual penalties avoided",
+                        "Board-level visibility",
+                      ],
                     },
                     {
                       title: "Improved Operational Efficiency",
-                      shortDesc: "Automation reduces IT manual effort by 60-70%.",
-                      highlights: ["5 weeks/year saved per admin", "60% reduction in errors", "8 FTE → 2 FTE staffing"],
+                      shortDesc:
+                        "Automation reduces IT manual effort by 60-70%.",
+                      highlights: [
+                        "5 weeks/year saved per admin",
+                        "60% reduction in errors",
+                        "8 FTE → 2 FTE staffing",
+                      ],
                     },
                     {
                       title: "Business Continuity",
-                      shortDesc: "Zero standing privileges ensure uninterrupted operations.",
-                      highlights: ["99.99% uptime SLA", "Automatic containment", "Disaster recovery ready"],
+                      shortDesc:
+                        "Zero standing privileges ensure uninterrupted operations.",
+                      highlights: [
+                        "99.99% uptime SLA",
+                        "Automatic containment",
+                        "Disaster recovery ready",
+                      ],
                     },
                   ],
                 },
@@ -1312,17 +1599,31 @@ const PAMPage = () => {
                     {
                       title: "Cost Savings & Efficiency",
                       shortDesc: "70% lower TCO with rapid deployment.",
-                      highlights: ["$650K-950K vs $2.0M-2.4M over 3 years", "$480K annual labor savings", "ROI in 6-12 months"],
+                      highlights: [
+                        "$650K-950K vs $2.0M-2.4M over 3 years",
+                        "$480K annual labor savings",
+                        "ROI in 6-12 months",
+                      ],
                     },
                     {
                       title: "Insurance Premium Reduction",
-                      shortDesc: "Robust security lowers cyber insurance costs.",
-                      highlights: ["20-30% reduction in premiums", "$50K-200K annual savings", "Better risk rating"],
+                      shortDesc:
+                        "Robust security lowers cyber insurance costs.",
+                      highlights: [
+                        "20-30% reduction in premiums",
+                        "$50K-200K annual savings",
+                        "Better risk rating",
+                      ],
                     },
                     {
                       title: "Competitive Advantage",
-                      shortDesc: "Move 80% faster with cloud-native AI architecture.",
-                      highlights: ["2-4 week deployment", "95% user adoption", "DevOps-friendly"],
+                      shortDesc:
+                        "Move 80% faster with cloud-native AI architecture.",
+                      highlights: [
+                        "2-4 week deployment",
+                        "95% user adoption",
+                        "DevOps-friendly",
+                      ],
                     },
                   ],
                 },
@@ -1331,11 +1632,19 @@ const PAMPage = () => {
                 return (
                   <motion.div key={ti} variants={fadeInUp}>
                     <div className="flex items-center border-b pb-4 mb-6 border-base-content/20">
-                      <div className="inline-block p-2 rounded-full mr-3" style={{ backgroundColor: `${tier.titleColor}1A` }}>
+                      <div
+                        className="inline-block p-2 rounded-full mr-3"
+                        style={{ backgroundColor: `${tier.titleColor}1A` }}
+                      >
                         <Icon size={22} style={{ color: tier.titleColor }} />
                       </div>
-                      <h3 className="text-2xl font-bold flex items-center" style={{ color: tier.titleColor }}>
-                        <span className="font-light text-base-content/50 mr-3 text-lg">{tier.tier}</span>
+                      <h3
+                        className="text-2xl font-bold flex items-center"
+                        style={{ color: tier.titleColor }}
+                      >
+                        <span className="font-light text-base-content/50 mr-3 text-lg">
+                          {tier.tier}
+                        </span>
                         {tier.title}
                       </h3>
                     </div>
@@ -1345,18 +1654,37 @@ const PAMPage = () => {
                         <motion.div
                           key={bi}
                           variants={fadeInUp}
-                          whileHover={{ y: -6, boxShadow: "0 18px 30px -18px rgba(16,185,129,0.10)" }}
+                          whileHover={{
+                            y: -6,
+                            boxShadow:
+                              "0 18px 30px -18px rgba(16,185,129,0.10)",
+                          }}
                           className="card bg-base-100 p-6 border border-base-content/10 flex flex-col glass-border"
                         >
-                          <h4 className="font-bold mb-2 text-lg" style={{ color: "#264082" }}>
+                          <h4
+                            className="font-bold mb-2 text-lg"
+                            style={{ color: "#264082" }}
+                          >
                             {b.title}
                           </h4>
-                          <p className="text-sm text-base-content/70 mb-4 flex-grow">{b.shortDesc}</p>
+                          <p className="text-sm text-base-content/70 mb-4 flex-grow">
+                            {b.shortDesc}
+                          </p>
 
                           <div className="mt-auto space-y-3">
                             {b.highlights.map((h, hi) => (
-                              <div key={hi} className="flex items-center gap-2 text-sm font-medium p-2 rounded-lg" style={{ backgroundColor: "#E8F5E9", color: "#388E3C" }}>
-                                <div className="w-1 h-5 rounded-sm" style={{ backgroundColor: "#388E3C" }} />
+                              <div
+                                key={hi}
+                                className="flex items-center gap-2 text-sm font-medium p-2 rounded-lg"
+                                style={{
+                                  backgroundColor: "#E8F5E9",
+                                  color: "#388E3C",
+                                }}
+                              >
+                                <div
+                                  className="w-1 h-5 rounded-sm"
+                                  style={{ backgroundColor: "#388E3C" }}
+                                />
                                 {h}
                               </div>
                             ))}
@@ -1381,15 +1709,21 @@ const PAMPage = () => {
             className="mt-12"
           >
             <div className="relative rounded-2xl p-10 md:p-16 text-center overflow-hidden bg-gradient-to-r from-primary to-accent text-primary-content shadow-2xl shadow-primary/30">
-              <h2 className="text-3xl font-bold mb-4">Ready to See the Future of PAM?</h2>
-              <p className="max-w-2xl mx-auto mb-8 text-primary-content/85">Stop chasing threats and start preventing them. Schedule a personalized demo to see how SWOT's AI-native PAM can secure your organization.</p>
+              <h2 className="text-3xl font-bold mb-4">
+                Ready to See the Future of PAM?
+              </h2>
+              <p className="max-w-2xl mx-auto mb-8 text-primary-content/85">
+                Stop chasing threats and start preventing them. Schedule a
+                personalized demo to see how SWOT's AI-native PAM can secure
+                your organization.
+              </p>
 
               <div className="flex justify-center gap-4">
                 <motion.button
                   {...cardHover}
                   className="btn btn-neutral btn-lg px-6"
                   aria-label="Request your free demo"
-                  onClick={() => scrollToSection('contact-form')} // Link to contact form below
+                  onClick={() => scrollToSection("contact-form")} // Link to contact form below
                 >
                   Request Your Free Demo
                 </motion.button>
@@ -1399,7 +1733,7 @@ const PAMPage = () => {
                   className="btn btn-ghost btn-lg px-6"
                   {...cardHover}
                   aria-label="Contact sales"
-                  onClick={() => scrollToSection('contact-form')} // Link to contact form below
+                  onClick={() => scrollToSection("contact-form")} // Link to contact form below
                 >
                   Contact Sales
                 </motion.a>
@@ -1408,68 +1742,138 @@ const PAMPage = () => {
 
             {/* Contact Form Section */}
             <section
-                id="contact-form"
-                ref={sectionRefs.current.cta} // Reusing CTA ref or create a new one if preferred
-                className="mt-12 max-w-2xl mx-auto"
+              id="contact-form"
+              ref={sectionRefs.current.cta} // Reusing CTA ref or create a new one if preferred
+              className="mt-12 max-w-2xl mx-auto"
             >
-                <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-bold mb-4 text-center" style={{ color: "#264082" }}>
-                    Schedule Your Demo
-                </motion.h2>
-                <motion.p variants={fadeInUp} className="text-center text-base-content/70 mb-10">
-                    Experience AI-native PAM in action.
-                </motion.p>
-                <motion.form
-                    onSubmit={handleSubmit}
-                    variants={fadeInUp}
-                    className="bg-base-100 p-8 rounded-xl shadow-lg border border-base-content/10 space-y-6"
-                >
-                    <div>
-                        <label htmlFor="fullName" className="block text-sm font-bold text-primary mb-2">Full Name <span className="text-error">*</span></label>
-                        <input type="text" id="fullName" required className="input input-bordered w-full" placeholder="John Doe" />
-                    </div>
-                    <div>
-                        <label htmlFor="company" className="block text-sm font-bold text-primary mb-2">Company <span className="text-error">*</span></label>
-                        <input type="text" id="company" required className="input input-bordered w-full" placeholder="Acme Corp" />
-                    </div>
-                    <div>
-                        <label htmlFor="email" className="block text-sm font-bold text-primary mb-2">Email <span className="text-error">*</span></label>
-                        <input type="email" id="email" required className="input input-bordered w-full" placeholder="john.doe@example.com" />
-                    </div>
-                    <div>
-                        <label htmlFor="phone" className="block text-sm font-bold text-primary mb-2">Phone</label>
-                        <input type="tel" id="phone" className="input input-bordered w-full" placeholder="+1 (555) 123-4567" />
-                    </div>
-                    <div>
-                        <label htmlFor="interest" className="block text-sm font-bold text-primary mb-2">Interested In</label>
-                        <select id="interest" className="select select-bordered w-full">
-                            <option>VLP + Offline LLM Demo</option>
-                            <option>Intent-Aware Approvals</option>
-                            <option>Threat Detection Capabilities</option>
-                            <option>Complete Platform</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label htmlFor="message" className="block text-sm font-bold text-primary mb-2">Message</label>
-                        <textarea id="message" className="textarea textarea-bordered w-full h-32" placeholder="Tell us about your security challenges..."></textarea>
-                    </div>
-                    <motion.button
-                        {...cardHover}
-                        type="submit"
-                        className="btn btn-primary btn-lg w-full"
-                    >
-                        Request Demo
-                    </motion.button>
-                </motion.form>
-                <div className="mt-6 bg-info/10 border-l-4 border-info p-6 rounded-lg text-info">
-                    <p className="font-bold">💚 30-Day Free Trial</p>
-                    <p className="text-sm mt-1">Full access to all capabilities. No credit card required.</p>
+              <motion.h2
+                variants={fadeInUp}
+                className="text-3xl md:text-4xl font-bold mb-4 text-center"
+                style={{ color: "#264082" }}
+              >
+                Schedule Your Demo
+              </motion.h2>
+              <motion.p
+                variants={fadeInUp}
+                className="text-center text-base-content/70 mb-10"
+              >
+                Experience AI-native PAM in action.
+              </motion.p>
+              <motion.form
+                onSubmit={handleSubmit}
+                variants={fadeInUp}
+                className="bg-base-100 p-8 rounded-xl shadow-lg border border-base-content/10 space-y-6"
+              >
+                <div>
+                  <label
+                    htmlFor="fullName"
+                    className="block text-sm font-bold text-primary mb-2"
+                  >
+                    Full Name <span className="text-error">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="fullName"
+                    required
+                    className="input input-bordered w-full"
+                    placeholder="John Doe"
+                  />
                 </div>
+                <div>
+                  <label
+                    htmlFor="company"
+                    className="block text-sm font-bold text-primary mb-2"
+                  >
+                    Company <span className="text-error">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="company"
+                    required
+                    className="input input-bordered w-full"
+                    placeholder="Acme Corp"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-bold text-primary mb-2"
+                  >
+                    Email <span className="text-error">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    required
+                    className="input input-bordered w-full"
+                    placeholder="john.doe@example.com"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="phone"
+                    className="block text-sm font-bold text-primary mb-2"
+                  >
+                    Phone
+                  </label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    className="input input-bordered w-full"
+                    placeholder="+1 (555) 123-4567"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="interest"
+                    className="block text-sm font-bold text-primary mb-2"
+                  >
+                    Interested In
+                  </label>
+                  <select
+                    id="interest"
+                    className="select select-bordered w-full"
+                  >
+                    <option>VLP + Offline LLM Demo</option>
+                    <option>Intent-Aware Approvals</option>
+                    <option>Threat Detection Capabilities</option>
+                    <option>Complete Platform</option>
+                  </select>
+                </div>
+                <div>
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-bold text-primary mb-2"
+                  >
+                    Message
+                  </label>
+                  <textarea
+                    id="message"
+                    className="textarea textarea-bordered w-full h-32"
+                    placeholder="Tell us about your security challenges..."
+                  ></textarea>
+                </div>
+                <motion.button
+                  {...cardHover}
+                  type="submit"
+                  className="btn btn-primary btn-lg w-full"
+                >
+                  Request Demo
+                </motion.button>
+              </motion.form>
+              <div className="mt-6 bg-info/10 border-l-4 border-info p-6 rounded-lg text-info">
+                <p className="font-bold">💚 30-Day Free Trial</p>
+                <p className="text-sm mt-1">
+                  Full access to all capabilities. No credit card required.
+                </p>
+              </div>
             </section>
           </motion.section>
         </main>
 
         <Footer />
-      </div> {/* End main content wrapper */}
+      </div>{" "}
+      {/* End main content wrapper */}
     </div>
   );
 };
